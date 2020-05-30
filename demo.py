@@ -1,1 +1,1 @@
-print("all hail queen ananya")
+print("my name is ananya")
