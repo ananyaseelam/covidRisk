@@ -1,16 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import {Constants} from 'expo';
+import LocationForm from './LocationForm'
 
-printHello = name => {Alert.alert('printed ' + name)}
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Button title="Input" onPress = {printHello('ananya')}/>
-      <Text>Risky Business</Text>
-    </View>
-  );
-}
+export default class App extends React.Component {
+  state={
+    showForm:false
+  }
+  showForm = () => {
+    this.setState({showForm: true})
+  }
+  addLocation = newLocation => {
+    this.setState({showForm: false})
+  }
+  render(){
+    if (this.state.showForm===true) return <LocationForm onSubmit= {this.addLocation}/>
+    return (
+      <View style={styles.container}>
+        <Text>Covid Risk</Text>
+        <Button 
+          title="Input" 
+          onPress = {this.showForm}
+        />
+      </View>
+    );
+  }
 
 const styles = StyleSheet.create({
   container: {
