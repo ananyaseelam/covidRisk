@@ -32,19 +32,6 @@ export default class RiskInput extends React.Component {
     this.setState({risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)})
   }
 
-  handleSubmit = () => {
-    this.props.onSubmit(this.state)
-    Alert.alert('Location is ' + this.state.location)
-  }
-  
-  validateForm = () => {
-    if(this.state.factor1.length > 0 && this.state.factor2.length >0 && this.state.factor3.length>0){
-      return this.setState({isFormValid:true})
-    }
-    else{
-      return this.setState({isFormValid:false})
-    }
-  }
   render() {
     return (
       <View style={styles.container}>
