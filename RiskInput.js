@@ -34,10 +34,17 @@ export default class RiskInput extends React.Component {
 
   render() {
     return (
+<<<<<<< Updated upstream
       <View>
           <Text>
             {this.evaluateRisk}
             Risk: {this.state.risk}
+=======
+      <View style={styles.container}>
+          <Text>
+            {this.state.risk}
+            {this.evaluateRisk()}
+>>>>>>> Stashed changes
           </Text>
       </View>
     )
