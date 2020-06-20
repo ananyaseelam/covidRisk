@@ -34,10 +34,10 @@ export default class RiskInput extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
           <Text>
             {this.evaluateRisk}
-            {this.state.risk}
+            Risk: {this.state.risk}
           </Text>
       </View>
     )
