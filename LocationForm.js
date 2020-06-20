@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button, StyleSheet, TextInput, View, Alert} from 'react-native'
-import RiskInput from './RiskInput'
+
 
 const styles = StyleSheet.create({
   container: {
