@@ -48,8 +48,9 @@ export default class RiskInput extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          {this.evaluateRisk()}
+          
           <Text>
+            {this.evaluateRisk}
             {this.state.risk}
           </Text>
       </View>
