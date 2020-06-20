@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
 import LocationForm from './LocationForm'
-
+import RiskInput from './RiskInput'
 export default class App extends React.Component {
   state={
     showForm:false
@@ -22,6 +22,7 @@ export default class App extends React.Component {
           title="Input" 
           onPress = {this.showForm}
         />
+        <RiskInput/>
       </View>
     );
   }
