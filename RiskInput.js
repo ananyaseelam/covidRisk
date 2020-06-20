@@ -37,7 +37,7 @@ export default class RiskInput extends React.Component {
       <View>
           <Text>
             {this.evaluateRisk}
-            Risk- {this.state.risk}
+            Risk: {this.state.risk}
           </Text>
       </View>
     )
