@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 3,
+    borderRadius: 4,
   },
 })
 
@@ -34,10 +34,10 @@ export default class RiskInput extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-          {this.evaluateRisk()}
+      <View>
           <Text>
-            {this.state.risk}
+            {this.evaluateRisk}
+            Risk: {this.state.risk}
           </Text>
       </View>
     )
