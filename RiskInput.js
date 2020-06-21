@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 })
 
 export default class RiskInput extends React.Component {
+
   state = {
     factor1:1,
     factor2:3,
@@ -28,30 +29,26 @@ export default class RiskInput extends React.Component {
     risk:0,
   }
 
-  evaluateRisk =  () => {
-    this.setState({risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)})
+  constructor(props) {
+    super(props);
   }
 
-  handleSubmit = () => {
-    this.props.onSubmit(this.state)
-    Alert.alert('Location is ' + this.state.location)
+  componentDidMount() {
+    console.log('hello');
+    this.setState({
+      risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)
+    });
   }
-  
-  validateForm = () => {
-    if(this.state.factor1.length > 0 && this.state.factor2.length >0 && this.state.factor3.length>0){
-      return this.setState({isFormValid:true})
-    }
-    else{
-      return this.setState({isFormValid:false})
-    }
+  //onClick set the state
+  componentDidUpdate() {
+
   }
+
   render() {
     return (
-      <View style={styles.container}>
-          
+      <View>
           <Text>
-            {this.evaluateRisk}
-            {this.state.risk}
+            Risk: {this.state.risk}
           </Text>
       </View>
     )
