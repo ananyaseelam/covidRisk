@@ -29,6 +29,7 @@ export default class RiskInput extends React.Component {
     risk:0,
   }
 
+  //react class component lifecycle begins 
   constructor(props) {
     super(props);
   }
