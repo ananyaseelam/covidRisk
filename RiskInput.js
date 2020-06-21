@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 })
 
 export default class RiskInput extends React.Component {
+
   state = {
     factor1:1,
     factor2:3,
@@ -28,23 +29,26 @@ export default class RiskInput extends React.Component {
     risk:0,
   }
 
-  evaluateRisk =  () => {
-    this.setState({risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)})
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log('hello');
+    this.setState({
+      risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)
+    });
+  }
+  //onClick set the state
+  componentDidUpdate() {
+
   }
 
   render() {
     return (
-<<<<<<< Updated upstream
       <View>
           <Text>
-            {this.evaluateRisk}
             Risk: {this.state.risk}
-=======
-      <View style={styles.container}>
-          <Text>
-            {this.state.risk}
-            {this.evaluateRisk()}
->>>>>>> Stashed changes
           </Text>
       </View>
     )
