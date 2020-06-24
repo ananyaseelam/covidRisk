@@ -1,0 +1,40 @@
+Key,Location Type,Address,Date & Time,% Change in Covid Cases F1 ,Visit Data F2 ,Average Time Spent Factor 3 
+1.00,City,"Raleigh, NC",6/17/2020 15:24:00,0.05,N/A,N/A
+2.00,County,"Durham County, NC",6/17/2020 15:24:00,0.3,N/A,N/A
+3.00,County,"Wake County, NC",6/17/2020 15:24:00,0.05,N/A,N/A
+3.01,County,"Wake County, NC",6/17/2020 18:24:00,0.05,N/A,N/A
+4.00,School,"128 Clarendon Crescent Ln, Raleigh, NC",6/17/2020 15:24:00,0.05,Usually as busy as it gets,8 hrs
+5.00,House,208 parkman grant drive,6/17/2020 15:24:00,0.09,N/A,N/A
+6.00,House,"7722 San Gabriel St, Raleigh, NC",6/17/2020 15:24:00,,N/A,N/A
+7.00,Grocery,"1200 Wake Towne Dr, Raleigh, NC 27609",6/17/2020 15:24:00,0.05,Not busy,30 minutes
+8.00,Grocery,"5633 Creedmoor Rd, Raleigh, NC 27612",6/17/2020 15:24:00,0.1,Not too busy,45 minutes
+9.00,Gas Station,"6801 Glenwood Ave, Raleigh, NC 27612",6/17/2020 15:24:00,-0.15,N/A,5 minutes
+10.00,Restaurant,"130 Morrisville Square Way, Morrisville, NC 27560",6/17/2020 15:24:00,0.04,Usually as busy as it gets,45 minutes
+11.00,Gas Station,"6200 Glenwood Ave, Raleigh, NC 27612",6/17/2020 15:24:00,-0.05,N/A,5 minutes
+12.00,Pharmacy,"6840 Glenwood Ave, Raleigh, NC 27612",6/17/2020 15:24:00,0.05,Usually as busy as it gets,15 minutes
+13.00,Restaurant,"1401 SE Maynard Rd L, Cary, NC 27511",6/17/2020 15:24:00,0.25,Not too busy,1 hr
+14.00,Airport,"2400 John Brantley Blvd, Morrisville, NC 27560",6/17/2020 15:24:00,0.1,,3 hrs
+15.00,Tex-Mex Restaurant,"8341 Brier Creek Pkwy, Raleigh, NC 27617",6/17/2020 15:24:00,0.1,Usually not too busy,2 hrs
+16.00,Doctor's Office,"97 Cornerstone Dr, Cary, NC 27519",6/17/2020 15:24:00,0.05,,45 minutes
+17.00,DMV,"1387 SE Maynard Rd, Cary, NC 27511",6/17/2020 15:24:00,0.2,Usually as busy as it gets,3 hrs
+18.00,Hair salon,"113 Ledgestone Way, Cary, NC 27519",6/17/2020 15:24:00,0.2,,2 hrs
+19.00,Fast food restaurant,"1000 Valleystone Dr, Cary, NC 27519",6/17/2020 15:24:00,0.03,A little busy,15 minutes
+20.00,Bank,"1931 High House Rd, Cary, NC 27519",6/17/2020 15:24:00,-0.02,Usually as busy as it gets,15 minutes
+21.00,Bubble tea store,"966 High House Rd Suite 124, Cary, NC 27513",6/17/2020 15:24:00,-0.1,Usually not busy,15 minutes
+22.00,Dermatologist,"1010 High House Rd #202, Cary, NC 27513",6/17/2020 15:24:00,0.3,,
+23.00,Department store,"8361 Brier Creek Pkwy, Raleigh, NC 27617",6/17/2020 15:24:00,0.34,,1 hrs
+24.00,Shopping mall,"8181 Brier Creek Pkwy, Raleigh, NC 27617",6/17/2020 15:24:00,-0.2,Usually as busy as it gets,2 hrs
+25.00,Apartment building,"8400 Brass Mill Ln, Raleigh, NC 27617",6/17/2020 15:24:00,0.4,N/A,N/A
+26.00,Hotel,"8001 Arco Corporate Dr, Raleigh, NC 27617",6/17/2020 15:24:00,,N/A,N/A
+27.00,Amusement center,"11190 Fun Park Dr, Raleigh, NC 27617",6/17/2020 15:24:00,,N/A,N/A
+28.00,Piano instructor,"2520 Gordon Glen Ct #103, Raleigh, NC 27617",6/17/2020 15:24:00,0.05,N/A,N/A
+29.00,Thrift store,"10701 Glenwood Ave, Raleigh, NC 27617",6/17/2020 15:24:00,,N/A,N/A
+30.00,Government office,"7751 Brier Creek Pkwy STE 102, Raleigh, NC 27617",6/17/2020 15:24:00,,N/A,N/A
+31.00,Buffet,"5006 Apex Highway 55, Durham, NC 27713",6/17/2020 15:24:00,0.02,usually not busy,1.5 hrs
+32.00,Public pool,"5115 Highcroft Dr, Cary, NC 27519",6/17/2020 15:24:00,-0.04,Not too busy,3 hrs
+33.00,Bar,"2734 NC-55, Cary, NC 27519",6/17/2020 15:24:00,0.07,a little busy,2 hrs
+34.00,movie theater,"3400 Village Market Place, Morrisville, NC 27560",6/17/2020 15:24:00,0.03,Usually as busy as it gets,2 hrs
+35.00,library,"100 Library Dr, Chapel Hill, NC 27514",6/17/2020 15:24:00,-0.03,usually not busy,3 hrs
+36.00,Concert,PNC Arena,6/17/2020 15:24:00,0.09,N/A,N/A
+37.00,Gym,"7301 Vanclaybon Rd, Apex, NC 27523",6/17/2020 15:24:00,0.01,usually not too,N/A
+38.00,,,,,,
