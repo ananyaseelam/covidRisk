@@ -29,7 +29,9 @@ export default class RiskInput extends React.Component {
     risk:0,
   }
 
-  constructor(props) {
+  //react class component lifecycle begins 
+  //1. instance of a component created and stored in the DOM (document object model)
+  constructor(props) { 
     super(props);
   }
 
@@ -39,6 +41,8 @@ export default class RiskInput extends React.Component {
       risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)
     });
   }
+
+  //2. Component is re-rendered 
   //onClick set the state
   componentDidUpdate() {
 

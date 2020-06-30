@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
 import LocationForm from './LocationForm'
 import RiskInput from './RiskInput'
+import ApiPractice from './ApiPractice'
+
 export default class App extends React.Component {
   state={
     showForm:false
@@ -18,12 +20,14 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Covid Risk</Text>
-        <Button
-          title="Input"
+        <Button 
+          title="Input" 
           onPress = {this.showForm}
         />
         <RiskInput/>
+        <ApiPractice/>
       </View>
+
     );
   }
 }
