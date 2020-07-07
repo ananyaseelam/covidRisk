@@ -2,7 +2,6 @@ import googlemaps
 import pprint
 import time
 import requests
-from googleplaces import GooglePlaces, types, lang
 import json #// sort, search, etc 
 
 # the result is a Python dictionary:
