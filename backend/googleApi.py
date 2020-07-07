@@ -7,7 +7,7 @@ import json #// sort, search, etc
 # the result is a Python dictionary:
 API_KEY = 
 
-def returnCounty(address):
+def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplaceblob = gmaps.find_place(address, 'textquery')
     oneplaceID = ((oneplaceblob['candidates'])[0])['place_id']
