@@ -1,4 +1,4 @@
-import COVID19Py
+from covid19.py import COVID19Py
 
 def returnCounty(country, county):
     county = covid19.getDataByCounty(country, county, timelines=True)
