@@ -7,7 +7,6 @@ import json #// sort, search, etc
 # the result is a Python dictionary:
 API_KEY = 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs'
 
-
 def returnCounty(address):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplaceblob = gmaps.find_place(address, 'textquery')
@@ -15,7 +14,6 @@ def returnCounty(address):
     oneplace = gmaps.place(str(oneplaceID))
     countyString = (oneplace['result'])['address_components']
     county = countySearch(countyString)
-    #print(json.dumps(oneplace, sort_keys=True, indent=4))
     return county
 
 def returnPlaceType(address):
@@ -32,11 +30,7 @@ def countySearch(searchString):
     wordList = county.split()
     return str(wordList[-1])[1:]
 
-location = 'Outer Banks'
-x = returnCounty(location)
-y = returnPlaceType(location)
 
-print(x + ' ' + str(y))
 
 
 
