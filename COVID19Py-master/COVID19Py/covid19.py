@@ -8,8 +8,9 @@ class COVID19(object):
     previousData = None
     latestData = None
     _valid_data_sources = []
-
-    def __init__(self, url="https://coronavirus-tracker-api.herokuapp.com", data_source='jhu'):
+#http://127.0.0.1:8000/
+#https://coronavirus-tracker-api.herokuapp.com
+    def __init__(self, url="http://127.0.0.1:8000", data_source='nyt'):
         self.url = url
         self._valid_data_sources = self._getSources()
         if data_source not in self._valid_data_sources:
@@ -102,6 +103,33 @@ class COVID19(object):
         else:
             data = self._request("/v2/locations", {"country_code": country_code})
         return data["locations"]
+
+    def getDataByCounty(self, country_code, county, timelines=False) -> List[Dict]:
+        """
+        :param country_code: String denoting the ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the country
+        :param timelines: Whether timeline information should be returned as well.
+        :return: A list of areas that correspond to the country_code. If the country_code is invalid, it returns an empty list.
+        """
+        data = None
+        if timelines:
+            data = self._request("/v2/locations", {"country_code": country_code, "county":county, "timelines": str(timelines).lower()})
+        else:
+            data = self._request("/v2/locations", {"country_code": country_code, "county":county})
+        return data["locations"]
+        
+    def getDataByCountybyDate(self, county, timelines=False) -> List[Dict]:
+        """
+        :param country_code: String denoting the ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the country
+        :param timelines: Whether timeline information should be returned as well.
+        :return: A list of areas that correspond to the country_code. If the country_code is invalid, it returns an empty list.
+        """
+        data = None
+        if timelines:
+            data = self._request("/v2/locations", {"county": county, "timelines": str(timelines).lower()})
+        else:
+            data = self._request("/v2/locations", {"county": county})
+        return data["locations"]
+
 
     def getLocationById(self, country_id: int):
         """
