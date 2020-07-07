@@ -6,4 +6,4 @@ location = 'Outer Banks'
 x = returnCounty(location)
 y = returnPlaceType(location)
 
-print(x + ' ' + str(y))
+print(x + ' County ' + str(y))
