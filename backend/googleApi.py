@@ -22,7 +22,7 @@ def returnPlaceType(address):
     oneplaceID = ((oneplaceblob['candidates'])[0])['place_id']
     oneplace = gmaps.place(str(oneplaceID))
     placeType = (oneplace['result'])['types']
-    return placeType
+    return placeType[0]
 
 def countySearch(searchString):
     searchString = str(searchString)
