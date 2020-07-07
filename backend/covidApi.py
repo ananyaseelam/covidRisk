@@ -31,6 +31,6 @@ current = "'2020-07-01T00:00:00Z'"
 
 #print(previous)
 #print(now)
-print(findPercentChange("Wake"))
+#print(findPercentChange("Wake"))
 
 
