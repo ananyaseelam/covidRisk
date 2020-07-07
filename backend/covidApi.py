@@ -1,4 +1,4 @@
-from covid19.py import COVID19Py
+from covid19 import COVID19
 
 def returnCounty(country, county):
     county = covid19.getDataByCounty(country, county, timelines=True)
@@ -21,7 +21,7 @@ def findPercentChange(county):
     return float((now-previous)/previous)
     
 
-covid19 = COVID19Py.COVID19(data_source="nyt")
+covid19 = COVID19(data_source="nyt")
 #returnCountry("US")
 #returnCounty("US", "Wake")
 #changes = covid19.getLatestChanges()
