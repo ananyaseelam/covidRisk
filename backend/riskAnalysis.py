@@ -1,9 +1,9 @@
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType
+from googleApi import returnCounty, returnPlaceType, getPlaceID
 
 
-location = 'Outer Banks'
-x = returnCounty(location)
+location = 'John F Kennedy Airport'
+x = returnCounty(getPlaceID(location))
 y = returnPlaceType(location)
 pc = findPercentChange(x)
 
