@@ -6,7 +6,8 @@ from googleplaces import GooglePlaces, types, lang
 import json #// sort, search, etc 
 
 # the result is a Python dictionary:
-API_KEY = 
+API_KEY = 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs'
+
 
 def returnCounty(address):
     gmaps = googlemaps.Client(key=API_KEY)
