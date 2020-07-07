@@ -11,9 +11,15 @@ def returnCounty(address):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplaceblob = gmaps.find_place(address, 'textquery')
     oneplaceID = ((oneplaceblob['candidates'])[0])['place_id']
-    oneplace = gmaps.place(str(oneplaceID))
+    return oneplaceID
+
+
+def returnCounty(placeID):
+    gmaps = googlemaps.Client(key=API_KEY)
+    oneplace = gmaps.place(str(placeID))
     countyString = (oneplace['result'])['address_components']
     county = countySearch(countyString)
+    #print(json.dumps(oneplace, sort_keys=True, indent=4))
     return county
 
 def returnPlaceType(address):
