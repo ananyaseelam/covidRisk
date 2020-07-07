@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
 import LocationForm from './LocationForm'
 import RiskInput from './RiskInput'
-import ApiPractice from './ApiPractice'
+import ApiPractice from '../backend/ApiPractice'
 
 export default class App extends React.Component {
   state={
