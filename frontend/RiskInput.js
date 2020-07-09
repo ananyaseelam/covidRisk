@@ -36,10 +36,12 @@ export default class RiskInput extends React.Component {
   }
 
   componentDidMount() {
-    console.log('hello');
-    this.setState({
-      risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)
-    });
+    fetch('http://127.0.0.1:5000/')
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({risk: json.risk});
+      })
+      .catch((error) => console.error(error))
   }
 
   //2. Component is re-rendered 
