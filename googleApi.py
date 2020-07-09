@@ -4,7 +4,7 @@ import time
 import requests
 from googleplaces import GooglePlaces, types, lang
 
-API_KEY = get_api_key()
+API_KEY = get_API_key
 
 google_places = GooglePlaces(API_KEY)
 
