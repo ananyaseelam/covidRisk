@@ -1,11 +1,16 @@
 from covidApi import findPercentChange
 from googleApi import returnCounty, returnPlaceType, getPlaceID
+from businessApi import returnBusiness
+
+def calculateRisk(pc, b):
+    risk = (pc*100)*0.5 + b*0.5
+    return risk
 
 
-location = 'John F Kennedy Airport'
+
+location = 'Subway at South Roxboro Street'
 x = returnCounty(getPlaceID(location))
 y = returnPlaceType(location)
 pc = findPercentChange(x)
-
-print(pc)
-print(x + ' County ' + str(y))
+b = returnBusiness('Tuesday', 19)
+print(calculateRisk(pc, b))
