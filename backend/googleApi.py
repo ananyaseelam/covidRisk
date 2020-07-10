@@ -5,7 +5,7 @@ import requests
 import json #// sort, search, etc 
 
 # the result is a Python dictionary:
-API_KEY = get_api_key()
+API_KEY = 
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -33,7 +33,10 @@ def returnPlaceType(address):
 def countySearch(searchString):
     searchString = str(searchString)
     county = searchString[:searchString.find(' County')]
-    wordList = county.split()
-    return str(wordList[-1])[1:]
+    pos = county.rindex("'")
+    countyVal = county[pos+1:]
+    return countyVal
 
-#print(returnPlaceType("Fire Station Brier Creek"))
+    
+
+returnCounty(getPlaceID('Starbucks in Miami Beach'))
