@@ -34,7 +34,10 @@ def countySearch(searchString):
     searchString = str(searchString)
     print(searchString)
     county = searchString[:searchString.find(' County')]
-    wordList = county.split()
-    return str(wordList[-1])[1:]
+    pos = county.rindex("'")
+    countyVal = county[pos+1:]
+    return countyVal
 
-#print(returnPlaceType("Fire Station Brier Creek"))
+    
+
+returnCounty(getPlaceID('Starbucks in Miami Beach'))
