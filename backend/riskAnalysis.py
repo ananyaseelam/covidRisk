@@ -1,6 +1,6 @@
 from covidApi import findPercentChange
 from googleApi import returnCounty, returnPlaceType, getPlaceID
-from businessApi import returnBusiness
+from businessApi import returnPoptimes
 
 def calculateRisk(pc, b):
     risk = (pc*100)*0.5 + b*0.5
@@ -8,9 +8,9 @@ def calculateRisk(pc, b):
 
 
 
-location = 'Subway at South Roxboro Street'
-x = returnCounty(getPlaceID(location))
+location = 'Statue of Liberty'
+county = returnCounty(getPlaceID(location))
 y = returnPlaceType(location)
-pc = findPercentChange(x)
-b = returnBusiness('Tuesday', 19)
+pc = findPercentChange(county)
+b = returnPoptimes('Thursday', 19)
 print(calculateRisk(pc, b))
