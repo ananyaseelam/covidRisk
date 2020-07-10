@@ -20,6 +20,12 @@ def calculateRisk():
     riskJson = json.dumps(riskDict)
     return riskJson
 
+@app.route('/getJson/<location>', methods=['POST']) #allow both GET and POST requests
+def postExample(location):
+    content = request.get_json(silent=True)
+    print(content['location'])
+    return content['location']
+
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
 def form_example():
