@@ -47,7 +47,18 @@ export default class RiskInput extends React.Component {
   //2. Component is re-rendered 
   //onClick set the state
   componentDidUpdate() {
-
+    fetch('http://127.0.0.1:5000/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'location': this.state.location,
+        'day': this.state.day,
+        'time': this.state.time,
+      })
+    });
   }
 
   render() {
