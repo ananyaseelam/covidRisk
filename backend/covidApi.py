@@ -1,10 +1,6 @@
 from covid19 import COVID19
 import json
-<<<<<<< HEAD
-from datetime import date, datetime, timedelta
-=======
 from datetime import date as d, datetime, timedelta
->>>>>>> master
 
 def returnCounty(country, county):
     county = covid19.getDataByCounty(country, county, timelines=True)
@@ -20,20 +16,12 @@ def getDataFromDate(bigString, date):
     return data
 
 def findPercentChange(county):
-<<<<<<< HEAD
-    today = date.today()
-=======
     today = d.today()
->>>>>>> master
     oneDay = today - timedelta(days=1)
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
     date = str(twoWeeks) +'T00:00:00Z'
-<<<<<<< HEAD
-    current = str(today) + 'T00:00:00Z'
-=======
     current = str(oneDay) + 'T00:00:00Z'
->>>>>>> master
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
     previous=int(getDataFromDate(returnCounty("US", str(county)), date))
@@ -48,7 +36,7 @@ covid19 = COVID19(data_source="nyt")
 #print(changes)
 date = '2020-06-18T00:00:00Z'
 current = '2020-07-01T00:00:00Z'
-'2020-07-09T00:00:00Z'
+#'2020-07-09T00:00:00Z'
 #print(previous)
 #print(now)
 #print(findPercentChange("Wake"))
