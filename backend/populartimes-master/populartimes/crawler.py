@@ -16,7 +16,7 @@ from queue import Queue
 
 import requests
 from geopy import Point
-from geopy.distance import vincenty, VincentyDistance
+#from geopy.distance import vincenty, VincentyDistance
 
 # urls for google api web service
 BASE_URL = "https://maps.googleapis.com/maps/api/place/"

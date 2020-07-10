@@ -36,7 +36,7 @@ covid19 = COVID19(data_source="nyt")
 #print(changes)
 date = '2020-06-18T00:00:00Z'
 current = '2020-07-01T00:00:00Z'
-'2020-07-09T00:00:00Z'
+#'2020-07-09T00:00:00Z'
 #print(previous)
 #print(now)
 #print(findPercentChange("Wake"))
