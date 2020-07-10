@@ -29,7 +29,7 @@ def findPercentChange(county):
     #print(prevData + ' ' + currentData)
     return float((now-previous)/previous)
 
-covid19 = COVID19(data_source="jhu")
+covid19 = COVID19(data_source="nyt")
 #returnCountry("US")
 #returnCounty("US", "Wake")
 #changes = covid19.getLatestChanges()
