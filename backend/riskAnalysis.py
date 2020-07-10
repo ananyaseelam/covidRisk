@@ -1,6 +1,5 @@
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID
-from businessApi import returnPoptimes
+from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
 import csv
 
 def calculateRisk(pc, b, avg):

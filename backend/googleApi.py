@@ -3,9 +3,10 @@ import pprint
 import time
 import requests
 import json #// sort, search, etc 
+import populartimes
 
 # the result is a Python dictionary:
-API_KEY = 
+API_KEY = 'hello'
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -32,12 +33,16 @@ def returnPlaceType(address):
 
 def countySearch(searchString):
     searchString = str(searchString)
-    print(searchString)
+    #print(searchString)
     county = searchString[:searchString.find(' County')]
     pos = county.rindex("'")
     countyVal = county[pos+1:]
     return countyVal
 
-    
+def returnPoptimes(day, hour):
+    dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
+    poptimes = populartimes.get_id(API_KEY, getPlaceID('RDU'))
+    dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+    return dataPoint
 
 returnCounty(getPlaceID('Starbucks in Miami Beach'))
