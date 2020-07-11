@@ -4,7 +4,6 @@ from covidApi import findPercentChange
 from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
 import json
 
-
 app = Flask(__name__)
 
 @app.route("/risk") #GET to render homepage
@@ -13,7 +12,7 @@ def calculateRisk():
     x = returnCounty(getPlaceID(location))
     y = returnPlaceType(location)
     pc = findPercentChange(x)
-    b = returnPoptimes('Friday', 10)
+    b = returnPoptimes('Friday', 10, location)
     risk = (pc*100)*0.5 + b*0.5
     riskDict = {'risk': risk}
     riskJson = json.dumps(riskDict)
