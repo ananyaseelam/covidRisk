@@ -4,9 +4,10 @@ import time
 import requests
 import json #// sort, search, etc 
 import populartimes
+import csv
 
 # the result is a Python dictionary:
-API_KEY = 'hello'
+API_KEY = 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs'
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -44,5 +45,13 @@ def returnPoptimes(day, hour):
     poptimes = populartimes.get_id(API_KEY, getPlaceID('RDU'))
     dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
     return dataPoint
+
+def avgTimeSpent(placeType):
+    with open('Average_Time_Spent_Risk.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            if row[0] == placeType:
+                avgTimeRisk = float(row[3])
+    return avgTimeRisk
 
 returnCounty(getPlaceID('Starbucks in Miami Beach'))

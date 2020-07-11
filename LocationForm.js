@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 export default class LocationForm extends React.Component {
   state = {
     location: '',
+    time: '',
     isFormValid: false,
   }
 
@@ -30,15 +31,23 @@ export default class LocationForm extends React.Component {
     this.validateForm()
     this.setState({location})
   }
-
+  handleTimeChange = time => {
+    this.validateForm()
+    this.setState({time})
+  }
   handleSubmit = () => {
     this.props.onSubmit(this.state)
-    Alert.alert('Location is ' + this.state.location)
+    Alert.alert('Location is ' + this.state.location + '\nTime is ' + this.state.time)
   }
 
   validateForm = () => {
     if(this.state.location.length > 0){
-      return this.setState({isFormValid:true})
+      if (this.state.time.length > 0){
+        return this.setState({isFormValid:true})
+      }
+      else {
+        return this.setState({isFormValid:false})
+      }
     }
     else{
       return this.setState({isFormValid:false})
@@ -52,6 +61,12 @@ export default class LocationForm extends React.Component {
             value={this.state.location}
             placeholder='Enter Location'
             onChangeText={this.handleLocationChange}
+        />
+        <TextInput
+            style={styles.input}
+            value={this.state.time}
+            placeholder='Enter time you plan to be there'
+            onChangeText={this.handleTimeChange}
         />
         <Button title="Submit" onPress = {this.handleSubmit} disabled = {!this.state.isFormValid}/>
         
