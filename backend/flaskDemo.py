@@ -1,19 +1,19 @@
 from flask import Flask
 from flask import request
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
 
 app = Flask(__name__)
 
 @app.route("/risk") #GET to render homepage
 def calculateRisk():
-    location = 'Starbucks at Miami Beach'
-    x = returnCounty(getPlaceID(location))
-    print(x)
+    location = 'Starbucks at Studio City'
+    cty = returnCounty(getPlaceID(location))
+    st = returnState(getPlaceID(location))
     placeType = returnPlaceType(location)
     avg = avgTimeSpent(placeType)
-    pc = findPercentChange(x)
+    pc = findPercentChange(st, cty)
     b = returnPoptimes('Friday', 10, location)
     risk = (pc*100)*0.33 + b*0.33 + avg*0.33
     riskDict = {'risk': risk, 'location':location, 'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
