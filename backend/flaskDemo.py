@@ -1,10 +1,8 @@
 from flask import Flask
 from flask import request
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID
-from businessApi import returnPoptimes
+from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
 import json
-
 
 app = Flask(__name__)
 
@@ -14,11 +12,17 @@ def calculateRisk():
     x = returnCounty(getPlaceID(location))
     y = returnPlaceType(location)
     pc = findPercentChange(x)
-    b = returnPoptimes('Friday', 10)
+    b = returnPoptimes('Friday', 10, location)
     risk = (pc*100)*0.5 + b*0.5
     riskDict = {'risk': risk}
     riskJson = json.dumps(riskDict)
     return riskJson
+
+@app.route('/getJson/<location>', methods=['POST']) #allow both GET and POST requests
+def postExample(location):
+    content = request.get_json(silent=True)
+    print(content['location'])
+    return content['location']
 
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests

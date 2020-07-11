@@ -21,25 +21,52 @@ const styles = StyleSheet.create({
 })
 
 export default class RiskInput extends React.Component {
+
   state = {
-    factor1:1,
-    factor2:3,
-    factor3:4,
+    location: 'miami beach, florida',
+    day: 'Friday', 
+    time: 10,
     risk:0,
   }
 
-  evaluateRisk =  () => {
-    this.setState({risk:(this.state.factor1*0.33 + this.state.factor2*0.33 + this.state.factor3*0.33)})
+  //react class component lifecycle begins 
+  //1. instance of a component created and stored in the DOM (document object model)
+  constructor(props) { 
+    super(props);
+  }
+
+  componentDidMount() {
+    fetch('http://127.0.0.1:5000/risk')
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({risk: json.risk});
+      })
+      .catch((error) => console.error(error))
+  }
+
+  //2. Component is re-rendered 
+  //onClick set the state
+  componentDidUpdate() {
+    fetch('http://127.0.0.1:5000/getJson/', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'location': this.state.location,
+    })
+  });
   }
 
   render() {
     return (
       <View>
           <Text>
-            {this.evaluateRisk}
             Risk: {this.state.risk}
           </Text>
       </View>
     )
   }
 }
+
