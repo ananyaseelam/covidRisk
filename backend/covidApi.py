@@ -2,8 +2,8 @@ from covid19 import COVID19
 import json
 from datetime import date as d, datetime, timedelta
 
-def returnCounty(country, county):
-    county = covid19.getDataByCounty(country, county, timelines=True)
+def returnCounty(country, state, county):
+    county = covid19.getDataByCounty(country, state, county, timelines=True)
     return county
 
 def returnCountry(country):
@@ -11,6 +11,7 @@ def returnCountry(country):
     return location
 
 def getDataFromDate(bigString, date):
+    #print(bigString)
     bigString = bigString[0]
     data = (((bigString['timelines'])['confirmed'])["timeline"])[date]
     return data
@@ -28,8 +29,9 @@ def findPercentChange(county):
     now=int(getDataFromDate(returnCounty("US", str(county)), date1day))
     return float((now-previous)/previous)
 
-covid19 = COVID19(data_source="jhu")
+covid19 = COVID19(data_source="nyt")
 
+#print(returnCounty('US', 'North Carolina', 'Wake'))
 #date = '2020-06-18T00:00:00Z'
 #current = '2020-07-01T00:00:00Z'
 
