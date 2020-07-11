@@ -1,13 +1,12 @@
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID
-from businessApi import returnPoptimes
+from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
 import csv
 
 def calculateRisk(pc, b, avg):
     risk = (pc*100)*0.33 + b*0.33 + avg*0.33
     return risk
 
-location = 'Target Brier Creek'
+location = 'Target Studio City'
 county = returnCounty(getPlaceID(location))
 placeType = returnPlaceType(location)
 
@@ -20,3 +19,5 @@ with open('Average_Time_Spent_Risk.csv') as csv_file:
 perCh = findPercentChange(county)
 busyness = returnPoptimes('Thursday', 19)
 print(calculateRisk(perCh, busyness, avgTimeRisk))
+
+print(county)
