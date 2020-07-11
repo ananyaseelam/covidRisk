@@ -70,13 +70,3 @@ export default class RiskInput extends React.Component {
   }
 }
 
-  render() {
-    return (
-      <View>
-          <Text>
-            Risk: {this.state.risk}
-          </Text>
-      </View>
-    )
-  }
-}
