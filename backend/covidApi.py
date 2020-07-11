@@ -16,7 +16,7 @@ def getDataFromDate(bigString, date):
     data = (((bigString['timelines'])['confirmed'])["timeline"])[date]
     return data
 
-def findPercentChange(county):
+def findPercentChange(state, county):
     today = d.today()
     oneDay = today - timedelta(days=1)
     twoDay = today - timedelta(days=2)
@@ -25,8 +25,8 @@ def findPercentChange(county):
     date1day = str(oneDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
-    previous=int(getDataFromDate(returnCounty("US", str(county)), date2wk))
-    now=int(getDataFromDate(returnCounty("US", str(county)), date1day))
+    previous=int(getDataFromDate(returnCounty("US", str(state), str(county)), date2wk))
+    now=int(getDataFromDate(returnCounty("US", str(state), str(county)), date1day))
     return float((now-previous)/previous)
 
 covid19 = COVID19(data_source="nyt")
