@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 export default class RiskInput extends React.Component {
 
   state = {
-    factor1:1,
-    factor2:3,
-    factor3:4,
+    location: 'miami beach, florida',
+    day: 'Friday', 
+    time: 10,
     risk:0,
   }
 
@@ -36,7 +36,7 @@ export default class RiskInput extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:5000/')
+    fetch('http://127.0.0.1:5000/risk')
       .then((response) => response.json())
       .then((json) => {
         this.setState({risk: json.risk});
@@ -47,18 +47,16 @@ export default class RiskInput extends React.Component {
   //2. Component is re-rendered 
   //onClick set the state
   componentDidUpdate() {
-    fetch('http://127.0.0.1:5000/', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'location': this.state.location,
-        'day': this.state.day,
-        'time': this.state.time,
-      })
-    });
+    fetch('http://127.0.0.1:5000/getJson/', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'location': this.state.location,
+    })
+  });
   }
 
   render() {

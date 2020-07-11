@@ -1,8 +1,7 @@
 from flask import Flask
 from flask import request
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID
-from businessApi import returnPoptimes
+from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
 import json
 
 
