@@ -20,25 +20,17 @@ def findPercentChange(county):
     oneDay = today - timedelta(days=1)
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
-    date = str(twoWeeks) +'T00:00:00Z'
-    current = str(oneDay) + 'T00:00:00Z'
+    date2wk = str(twoWeeks) +'T00:00:00Z'
+    date1day = str(oneDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
-    previous=int(getDataFromDate(returnCounty("US", str(county)), date))
-    now=int(getDataFromDate(returnCounty("US", str(county)), current))
-    #print(prevData + ' ' + currentData)
+    previous=int(getDataFromDate(returnCounty("US", str(county)), date2wk))
+    now=int(getDataFromDate(returnCounty("US", str(county)), date1day))
     return float((now-previous)/previous)
 
-covid19 = COVID19(data_source="nyt")
-#returnCountry("US")
-#returnCounty("US", "Wake")
-#changes = covid19.getLatestChanges()
-#print(changes)
-date = '2020-06-18T00:00:00Z'
-current = '2020-07-01T00:00:00Z'
-#'2020-07-09T00:00:00Z'
-#print(previous)
-#print(now)
-#print(findPercentChange("Wake"))
+covid19 = COVID19(data_source="jhu")
+
+#date = '2020-06-18T00:00:00Z'
+#current = '2020-07-01T00:00:00Z'
 
 
