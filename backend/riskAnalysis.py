@@ -1,5 +1,5 @@
-from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
+from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 # import csv
 
 def calculateRisk(pc, b, avg):
@@ -8,7 +8,7 @@ def calculateRisk(pc, b, avg):
 
 location = 'Starbucks Suffolk Virginia'
 county = returnCounty(getPlaceID(location))
-
+state = returnState(getPlaceID(location))
 placeType = returnPlaceType(location)
 
 # with open('Average_Time_Spent_Risk.csv') as csv_file:
@@ -19,6 +19,10 @@ placeType = returnPlaceType(location)
 
 perCh = findPercentChange(county)
 print('perCh: ', perCh)
+population =  findPopulation(county, state)
+print('population: ', population)
+cases = findCovidCasesPerHund(population, county)
+print('cases per hundred thousand: ', cases)
 busyness = returnPoptimes('Thursday', 19)
 avgTimeRisk = avgTimeSpent(placeType)
 print(calculateRisk(perCh, busyness, avgTimeRisk))

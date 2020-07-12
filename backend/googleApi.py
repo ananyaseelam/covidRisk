@@ -24,6 +24,14 @@ def returnCounty(placeID):
     #print(json.dumps(oneplace, sort_keys=True, indent=4))
     return county
 
+def returnState(placeID):
+    gmaps = googlemaps.Client(key=API_KEY)
+    oneplace = gmaps.place(str(placeID))
+    stateString = (oneplace['result'])['address_components']
+    state = stateSearch(stateString)
+    #print(json.dumps(oneplace, sort_keys=True, indent=4))
+    return state
+
 def returnPlaceType(address):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplaceblob = gmaps.find_place(address, 'textquery')
@@ -44,11 +52,18 @@ def countySearch(searchString):
         endCountyPos = searchString.find(", 'types': ['locality'") -1
         cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
         county = searchString[cutOffCountyPos:endCountyPos]
-        return county
+        return (county + ' city')
     else: #else find county name
         cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
         county = searchString[cutOffCountyPos:endCountyPos]
         return county
+
+def stateSearch(searchString):
+    searchString = str(searchString)
+    endStatePos = searchString.find(", 'types': ['administrative_area_level_1'") - 21
+    cutOffStatePos = searchString[:endStatePos].rfind(': ')+3
+    state = searchString[cutOffStatePos:endStatePos]
+    return state
 
 def returnPoptimes(day, hour):
     dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
