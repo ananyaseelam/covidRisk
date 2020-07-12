@@ -35,10 +35,20 @@ def returnPlaceType(address):
 def countySearch(searchString):
     searchString = str(searchString)
     #print(searchString)
-    county = searchString[:searchString.find(' County')]
-    pos = county.rindex("'")
-    countyVal = county[pos+1:]
-    return countyVal
+    #county = searchString[:searchString.find(' County')]
+    #pos = county.rindex("'")
+    #countyVal = county[pos+1:]
+    #return countyVal
+    endCountyPos = searchString.find(", 'types': ['administrative_area_level_2'") - 1
+    if endCountyPos == -2: #location isn't in a county
+        endCountyPos = searchString.find(", 'types': ['locality'") -1
+        cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
+        county = searchString[cutOffCountyPos:endCountyPos]
+        return county
+    else: #else find county name
+        cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
+        county = searchString[cutOffCountyPos:endCountyPos]
+        return county
 
 def returnPoptimes(day, hour):
     dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
@@ -54,4 +64,4 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[3])
     return avgTimeRisk
 
-returnCounty(getPlaceID('Starbucks in Miami Beach'))
+print(returnCounty(getPlaceID('Starbucks Suffolk Virginia')))

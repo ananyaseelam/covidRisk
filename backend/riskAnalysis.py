@@ -6,7 +6,7 @@ def calculateRisk(pc, b, avg):
     risk = (pc*100)*0.33 + b*0.33 + avg*0.33
     return risk
 
-location = 'Target Studio City'
+location = 'Starbucks Suffolk Virginia'
 county = returnCounty(getPlaceID(location))
 
 placeType = returnPlaceType(location)
@@ -18,6 +18,7 @@ placeType = returnPlaceType(location)
 #             avgTimeRisk = float(row[3])
 
 perCh = findPercentChange(county)
+print('perCh: ', perCh)
 busyness = returnPoptimes('Thursday', 19)
 avgTimeRisk = avgTimeSpent(placeType)
 print(calculateRisk(perCh, busyness, avgTimeRisk))

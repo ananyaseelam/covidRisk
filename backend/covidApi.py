@@ -16,6 +16,7 @@ def getDataFromDate(bigString, date):
     return data
 
 def findPercentChange(county):
+    print("county in percent change: " + county)
     today = d.today()
     oneDay = today - timedelta(days=1)
     twoDay = today - timedelta(days=2)
@@ -28,7 +29,7 @@ def findPercentChange(county):
     now=int(getDataFromDate(returnCounty("US", str(county)), date1day))
     return float((now-previous)/previous)
 
-covid19 = COVID19(data_source="jhu")
+covid19 = COVID19(data_source="nyt")
 
 #date = '2020-06-18T00:00:00Z'
 #current = '2020-07-01T00:00:00Z'
