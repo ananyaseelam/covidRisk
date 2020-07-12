@@ -79,4 +79,4 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[3])
     return avgTimeRisk
 
-print(returnCounty(getPlaceID('Starbucks Suffolk Virginia')))
+print(returnCounty(getPlaceID('Statue of Liberty')))
