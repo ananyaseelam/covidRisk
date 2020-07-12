@@ -1,29 +1,36 @@
 from flask import Flask
 from flask import request
 from covidApi import findPercentChange
-from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
-
 
 app = Flask(__name__)
 
 @app.route("/risk") #GET to render homepage
 def calculateRisk():
-    location = 'Miami Beach, Florida'
-    x = returnCounty(getPlaceID(location))
-    y = returnPlaceType(location)
-    pc = findPercentChange(x)
-    b = returnPoptimes('Friday', 10)
-    risk = (pc*100)*0.5 + b*0.5
-    riskDict = {'risk': risk}
+    location = 'Suffolk City'
+    cty = returnCounty(getPlaceID(location))
+    st = returnState(getPlaceID(location))
+    placeType = returnPlaceType(location)
+    avg = avgTimeSpent(placeType)
+    pc = findPercentChange(st, cty)
+    b = returnPoptimes('Friday', 10, location)
+    risk = (pc*100)*0.33 + b*0.33 + avg*0.33
+    riskDict = {'risk': risk, 'location':location, 'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
     riskJson = json.dumps(riskDict)
     return riskJson
 
-@app.route('/getJson/<location>', methods=['POST']) #allow both GET and POST requests
-def postExample(location):
-    content = request.get_json(silent=True)
-    print(content['location'])
-    return content['location']
+@app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
+def get_data():
+    if request.method == 'POST':
+        req_data = request.get_json()
+        #print(req_data)
+        location = req_data['location']
+        print(req_data.dump())
+        #login(arg,arg) is a function that tries to log in and returns true or false
+        return str(location)
+    else:
+        return ('not posted')
 
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
