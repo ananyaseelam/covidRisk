@@ -104,7 +104,7 @@ class COVID19(object):
             data = self._request("/v2/locations", {"country_code": country_code})
         return data["locations"]
 
-    def getDataByCounty(self, country_code, county, timelines=False) -> List[Dict]:
+    def getDataByCounty(self, country_code, state, county, timelines=False) -> List[Dict]:
         """
         :param country_code: String denoting the ISO 3166-1 alpha-2 code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the country
         :param timelines: Whether timeline information should be returned as well.
@@ -112,9 +112,9 @@ class COVID19(object):
         """
         data = None
         if timelines:
-            data = self._request("/v2/locations", {"country_code": country_code, "county":county, "timelines": str(timelines).lower()})
+            data = self._request("/v2/locations", {"country_code": country_code, "province": state, "county":county,  "timelines": str(timelines).lower()})
         else:
-            data = self._request("/v2/locations", {"country_code": country_code, "county":county})
+            data = self._request("/v2/locations", {"country_code": country_code, "province": state, "county":county})
         return data["locations"]
         
     def getDataByCountybyDate(self, county, timelines=False) -> List[Dict]:
