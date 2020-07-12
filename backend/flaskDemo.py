@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/risk") #GET to render homepage
 def calculateRisk():
-    location = 'Starbucks at Studio City'
+    location = 'Suffolk City'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
     placeType = returnPlaceType(location)
@@ -20,11 +20,17 @@ def calculateRisk():
     riskJson = json.dumps(riskDict)
     return riskJson
 
-@app.route('/getJson/<location>', methods=['POST']) #allow both GET and POST requests
-def postExample(location):
-    content = request.get_json(silent=True)
-    print(content['location'])
-    return content['location']
+@app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
+def get_data():
+    if request.method == 'POST':
+        req_data = request.get_json()
+        #print(req_data)
+        location = req_data['location']
+        print(req_data.dump())
+        #login(arg,arg) is a function that tries to log in and returns true or false
+        return str(location)
+    else:
+        return ('not posted')
 
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
