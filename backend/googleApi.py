@@ -18,6 +18,7 @@ def getPlaceID(address):
 def returnCounty(placeID):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplace = gmaps.place(str(placeID))
+    print(oneplace)
     searchString = (oneplace['result'])['address_components']
     searchString = str(searchString)
     county = searchString[:searchString.find(' County')]
@@ -71,4 +72,3 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[3])
     return avgTimeRisk
 
-#print(returnState(getPlaceID('Starbucks in Miami Beach')))
