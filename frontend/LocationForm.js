@@ -22,14 +22,50 @@ const styles = StyleSheet.create({
 
 export default class LocationForm extends React.Component {
   state = {
+    risk: 0,
     location: '',
+    day: '', 
     time: '',
     isFormValid: false,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = { risk: 0, location: '', day: '', time: '', isFormValid: false, isLoading: true};
+ }
+ 
+  getRemoteData = async () => {
+    const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time};
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
+    let postData = {
+        method: 'POST',
+        mode: 'cors', 
+        headers: {
+            'Accept': 'application/json',
+        },
+        body: blob
+    }
+    fetch('http://127.0.0.1:5000/getJson/', postData)
+ 
+    
+
+    fetch('http://127.0.0.1:5000/risk')
+    .then((response) => response.json())
+    .then((json) => {
+      this.setState({risk: json.risk});
+    })
+    .catch((error) => console.error(error))
+    console.log(this.state.risk)
+  };
+
+
   handleLocationChange = location => {
     this.validateForm()
     this.setState({location})
+  }
+  handleDayChange = day => {
+    this.validateForm()
+    this.setState({day})
   }
   handleTimeChange = time => {
     this.validateForm()
@@ -37,22 +73,26 @@ export default class LocationForm extends React.Component {
   }
   handleSubmit = () => {
     this.props.onSubmit(this.state)
-    Alert.alert('Location is ' + this.state.location + '\nTime is ' + this.state.time)
+    this.getRemoteData()
+    Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
+    + this.state.time+ '\nRisk is ' + this.state.risk)
+    
   }
 
   validateForm = () => {
     if(this.state.location.length > 0){
-      if (this.state.time.length > 0){
-        return this.setState({isFormValid:true})
-      }
-      else {
-        return this.setState({isFormValid:false})
+      if(this.state.day.length > 0){
+        if(this.state.time.length >= 0){
+          return this.setState({isFormValid:true})
+        }
       }
     }
     else{
       return this.setState({isFormValid:false})
     }
   }
+
+  
   render() {
     return (
       <View style={styles.container}>
@@ -64,12 +104,18 @@ export default class LocationForm extends React.Component {
         />
         <TextInput
             style={styles.input}
+            value={this.state.day}
+            placeholder='Day of the Week'
+            onChangeText={this.handleDayChange}
+        />
+        <TextInput
+            style={styles.input}
             value={this.state.time}
             placeholder='Enter time you plan to be there'
             onChangeText={this.handleTimeChange}
         />
         <Button title="Submit" onPress = {this.handleSubmit} disabled = {!this.state.isFormValid}/>
-        
+      
       </View>
     )
   }
