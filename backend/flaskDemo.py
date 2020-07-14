@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-@app.route("/risk") #GET to render homepage
+@app.route("/risk/") #GET to render homepage
 def calculateRisk():
     location = 'RDU'
     cty = returnCounty(getPlaceID(location))
@@ -34,12 +34,13 @@ def get_data():
         pc = findPercentChange(st, cty)
         b = returnPoptimes(day, time, location)
         risk = (pc*100)*0.33 + b*0.33 + avg*0.33
-        riskDict = {'risk': risk}
+        riskDict = riskDict = {'risk': risk, 'location':location, 
+        'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson
     if request.method == 'GET':
-        return ('not posted')
+        return 'not posted'
 
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
