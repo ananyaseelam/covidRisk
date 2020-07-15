@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-from covidApi import findPercentChange,returnCounty
-from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
-=======
 from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
->>>>>>> master
 # import csv
 
 def calculateRisk():
@@ -33,9 +28,3 @@ busyness = returnPoptimes('Thursday', 19, location)
 avgTimeRisk = avgTimeSpent(placeType)
 print(calculateRisk(cases, busyness, avgTimeRisk))
 
-<<<<<<< HEAD
-location = 'Suffolk City'
-cty = returnCounty(getPlaceID(location))
-print(cty) 
-=======
->>>>>>> master
