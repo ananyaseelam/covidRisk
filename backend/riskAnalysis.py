@@ -6,7 +6,7 @@ def calculateRisk(pc, b, avg):
     risk = (pc*100)*0.33 + b*0.33 + avg*0.33
     return risk
 
-location = 'Starbucks Suffolk Virginia'
+location = 'RDU Airport'
 county = returnCounty(getPlaceID(location))
 state = returnState(getPlaceID(location))
 placeType = returnPlaceType(location)
@@ -17,14 +17,14 @@ placeType = returnPlaceType(location)
 #         if row[0] == placeType:
 #             avgTimeRisk = float(row[3])
 
-perCh = findPercentChange(county)
-print('perCh: ', perCh)
+#perCh = findPercentChange(state, county, )
+#print('perCh: ', perCh)
 population =  findPopulation(county, state)
 print('population: ', population)
-cases = findCovidCasesPerHund(population, county)
+cases = findCovidCasesPerHund(population, county, state)
 print('cases per hundred thousand: ', cases)
-busyness = returnPoptimes('Thursday', 19)
+busyness = returnPoptimes('Thursday', 19, location)
 avgTimeRisk = avgTimeSpent(placeType)
-print(calculateRisk(perCh, busyness, avgTimeRisk))
+print(calculateRisk(cases, busyness, avgTimeRisk))
 
-print(county)
+# print(county)

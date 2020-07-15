@@ -42,19 +42,30 @@ def findPopulation(county, state):
         line_count+=1
 
 def findCovidCasesPerHund(population, county, state):
+    sumCases = 0
     population = float(population)
     today = d.today()
     oneDay = today - timedelta(days=1)
     twoDay = today - timedelta(days=2)
+    threeDay = today - timedelta(days=3)
+    fourDay = today - timedelta(days=4)
     date1day = str(oneDay) + 'T00:00:00Z'
     date2day = str(twoDay) + 'T00:00:00Z'
-    nowCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date1day))
-    thenCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date2day))
-    changeCases = nowCases - thenCases
-    print('change cases: ', changeCases)
+    date3day = str(threeDay) + 'T00:00:00Z'
+    date4day = str(fourDay) + 'T00:00:00Z'
+    _1dayCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date1day))
+    _2dayCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date2day))
+    changeCases = _1dayCases - _2dayCases
+    sumCases+=changeCases
+    _3dayCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date3day))
+    changeCases = _2dayCases - _3dayCases
+    sumCases+=changeCases
+    _4dayCases=float(getDataFromDate(returnCounty("US", str(state), str(county)), date4day))
+    changeCases = _3dayCases - _4dayCases
+    sumCases+=changeCases
+    avgChangeCases = float(sumCases/3)
     factor = 100000/population
-    print("factor: ", factor)
-    changeCasesPerHund = round(changeCases*factor, 2)
+    changeCasesPerHund = round(avgChangeCases*factor, 2)
     return changeCasesPerHund
 
 
