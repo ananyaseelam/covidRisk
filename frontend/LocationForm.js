@@ -37,27 +37,34 @@ export default class LocationForm extends React.Component {
 
 
  
-  getRemoteData = () => {
+  getRemoteData = async () => {
     const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time};
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
-        mode: 'no-cors', 
+        mode: 'cors', 
         headers: {
             'Accept': 'application/json',
         },
         body: blob
     }
-    fetch('http://127.0.0.1:5000/getJson/', postData)
-    .then((response) => response.json())
-    .then((json) => {
-      this.setState({risk: json.risk});
-    })
-    .catch((error) => console.error(error))
-    console.log('Risk: ', this.state.risk)
-
-    //add wait thing 
+    //fetch('http://127.0.0.1:5000/getJson/', postData)
+    try {
+      let response = await fetch('http://127.0.0.1:5000/getJson/', postData)
+      let json = await response.json();
+      console.log(json)
+      //this.setState({risk: json["risk"]});
+      console.log('RISK: ' + json.risk)
+      return json.risk
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  getSnapshotBeforeUpdate(nextProps) {       
+    console.log("Data "+nextProps.payload.payloadData); // Display [Object Object]
+    console.log(nextProps.payload.payloadData);  //  Display proper list
+ }
 
 
   handleLocationChange = location => {
@@ -75,7 +82,8 @@ export default class LocationForm extends React.Component {
   
   handleSubmit = () => {
     this.props.onSubmit(this.state)
-    this.getRemoteData()
+    this.setState({risk: this.getRemoteData()})
+    console.log('Riskskks: ' + this.getRemoteData())
     Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
     + this.state.time+ '\nRisk is ' + this.state.risk)
     
