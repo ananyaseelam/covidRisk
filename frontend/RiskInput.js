@@ -56,3 +56,4 @@ export default class RiskInput extends React.Component {
     )
   }
 }
+
