@@ -7,7 +7,7 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs'
+API_KEY = 
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -15,14 +15,17 @@ def getPlaceID(address):
     oneplaceID = ((oneplaceblob['candidates'])[0])['place_id']
     return oneplaceID
 
-
 def returnCounty(placeID):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplace = gmaps.place(str(placeID))
-    countyString = (oneplace['result'])['address_components']
-    county = countySearch(countyString)
-    #print(json.dumps(oneplace, sort_keys=True, indent=4))
-    return county
+    print(oneplace)
+    searchString = (oneplace['result'])['address_components']
+    searchString = str(searchString)
+    county = searchString[:searchString.find(' County')]
+    pos = county.rindex("'")
+    countyVal = county[pos+1:]
+    return countyVal
+
 
 def returnState(placeID):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -79,4 +82,3 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[3])
     return avgTimeRisk
 
-#print(returnCounty(getPlaceID('Statue of Liberty')))

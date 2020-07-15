@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, StyleSheet, TextInput, View, Alert, Text} from 'react-native'
 
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,32 +32,18 @@ export default class RiskInput extends React.Component {
 
   //react class component lifecycle begins 
   //1. instance of a component created and stored in the DOM (document object model)
-  constructor(props) { 
+  constructor(props) {
     super(props);
-  }
+    this.state = { isLoading: true};
+ }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:5000/risk')
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({risk: json.risk});
-      })
-      .catch((error) => console.error(error))
+
   }
 
   //2. Component is re-rendered 
   //onClick set the state
   componentDidUpdate() {
-    fetch('http://127.0.0.1:5000/getJson/', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'location': this.state.location,
-    })
-  });
   }
 
   render() {
@@ -69,4 +56,3 @@ export default class RiskInput extends React.Component {
     )
   }
 }
-

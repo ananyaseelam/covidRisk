@@ -12,6 +12,7 @@ def returnCountry(country):
     return location
 
 def getDataFromDate(bigString, date):
+    #print(bigString)
     bigString = bigString[0]
     data = (((bigString['timelines'])['confirmed'])["timeline"])[date]
     return data
@@ -68,9 +69,9 @@ def findCovidCasesPerHund(population, county, state):
     changeCasesPerHund = round(avgChangeCases*factor, 2)
     return changeCasesPerHund
 
-
 covid19 = COVID19(data_source="nyt")
 
+#print(returnCounty('US', 'North Carolina', 'Wake'))
 #date = '2020-06-18T00:00:00Z'
 #current = '2020-07-01T00:00:00Z'
 
