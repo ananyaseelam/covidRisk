@@ -1,11 +1,13 @@
-from covidApi import findPercentChange
+from covidApi import findPercentChange,returnCounty
 from googleApi import returnCounty, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 # import csv
 
 def calculateRisk():
-    location = 'Starbucks at Miami Beach'
-    x = returnCounty(getPlaceID(location))
-    print(x)
+    location = 'Suffolk City'
+    cty = returnCounty(getPlaceID(location))
+    print(cty)  
 
 
-calculateRisk()
+location = 'Suffolk City'
+cty = returnCounty(getPlaceID(location))
+print(cty) 
