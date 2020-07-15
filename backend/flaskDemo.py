@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/risk/") #GET to render homepage
 def calculateRisk():
-    location = 'RDU'
+    location = 'Suffolk City'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
     placeType = returnPlaceType(location)
