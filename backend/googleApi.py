@@ -26,28 +26,14 @@ def returnCounty(placeID):
     countyVal = county[pos+1:]
     return countyVal
 
+
 def returnState(placeID):
-    state_names = [
-    "Alaska", "Alabama", "Arkansas", "American Samoa", 
-    "Arizona", "California", "Colorado", "Connecticut", "District of Columbia", 
-    "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", 
-    "Illinois", "Indiana", "Kansas", "Kentucky", "Louisiana", "Massachusetts", 
-    "Maryland", "Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", 
-    "Montana", "North Carolina", "North Dakota", "Nebraska", "New Hampshire", 
-    "New Jersey", "New Mexico", "Nevada", "New York", "Ohio", "Oklahoma", 
-    "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", 
-    "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", 
-    "Vermont", "Washington", "Wisconsin", "West Virginia", "Wyoming"
-    ]
     gmaps = googlemaps.Client(key=API_KEY)
     oneplace = gmaps.place(str(placeID))
-    searchString = (oneplace['result'])['address_components']
-    stateVal = ''
-    for state in state_names:
-        if (str(searchString).find(str(state)) != -1):
-            stateVal = str(state)
-    return stateVal
-
+    stateString = (oneplace['result'])['address_components']
+    state = stateSearch(stateString)
+    #print(json.dumps(oneplace, sort_keys=True, indent=4))
+    return state
 
 def returnPlaceType(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -57,6 +43,30 @@ def returnPlaceType(address):
     placeType = (oneplace['result'])['types']
     return placeType[0]
 
+def countySearch(searchString):
+    searchString = str(searchString)
+    #print(searchString)
+    #county = searchString[:searchString.find(' County')]
+    #pos = county.rindex("'")
+    #countyVal = county[pos+1:]
+    #return countyVal
+    endCountyPos = searchString.find(", 'types': ['administrative_area_level_2'") - 1
+    if endCountyPos == -2: #location isn't in a county
+        endCountyPos = searchString.find(", 'types': ['locality'") -1
+        cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
+        county = searchString[cutOffCountyPos:endCountyPos]
+        return (county + ' city')
+    else: #else find county name
+        cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
+        county = searchString[cutOffCountyPos:endCountyPos]
+        return county
+
+def stateSearch(searchString):
+    searchString = str(searchString)
+    endStatePos = searchString.find(", 'types': ['administrative_area_level_1'") - 21
+    cutOffStatePos = searchString[:endStatePos].rfind(': ')+3
+    state = searchString[cutOffStatePos:endStatePos]
+    return state
 
 def returnPoptimes(day, hour, location):
     dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
