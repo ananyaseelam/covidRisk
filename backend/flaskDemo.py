@@ -23,9 +23,10 @@ def calculateRisk():
 @app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
 def get_data():
     if request.method == 'POST':
-        print(request.data)
-        req_data = request.get_data
-        print(req_data)
+        #print(request.is_json)
+        #print(request.json)
+        print(request.json)
+        req_data = request.json
         location = req_data['location']
         day = req_data['day']
         time = req_data['time']
@@ -36,10 +37,10 @@ def get_data():
         pc = findPercentChange(st, cty)
         b = returnPoptimes(day, time, location)
         risk = (pc*100)*0.33 + b*0.33 + avg*0.33
-        riskDict = riskDict = {'risk': risk, 'location':location, 
+        riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
         riskJson = json.dumps(riskDict)
-        print(riskJson)
+        print('RISK: ' + str(riskDict['risk']))
         return riskJson
     if request.method == 'GET':
         return 'not posted'
