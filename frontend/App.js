@@ -1,4 +1,3 @@
-  
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
@@ -25,7 +24,6 @@ export default class App extends React.Component {
           title="Input" 
           onPress = {this.showForm}
         />
-        <RiskInput/>
       </View>
 
     );
@@ -40,3 +38,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
