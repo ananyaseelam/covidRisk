@@ -31,31 +31,32 @@ export default class LocationForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { risk: 0, location: '', day: '', time: '', isFormValid: false, isLoading: true};
+    //this.state = {risk: 0, location: '', day: '', time: '', isFormValid: false, isLoading: true};
  }
+
+
+
  
-  getRemoteData = async () => {
+  getRemoteData = () => {
     const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time};
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
-        mode: 'cors', 
+        mode: 'no-cors', 
         headers: {
             'Accept': 'application/json',
         },
         body: blob
     }
     fetch('http://127.0.0.1:5000/getJson/', postData)
- 
-    
-
-    fetch('http://127.0.0.1:5000/risk')
     .then((response) => response.json())
     .then((json) => {
       this.setState({risk: json.risk});
     })
     .catch((error) => console.error(error))
-    console.log(this.state.risk)
+    console.log('Risk: ', this.state.risk)
+
+    //add wait thing 
   };
 
 
@@ -71,6 +72,7 @@ export default class LocationForm extends React.Component {
     this.validateForm()
     this.setState({time})
   }
+  
   handleSubmit = () => {
     this.props.onSubmit(this.state)
     this.getRemoteData()
@@ -78,11 +80,10 @@ export default class LocationForm extends React.Component {
     + this.state.time+ '\nRisk is ' + this.state.risk)
     
   }
-
   validateForm = () => {
     if(this.state.location.length > 0){
       if(this.state.day.length > 0){
-        if(this.state.time.length >= 0){
+        if(this.state.time.length > 0){
           return this.setState({isFormValid:true})
         }
       }

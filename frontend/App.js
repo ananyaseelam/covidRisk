@@ -1,4 +1,3 @@
-  
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
@@ -39,3 +38,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
