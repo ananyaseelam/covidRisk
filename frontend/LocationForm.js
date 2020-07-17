@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, StyleSheet, TextInput, View, Alert} from 'react-native'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 const styles = StyleSheet.create({
@@ -22,35 +23,24 @@ const styles = StyleSheet.create({
 
 export default class LocationForm extends React.Component {
   state = {
-    risk: 0,
+    risk: '',
     location: '',
     day: '', 
     time: '',
     isFormValid: false,
   }
 
-  constructor(props) {
-    super(props);
-    //this.state = {risk: 0, location: '', day: '', time: '', isFormValid: false, isLoading: true};
- }
-
-
-
- 
   getRemoteData = async () => {
     const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time};
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
-        mode: 'cors', 
-        headers: {
-            'Accept': 'application/json',
-        },
+        method: 'no-cors',
         body: blob
     }
     //fetch('http://127.0.0.1:5000/getJson/', postData)
     try {
-      let response = await fetch('http://127.0.0.1:5000/getJson/', postData)
+      let response = await fetch('http://localhost:5000/getJson', postData)
       let json = await response.json();
       console.log(json)
       //this.setState({risk: json["risk"]});
@@ -61,11 +51,10 @@ export default class LocationForm extends React.Component {
     }
   };
 
-  getSnapshotBeforeUpdate(nextProps) {       
-    console.log("Data "+nextProps.payload.payloadData); // Display [Object Object]
-    console.log(nextProps.payload.payloadData);  //  Display proper list
+  
+  constructor(props) {
+    super(props);
  }
-
 
   handleLocationChange = location => {
     this.validateForm()
@@ -79,15 +68,16 @@ export default class LocationForm extends React.Component {
     this.validateForm()
     this.setState({time})
   }
-  
+
   handleSubmit = () => {
     this.props.onSubmit(this.state)
-    this.setState({risk: this.getRemoteData()})
-    console.log('Riskskks: ' + this.getRemoteData())
+    console.log(this.getRemoteData())
+    //this.getRemoteData().then(result => console.log({result}))
+    console.log('this.state.risk: ' + this.state.risk)
     Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
     + this.state.time+ '\nRisk is ' + this.state.risk)
-    
   }
+
   validateForm = () => {
     if(this.state.location.length > 0){
       if(this.state.day.length > 0){
