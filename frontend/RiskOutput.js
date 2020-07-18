@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default class RiskInput extends React.Component {
+export default class RiskOutput extends React.Component {
 
   state = {
     location: 'miami beach, florida',
