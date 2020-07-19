@@ -2,12 +2,16 @@ from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 # import csv
 
-def calculateRisk():
-    location = 'Starbucks at Miami Beach'
-    x = returnCounty(getPlaceID(location))
-    print(x)
+def calculateRisk(c, b, avgRisk):
+    risk = 0.4*c + 0.2*b + 0.2*avgRisk
+    return risk
+    
+    
+# location = 'Starbucks at Miami Beach'
+# x = returnCounty(getPlaceID(location))
+# print(x)
 
-location = 'RDU Airport'
+location = 'BJs Brier Creek North Carolina'
 county = returnCounty(getPlaceID(location))
 state = returnState(getPlaceID(location))
 placeType = returnPlaceType(location)
@@ -22,9 +26,10 @@ placeType = returnPlaceType(location)
 #print('perCh: ', perCh)
 population =  findPopulation(county, state)
 print('population: ', population)
-cases = findCovidCasesPerHund(population, county, state)
-print('cases per hundred thousand: ', cases)
+casesRisk = float(findCovidCasesPerHund(population, county, state))
+print('cases per hundred thousand: ', casesRisk)
 busyness = returnPoptimes('Thursday', 19, location)
+print('busyness:', busyness)
 avgTimeRisk = avgTimeSpent(placeType)
-print(calculateRisk(cases, busyness, avgTimeRisk))
+print(calculateRisk(casesRisk, busyness, avgTimeRisk))
 
