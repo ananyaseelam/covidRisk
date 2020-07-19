@@ -1,34 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import {Constants} from 'expo';
-import LocationForm from './LocationForm'
-import RiskInput from './RiskInput'
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator} from 'react-navigation-stack';
+import FirstPage from './pages/FirstPage';
+import SecondPage from './pages/SecondPage';
 
-export default class App extends React.Component {
-  state={
-    showForm:false
+//import all the screens we are going to switch 
+const App = createStackNavigator({
+  //Constant which holds all the screens like index of any book 
+    FirstPage: { screen: FirstPage }, 
+    //First entry by default be our first screen 
+    //if we do not define initialRouteName
+    SecondPage: { screen: SecondPage }, 
+  },
+  {
+    initialRouteName: 'FirstPage',
   }
-  showForm = () => {
-    this.setState({showForm: true})
-  }
-  addLocation = newLocation => {
-    this.setState({showForm: false})
-  }
-  
-  render(){
-    if (this.state.showForm===true) return <LocationForm onSubmit= {this.addLocation}/>
-    return (
-      <View style={styles.container}>
-        <Text>Covid Risk</Text>
-        <Button 
-          title="Input" 
-          onPress = {this.showForm}
-        />
-      </View>
-
-    );
-  }
-}
+);
+export default createAppContainer(App);
 
 const styles = StyleSheet.create({
   container: {
