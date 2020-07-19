@@ -42,7 +42,6 @@ export default class LocationForm extends React.Component {
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
-        mode: 'no-cors', 
         headers: {
             'Accept': 'application/json',
         },
