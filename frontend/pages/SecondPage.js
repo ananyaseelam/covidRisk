@@ -14,6 +14,7 @@ export default class SecondPage extends Component {
     day: '', 
     time: '',
     isFormValid: false,
+    showForm: true,
   }
 
   constructor(props) {
@@ -62,6 +63,7 @@ export default class SecondPage extends Component {
   handleSubmit = () => {
     //this.props.onSubmit(this.state)
     this.getRemoteData()
+    this.state.showForm=false
     //Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
     //+ this.state.time+ '\nRisk is ' + this.state.risk)
     
@@ -82,6 +84,14 @@ export default class SecondPage extends Component {
   
   render() {
     const { navigate } = this.props.navigation;
+    if (this.state.showForm===false) 
+      return (
+        <View style={styles.container}>
+        <Text>
+          Risk: {this.state.risk}
+        </Text>
+        </View>
+      )
     return (
       <View style={styles.container}>
         <TextInput
