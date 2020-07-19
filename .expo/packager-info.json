@@ -1,11 +1,18 @@
 {
 <<<<<<< HEAD
+  "webpackServerPort": null,
+=======
+<<<<<<< HEAD
+>>>>>>> master
   "expoServerPort": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
   "ngrokPid": null,
   "packagerPort": null,
   "packagerPid": null,
+<<<<<<< HEAD
+  "devToolsPort": 19002
+=======
   "webpackServerPort": null
 =======
   "expoServerPort": 19000,
@@ -17,4 +24,5 @@
   "webpackServerPort": null,
   "devToolsPort": 19002
 >>>>>>> 86c35b37ead4bb95de549db0886341c8320c14ea
+>>>>>>> master
 }

@@ -24,7 +24,6 @@ export default class App extends React.Component {
           title="Input" 
           onPress = {this.showForm}
         />
-        <RiskInput/>
       </View>
 
     );

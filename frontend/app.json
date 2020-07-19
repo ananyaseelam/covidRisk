@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "project1",
-    "slug": "project1",
+    "name": "covidRisk",
+    "slug": "covidRisk",
     "platforms": [
       "ios",
       "android",
