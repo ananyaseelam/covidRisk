@@ -5,17 +5,26 @@ import { StyleSheet, View, Button, TextInput, Text } from 'react-native';
 import LocationForm from '../LocationForm';
 
 export default class FirstPage extends Component {
-    state={
-      showForm:false
-    }
-    showForm = () => {
-      this.setState({showForm: true})
-    }
-    addLocation = newLocation => {
-      this.setState({showForm: false})
-    }
+  constructor(props) {
+        //constructor to set default state
+    super(props);
+    this.state = {
+      showForm: false,
+    };
+  }
+  static navigationOptions = {
+    //Setting the header of the screen
+    title: 'First Page',
+  };
+  showForm = () => {
+    this.setState({showForm: true})
+  }
+  addLocation = newLocation => {
+    this.setState({showForm: false})
+  }
     
-    render(){
+  render(){
+      const { navigate } = this.props.navigation;
       if (this.state.showForm===true) return <LocationForm onSubmit= {this.addLocation}/>
       return (
         <View style={styles.container}>

@@ -23,7 +23,7 @@ def findPercentChange(state, county):
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
     date2wk = str(twoWeeks) +'T00:00:00Z'
-    date1day = str(oneDay) + 'T00:00:00Z'
+    date1day = str(twoDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
     previous=int(getDataFromDate(returnCounty("US", str(state), str(county)), date2wk))
