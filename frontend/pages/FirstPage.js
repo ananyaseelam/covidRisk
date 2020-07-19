@@ -14,7 +14,7 @@ export default class FirstPage extends Component {
   }
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'First Page',
+    title: 'Covid Risk App',
   };
   showForm = () => {
     this.setState({showForm: true})
@@ -27,7 +27,6 @@ export default class FirstPage extends Component {
       const { navigate } = this.props.navigation;
       return (
         <View style={styles.container}>
-          <Text>Covid Risk</Text>
           <Button 
             title="Input" 
             onPress = {this.showForm}
