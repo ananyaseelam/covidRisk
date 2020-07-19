@@ -87,9 +87,9 @@ export default class SecondPage extends Component {
     if (this.state.showForm===false) 
       return (
         <View style={styles.container}>
-        <Text>
-          Risk: {this.state.risk}
-        </Text>
+          <Text>
+            Risk: {this.state.risk}
+          </Text>
         </View>
       )
     return (

@@ -25,7 +25,6 @@ export default class FirstPage extends Component {
     
   render(){
       const { navigate } = this.props.navigation;
-      if (this.state.showForm===true) return <LocationForm onSubmit= {this.addLocation}/>
       return (
         <View style={styles.container}>
           <Text>Covid Risk</Text>
@@ -34,7 +33,7 @@ export default class FirstPage extends Component {
             onPress = {this.showForm}
           />
           <Button
-          title="Go Next"
+          title="Calculate Your Risk Here"
           //Button Title
           onPress={() =>
             navigate('SecondPage')
