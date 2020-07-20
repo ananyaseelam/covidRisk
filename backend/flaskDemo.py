@@ -5,10 +5,10 @@ from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, re
 import json
 
 app = Flask(__name__)
-
+riskVal = 0.0
 @app.route("/risk/") #GET to render homepage
 def calculateRisk():
-    location = 'Suffolk City'
+    location = 'RDU'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
     placeType = returnPlaceType(location)
@@ -24,7 +24,7 @@ def calculateRisk():
 def get_data():
     if request.method == 'POST':
         print(request.data)
-        req_data = request.get_data
+        req_data = request.json
         print(req_data)
         location = req_data['location']
         day = req_data['day']
@@ -36,6 +36,8 @@ def get_data():
         pc = findPercentChange(st, cty)
         b = returnPoptimes(day, time, location)
         risk = (pc*100)*0.33 + b*0.33 + avg*0.33
+        riskVal=risk
+        print(riskVal)
         riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
         riskJson = json.dumps(riskDict)
@@ -43,7 +45,6 @@ def get_data():
         return riskJson
     if request.method == 'GET':
         return 'not posted'
-
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
 def form_example():
