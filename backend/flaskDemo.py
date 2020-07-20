@@ -14,7 +14,7 @@ def calculateRisk():
     placeType = returnPlaceType(location)
     avg = avgTimeSpent(placeType)
     pc = findPercentChange(st, cty)
-    b = returnPoptimes('Friday', 10, location)
+    b = returnPoptimes('Friday', '10', location)
     risk = (pc*100)*0.33 + b*0.33 + avg*0.33
     riskDict = {'risk': risk, 'location':location, 'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
     riskJson = json.dumps(riskDict)
