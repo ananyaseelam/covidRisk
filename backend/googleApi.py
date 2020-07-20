@@ -7,7 +7,7 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = 
+API_KEY = "AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs"
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -18,7 +18,7 @@ def getPlaceID(address):
 def returnCounty(placeID):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplace = gmaps.place(str(placeID))
-    print(oneplace)
+    #print(oneplace)
     searchString = (oneplace['result'])['address_components']
     searchString = str(searchString)
     county = searchString[:searchString.find(' County')]
@@ -69,9 +69,22 @@ def stateSearch(searchString):
     return state
 
 def returnPoptimes(day, hour, location):
+    periodPos = hour.find('M') -1
+    timePeriod = hour[periodPos:] 
+    semiPos = hour.find(':')
+    hour = int(hour[:semiPos])
+    if timePeriod == "PM": #converts to military time
+        hour+=12
+    if hour == 12: #changes 12 to 0
+        hour = 0
+    if hour == 24: #changes 24 to 12
+        hour = 12
     dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
     poptimes = populartimes.get_id(API_KEY, getPlaceID(location))
-    dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+    try:
+        dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+    except KeyError:
+        dataPoint = 0
     return dataPoint
 
 def avgTimeSpent(placeType):
