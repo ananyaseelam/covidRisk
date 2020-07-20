@@ -87,11 +87,19 @@ def returnPoptimes(day, hour, location):
         dataPoint = 0
     return dataPoint
 
-def avgTimeSpent(placeType):
+def avgTimeRisk(placeType):
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             if row[0] == placeType:
                 avgTimeRisk = float(row[3])
+    return avgTimeRisk
+
+def avgTimeSpent(placeType):
+    with open('Average_Time_Spent_Risk.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            if row[0] == placeType:
+                avgTimeRisk = float(row[2])
     return avgTimeRisk
 

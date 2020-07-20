@@ -1,5 +1,5 @@
 from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
-from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeRisk, avgTimeSpent
 # import csv
 
 def calculateRisk(c, b, avgRisk):
@@ -37,7 +37,9 @@ print('cases risk value: ', casesRisk)
 time = '5:30PM'
 busyness = returnPoptimes('Thursday', time, location)
 print('busyness:', busyness)
-avgTimeRisk = avgTimeSpent(placeType)
+avgTimeRisk = avgTimeRisk(placeType)
 print('average time risk: ', avgTimeRisk)
+avgTimeSpent = avgTimeSpent(placeType)
+print('average time spent (mins): ', avgTimeSpent)
 print(calculateRisk(casesRisk, busyness, avgTimeRisk))
 
