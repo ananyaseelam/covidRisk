@@ -23,7 +23,7 @@ def findPercentChange(state, county):
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
     date2wk = str(twoWeeks) +'T00:00:00Z'
-    date1day = str(oneDay) + 'T00:00:00Z'
+    date1day = str(twoDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
     previous=int(getDataFromDate(returnCounty("US", str(state), str(county)), date2wk))
@@ -67,7 +67,17 @@ def findCovidCasesPerHund(population, county, state):
     avgChangeCases = float(sumCases/3)
     factor = 100000/population
     changeCasesPerHund = round(avgChangeCases*factor, 2)
-    return changeCasesPerHund
+    with open('Cases_Per_HundredThousand_Scaled.csv') as csv_file:
+        csv_file.readline()
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if float(row[0]) >= changeCasesPerHund:
+                return row[1]
+            line_count+=1
+            if line_count == 7:
+                return row[1]
+
 
 covid19 = COVID19(data_source="nyt")
 

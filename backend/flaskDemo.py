@@ -1,17 +1,14 @@
 from flask import Flask
-from flask_cors import CORS
 from flask import request
 from covidApi import findPercentChange
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
 
-
 app = Flask(__name__)
-#CORS(app)
-
+riskVal = 0.0
 @app.route("/risk/") #GET to render homepage
 def calculateRisk():
-    location = 'Suffolk City'
+    location = 'RDU'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
     placeType = returnPlaceType(location)
@@ -24,13 +21,11 @@ def calculateRisk():
     return riskJson
 
 @app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
-#@cross_origin()
 def get_data():
     if request.method == 'POST':
-        #print(request.is_json)
-        #print(request.json)
-        print(request.json)
+        print(request.data)
         req_data = request.json
+        print(req_data)
         location = req_data['location']
         day = req_data['day']
         time = req_data['time']
@@ -41,15 +36,15 @@ def get_data():
         pc = findPercentChange(st, cty)
         b = returnPoptimes(day, time, location)
         risk = (pc*100)*0.33 + b*0.33 + avg*0.33
-        riskDict = {'risk': risk, 'location':location, 
+        riskVal=risk
+        print(riskVal)
+        riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
         riskJson = json.dumps(riskDict)
-        print('RISK: ' + str(riskDict['risk']))
         print(riskJson)
         return riskJson
     if request.method == 'GET':
         return 'not posted'
-
 
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
 def form_example():
