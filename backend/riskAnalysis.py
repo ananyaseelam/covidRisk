@@ -1,4 +1,4 @@
-from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund
+from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 # import csv
 
@@ -30,11 +30,14 @@ placeType = returnPlaceType(location)
 #print('perCh: ', perCh)
 population =  findPopulation(county, state)
 print('population: ', population)
-casesRisk = float(findCovidCasesPerHund(population, county, state))
-print('cases per hundred thousand: ', casesRisk)
+newCases = findCovidCasesPerHund(population, county, state)
+print('cases per hundred thousand: ', newCases)
+casesRisk = findRiskCases(newCases)
+print('cases risk value: ', casesRisk)
 time = '5:30PM'
 busyness = returnPoptimes('Thursday', time, location)
 print('busyness:', busyness)
 avgTimeRisk = avgTimeSpent(placeType)
+print('average time risk: ', avgTimeRisk)
 print(calculateRisk(casesRisk, busyness, avgTimeRisk))
 
