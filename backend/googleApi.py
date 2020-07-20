@@ -7,7 +7,7 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = 
+API_KEY = "AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs"
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -81,7 +81,10 @@ def returnPoptimes(day, hour, location):
         hour = 12
     dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
     poptimes = populartimes.get_id(API_KEY, getPlaceID(location))
-    dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+    try:
+        dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+    except KeyError:
+        dataPoint = 0
     return dataPoint
 
 def avgTimeSpent(placeType):

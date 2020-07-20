@@ -3,7 +3,10 @@ from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, re
 # import csv
 
 def calculateRisk(c, b, avgRisk):
-    risk = 0.4*c + 0.2*b + 0.2*avgRisk
+    if b == 0:
+        risk = 0.6*c + 0.4*avgRisk
+    else:
+        risk = 0.4*c + 0.3*b + 0.3*avgRisk
     return risk
     
     
@@ -11,8 +14,9 @@ def calculateRisk(c, b, avgRisk):
 # x = returnCounty(getPlaceID(location))
 # print(x)
 
-location = 'BJs Brier Creek North Carolina'
+location = 'Raleigh North Carolina'
 county = returnCounty(getPlaceID(location))
+print(county)
 state = returnState(getPlaceID(location))
 placeType = returnPlaceType(location)
 
@@ -28,7 +32,8 @@ population =  findPopulation(county, state)
 print('population: ', population)
 casesRisk = float(findCovidCasesPerHund(population, county, state))
 print('cases per hundred thousand: ', casesRisk)
-busyness = returnPoptimes('Thursday', 19, location)
+time = '5:30PM'
+busyness = returnPoptimes('Thursday', time, location)
 print('busyness:', busyness)
 avgTimeRisk = avgTimeSpent(placeType)
 print(calculateRisk(casesRisk, busyness, avgTimeRisk))
