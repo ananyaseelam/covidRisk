@@ -14,7 +14,7 @@ def calculateRisk(c, b, avgRisk):
 # x = returnCounty(getPlaceID(location))
 # print(x)
 
-location = 'Raleigh North Carolina'
+location = 'Pentagon'
 county = returnCounty(getPlaceID(location))
 print(county)
 state = returnState(getPlaceID(location))

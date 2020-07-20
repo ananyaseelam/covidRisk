@@ -21,10 +21,8 @@ def returnCounty(placeID):
     #print(oneplace)
     searchString = (oneplace['result'])['address_components']
     searchString = str(searchString)
-    county = searchString[:searchString.find(' County')]
-    pos = county.rindex("'")
-    countyVal = county[pos+1:]
-    return countyVal
+    county = countySearch(searchString)
+    return county
 
 
 def returnState(placeID):
