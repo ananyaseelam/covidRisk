@@ -14,6 +14,8 @@ export default class SecondPage extends Component {
     day: '', 
     time: '',
     placeType:'',
+    casesData: '',
+    countyPop: 0,
     isFormValid: false,
     showForm: true,
     isLoading: false,
@@ -38,10 +40,12 @@ export default class SecondPage extends Component {
     fetch('http://127.0.0.1:5000/getJson/', postData)
     .then((response) => response.json())
     .then((json) => {
-      console.log('Risk: ', json.risk)
+      //console.log('Risk: ', json)
       this.setState({risk: json.risk});
       this.setState({placeType: json.placeType})
-      console.log('Risk AGAIN ', this.state.risk)
+      this.setState({casesData:json.new_cases})
+      this.setState({countyPop: json.population})
+      //console.log('Risk AGAIN ', this.state.risk)
     })
     .catch((error) => console.error(error))
     
@@ -93,6 +97,9 @@ export default class SecondPage extends Component {
             Risk: {this.state.risk}
             {"\n"}
             Place Type: {this.state.placeType}
+            {"\n"}
+            New Cases per Hundred Thousand: {this.state.casesData}
+            {"\n"} 
           </Text>
         </View>
       )
@@ -133,5 +140,15 @@ const styles = StyleSheet.create({
     fontSize: 23,
     textAlign: 'center',
     color: '#f00',
+  },
+  input: {
+    borderWidth: 5,
+    borderColor: 'pink',
+    minWidth: 100,
+    marginTop: 20,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 3,
   },
 });

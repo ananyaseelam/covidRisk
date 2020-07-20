@@ -67,16 +67,19 @@ def findCovidCasesPerHund(population, county, state):
     avgChangeCases = float(sumCases/3)
     factor = 100000/population
     changeCasesPerHund = round(avgChangeCases*factor, 2)
+    return changeCasesPerHund
+
+def findRiskCases (changeCasesPerHund):
     with open('Cases_Per_HundredThousand_Scaled.csv') as csv_file:
         csv_file.readline()
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
             if float(row[0]) >= changeCasesPerHund:
-                return row[1]
+                return float(row[1])
             line_count+=1
             if line_count == 7:
-                return row[1]
+                return float(row[1])
 
 
 covid19 = COVID19(data_source="nyt")
@@ -84,5 +87,3 @@ covid19 = COVID19(data_source="nyt")
 #print(returnCounty('US', 'North Carolina', 'Wake'))
 #date = '2020-06-18T00:00:00Z'
 #current = '2020-07-01T00:00:00Z'
-
-

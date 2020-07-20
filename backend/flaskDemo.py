@@ -1,13 +1,14 @@
 from flask import Flask
 from flask import request
-from covidApi import findPercentChange
+from riskAnalysis import calculateRisk
+from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
 
 app = Flask(__name__)
 riskVal = 0.0
 @app.route("/risk/") #GET to render homepage
-def calculateRisk():
+def calculatetheRisk():
     location = 'RDU'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
@@ -29,17 +30,23 @@ def get_data():
         location = req_data['location']
         day = req_data['day']
         time = req_data['time']
-        cty = returnCounty(getPlaceID(location))
-        st = returnState(getPlaceID(location))
         placeType = returnPlaceType(location)
-        avg = avgTimeSpent(placeType)
-        pc = findPercentChange(st, cty)
-        b = returnPoptimes(day, time, location)
-        risk = (pc*100)*0.33 + b*0.33 + avg*0.33
-        riskVal=risk
-        print(riskVal)
-        riskDict = riskDict = {'risk': risk, 'location':location, 
-        'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
+        county = returnCounty(getPlaceID(location))
+        print(county)
+        state = returnState(getPlaceID(location))
+        print('State: ', state)
+        placeType = returnPlaceType(location)
+        population =  findPopulation(county, state)
+        print(population)
+        busyness = returnPoptimes(day, time, location)
+        avgTimeRisk = avgTimeSpent(placeType)
+        newCases = findCovidCasesPerHund(population, county, state)
+        casesRisk = findRiskCases(newCases)
+        risk = calculateRisk(casesRisk, busyness, avgTimeRisk)
+        riskDict = {'risk': risk, 'location':location, 
+                    'placeType':placeType, 'average_time_spent':avgTimeRisk, 
+                    'population':population, 'popular_times':busyness, 
+                    'new_cases':newCases}
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson
