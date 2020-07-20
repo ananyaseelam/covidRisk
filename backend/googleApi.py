@@ -7,7 +7,7 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = "AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs"
+API_KEY = 
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
