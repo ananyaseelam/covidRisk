@@ -7,7 +7,7 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = "AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs"
+API_KEY = 
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -21,10 +21,8 @@ def returnCounty(placeID):
     #print(oneplace)
     searchString = (oneplace['result'])['address_components']
     searchString = str(searchString)
-    county = searchString[:searchString.find(' County')]
-    pos = county.rindex("'")
-    countyVal = county[pos+1:]
-    return countyVal
+    county = countySearch(searchString)
+    return county
 
 
 def returnState(placeID):
@@ -87,11 +85,19 @@ def returnPoptimes(day, hour, location):
         dataPoint = 0
     return dataPoint
 
-def avgTimeSpent(placeType):
+def avgTimeRisk(placeType):
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             if row[0] == placeType:
                 avgTimeRisk = float(row[3])
+    return avgTimeRisk
+
+def avgTimeSpent(placeType):
+    with open('Average_Time_Spent_Risk.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            if row[0] == placeType:
+                avgTimeRisk = float(row[2])
     return avgTimeRisk
 
