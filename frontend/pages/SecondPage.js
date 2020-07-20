@@ -13,6 +13,7 @@ export default class SecondPage extends Component {
     location: '',
     day: '', 
     time: '',
+    placeType:'',
     isFormValid: false,
     showForm: true,
     isLoading: false,
@@ -39,6 +40,7 @@ export default class SecondPage extends Component {
     .then((json) => {
       console.log('Risk: ', json.risk)
       this.setState({risk: json.risk});
+      this.setState({placeType: json.placeType})
       console.log('Risk AGAIN ', this.state.risk)
     })
     .catch((error) => console.error(error))
@@ -89,6 +91,8 @@ export default class SecondPage extends Component {
         <View style={styles.container}>
           <Text>
             Risk: {this.state.risk}
+            {"\n"}
+            Place Type: {this.state.placeType}
           </Text>
         </View>
       )

@@ -27,10 +27,9 @@ export default class FirstPage extends Component {
       const { navigate } = this.props.navigation;
       return (
         <View style={styles.container}>
-          <Button 
-            title="Input" 
-            onPress = {this.showForm}
-          />
+          <Text>
+            Welcome to the Covid Risk App! 
+          </Text>
           <Button
           title="Calculate Your Risk Here"
           //Button Title
