@@ -1,10 +1,13 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 from covidApi import findPercentChange
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 riskVal = 0.0
 @app.route("/risk/") #GET to render homepage
 def calculateRisk():
@@ -21,11 +24,19 @@ def calculateRisk():
     return riskJson
 
 @app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
+@cross_origin()
 def get_data():
     if request.method == 'POST':
+        print("**********************************I am in the flask side")
+        print(request.headers)
         print(request.data)
+        #byte_str=request.data
+        #new_str=byte_str.decode('utf-8')
+        #print(new_str)
+        #print(json.dumps(new_str))
+        #req_data = json.loads(new_str)
         req_data = request.json
-        print(req_data)
+        print(type(req_data))
         location = req_data['location']
         day = req_data['day']
         time = req_data['time']
@@ -35,6 +46,7 @@ def get_data():
         avg = avgTimeSpent(placeType)
         pc = findPercentChange(st, cty)
         b = returnPoptimes(day, time, location)
+
         risk = (pc*100)*0.33 + b*0.33 + avg*0.33
         riskVal=risk
         print(riskVal)
