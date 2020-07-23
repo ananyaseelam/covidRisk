@@ -7,7 +7,9 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
+
 API_KEY = ''
+
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -103,5 +105,3 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[2])
     return avgTimeRisk
 
-
-#print(returnCounty(getPlaceID('RDU')))
