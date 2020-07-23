@@ -13,6 +13,8 @@ export default class SecondPage extends Component {
   state = {
     risk: 0,
     location: '',
+    county:'',
+    state: '',
     day: '', 
     time: '',
     placeType:'',
@@ -23,6 +25,8 @@ export default class SecondPage extends Component {
     showForm: true,
     isLoading: false,
     spinner: true,
+    latitude:0.0,
+    longitude:0.0,
   }
 
   constructor(props) {
@@ -51,6 +55,10 @@ export default class SecondPage extends Component {
       this.setState({casesData:json.new_cases})
       this.setState({countyPop: json.population})
       this.setState({timeSpent: json.average_time_spent})
+      this.setState({latitude: json.latitude})
+      this.setState({longitude: json.longitude})
+      this.setState({county: json.county})
+      //this.setState({state: json.state})
       //console.log('Risk AGAIN ', this.state.risk)
     })
     .catch((error) => console.error(error))
@@ -117,6 +125,11 @@ export default class SecondPage extends Component {
               {"\n"}
               Average Time Spent at this Location: {this.state.timeSpent} minutes
             </Text>
+            <Button 
+            title="Map View"
+            onPress={() =>
+              this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
+            }/>
           </View>
         )
       }
