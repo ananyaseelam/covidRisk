@@ -7,7 +7,9 @@ import populartimes
 import csv
 
 # the result is a Python dictionary:
-API_KEY = 
+
+API_KEY = ''
+
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -48,14 +50,16 @@ def countySearch(searchString):
     #pos = county.rindex("'")
     #countyVal = county[pos+1:]
     #return countyVal
-    endCountyPos = searchString.find(", 'types': ['administrative_area_level_2'") - 1
-    if endCountyPos == -2: #location isn't in a county
+    endCountyPos = searchString.find(", 'types': ['administrative_area_level_2'") - 8
+    print(endCountyPos)
+    if endCountyPos == -9: #location isn't in a county
         endCountyPos = searchString.find(", 'types': ['locality'") -1
         cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
         county = searchString[cutOffCountyPos:endCountyPos]
         return (county + ' city')
     else: #else find county name
         cutOffCountyPos = searchString[:endCountyPos].rfind(': ')+3
+        #print(searchString)
         county = searchString[cutOffCountyPos:endCountyPos]
         return county
 

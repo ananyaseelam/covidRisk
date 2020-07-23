@@ -23,7 +23,7 @@ def findPercentChange(state, county):
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
     date2wk = str(twoWeeks) +'T00:00:00Z'
-    date1day = str(twoDay) + 'T00:00:00Z'
+    date1day = str(oneDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
     previous=int(getDataFromDate(returnCounty("US", str(state), str(county)), date2wk))
@@ -98,5 +98,3 @@ covid19 = COVID19(data_source="nyt")
 #print(returnCounty('US', 'North Carolina', 'Wake'))
 #date = '2020-06-18T00:00:00Z'
 #current = '2020-07-01T00:00:00Z'
-
-

@@ -1,3 +1,4 @@
+
 from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeRisk, avgTimeSpent
 # import csv
@@ -13,7 +14,7 @@ def calculateRisk(c, b, avgRisk):
 # location = 'Starbucks at Miami Beach'
 # x = returnCounty(getPlaceID(location))
 # print(x)
-
+"""
 location = 'Pentagon'
 county = returnCounty(getPlaceID(location))
 print(county)
@@ -43,3 +44,4 @@ avgTimeSpent = avgTimeSpent(placeType)
 print('average time spent (mins): ', avgTimeSpent)
 print(calculateRisk(casesRisk, busyness, avgTimeRisk))
 
+"""
