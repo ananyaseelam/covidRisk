@@ -23,7 +23,7 @@ def findPercentChange(state, county):
     twoDay = today - timedelta(days=2)
     twoWeeks = today - timedelta(days=14)
     date2wk = str(twoWeeks) +'T00:00:00Z'
-    date1day = str(twoDay) + 'T00:00:00Z'
+    date1day = str(oneDay) + 'T00:00:00Z'
     #str(oneDay)+'T00:00:00Z') not sure what to do with these values yet
     #(str(twoDay)+'T00:00:00Z'
     previous=int(getDataFromDate(returnCounty("US", str(state), str(county)), date2wk))
@@ -31,16 +31,27 @@ def findPercentChange(state, county):
     return float((now-previous)/previous)
 
 def findPopulation(county, state):
+    population = 0
     if county.find('city') == -1 and county.find('County') == -1:
         county = county + ' County' 
+    print("county: ", county, "state: ", state)
     with open('US_Counties_by_Population.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
             if row[1] == county:
                 if row[2] == state:
-                    return row[3]
-        line_count+=1
+                    population = row[3]
+    with open('US_Counties_by_Population.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        if(population == 0):
+            for row in csv_reader:
+                if row[1] == county:
+                    population = row[3]
+                    print('hello1')
+    return population
+    line_count+=1
 
 def findCovidCasesPerHund(population, county, state):
     sumCases = 0

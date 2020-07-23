@@ -1,14 +1,16 @@
 from flask import Flask
 from flask import request
-from riskAnalysis import calculateRisk
-from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
+from flask_cors import CORS, cross_origin
+from covidApi import findPercentChange
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 riskVal = 0.0
 @app.route("/risk/") #GET to render homepage
-def calculatetheRisk():
+def calculateRisk():
     location = 'RDU'
     cty = returnCounty(getPlaceID(location))
     st = returnState(getPlaceID(location))
@@ -22,31 +24,34 @@ def calculatetheRisk():
     return riskJson
 
 @app.route('/getJson/', methods=['GET', 'POST']) #allow both GET and POST requests
+@cross_origin()
 def get_data():
     if request.method == 'POST':
+        print("**********************************I am in the flask side")
+        print(request.headers)
         print(request.data)
+        #byte_str=request.data
+        #new_str=byte_str.decode('utf-8')
+        #print(new_str)
+        #print(json.dumps(new_str))
+        #req_data = json.loads(new_str)
         req_data = request.json
-        print(req_data)
+        print(type(req_data))
         location = req_data['location']
         day = req_data['day']
         time = req_data['time']
+        cty = returnCounty(getPlaceID(location))
+        st = returnState(getPlaceID(location))
         placeType = returnPlaceType(location)
-        county = returnCounty(getPlaceID(location))
-        print(county)
-        state = returnState(getPlaceID(location))
-        print('State: ', state)
-        placeType = returnPlaceType(location)
-        population =  findPopulation(county, state)
-        print(population)
-        busyness = returnPoptimes(day, time, location)
-        avgTimeRisk = avgTimeSpent(placeType)
-        newCases = findCovidCasesPerHund(population, county, state)
-        casesRisk = findRiskCases(newCases)
-        risk = calculateRisk(casesRisk, busyness, avgTimeRisk)
-        riskDict = {'risk': risk, 'location':location, 
-                    'placeType':placeType, 'average_time_spent':avgTimeRisk, 
-                    'population':population, 'popular_times':busyness, 
-                    'new_cases':newCases}
+        avg = avgTimeSpent(placeType)
+        pc = findPercentChange(st, cty)
+        b = returnPoptimes(day, time, location)
+
+        risk = (pc*100)*0.33 + b*0.33 + avg*0.33
+        riskVal=risk
+        print(riskVal)
+        riskDict = riskDict = {'risk': risk, 'location':location, 
+        'placeType':placeType, 'average_time_spent':avg, 'percent_change':pc*100, 'popular_times':b}
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson

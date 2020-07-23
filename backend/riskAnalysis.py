@@ -1,4 +1,4 @@
-from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund
+from covidApi import findPopulation, findCovidCasesPerHund
 from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent
 # import csv
 
@@ -8,5 +8,4 @@ def calculateRisk(c, b, avgRisk):
     else:
         risk = 0.4*c + 0.3*b + 0.3*avgRisk
     return risk
-    
-    
+

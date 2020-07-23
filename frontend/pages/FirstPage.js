@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 //import react in our code.
 import { StyleSheet, View, Button, TextInput, Text } from 'react-native';
 //import all the components we are going to use.
-import LocationForm from '../LocationForm';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 export default class FirstPage extends Component {
   constructor(props) {
@@ -30,12 +31,24 @@ export default class FirstPage extends Component {
           <Text>
             Welcome to the Covid Risk App! 
           </Text>
+
           <Button
           title="Calculate Your Risk Here"
           //Button Title
           onPress={() =>
             navigate('SecondPage')
           }
+          //single page applications
+          //On click of the button we will send
+          //the data as a Json from here to the Second Screen using navigation prop
+        />
+        <Button
+          title="Map View"
+          //Button Title
+          onPress={() =>
+            navigate('ThirdPage')
+          }
+          //single page applications
           //On click of the button we will send
           //the data as a Json from here to the Second Screen using navigation prop
         />

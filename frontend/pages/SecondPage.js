@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 //import react in our code.
 import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
 //import all the components we are going to use.
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -14,11 +16,13 @@ export default class SecondPage extends Component {
     day: '', 
     time: '',
     placeType:'',
-    casesData: '',
+    casesData: 0,
     countyPop: 0,
+    timeSpent: 0, 
     isFormValid: false,
     showForm: true,
     isLoading: false,
+    spinner: true,
   }
 
   constructor(props) {
@@ -31,9 +35,10 @@ export default class SecondPage extends Component {
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
-        mode: 'no-cors', 
+        //mode: 'no-cors', 
         headers: {
             'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: blob
     }
@@ -45,13 +50,21 @@ export default class SecondPage extends Component {
       this.setState({placeType: json.placeType})
       this.setState({casesData:json.new_cases})
       this.setState({countyPop: json.population})
+      this.setState({timeSpent: json.average_time_spent})
       //console.log('Risk AGAIN ', this.state.risk)
     })
     .catch((error) => console.error(error))
-    
-
-    //add wait thing 
   };
+
+  startLoading = () => {
+    this.setState({isLoading:true})
+    this.handleSubmit()
+  }
+  checkLoading = () => {
+    if(this.state.risk>0){
+      this.setState({isLoading:false})
+    }
+  }
 
 
   handleLocationChange = location => {
@@ -69,10 +82,11 @@ export default class SecondPage extends Component {
   
   handleSubmit = () => {
     //this.props.onSubmit(this.statee
-    this.state.showForm = false
+    this.setState({showForm:false})
     this.getRemoteData()
     //Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
     //+ this.state.time+ '\nRisk is ' + this.state.risk)
+    //onPress --> render progress bar 
   }
   validateForm = () => {
     if(this.state.location.length > 0){
@@ -87,45 +101,64 @@ export default class SecondPage extends Component {
     }
   }
 
-  render() {
+  render() { 
     const { navigate } = this.props.navigation;
 
-    if (this.state.showForm===false) 
+    if (this.state.showForm===false){
+      if(this.state.risk>0){
+        return (
+          <View style={styles.container}>
+            <Text>
+              Risk: {this.state.risk}
+              {"\n"}
+              New Cases per Hundred Thousand: {this.state.casesData}
+              {"\n"} 
+              Place Type: {this.state.placeType}
+              {"\n"}
+              Average Time Spent at this Location: {this.state.timeSpent} minutes
+            </Text>
+          </View>
+        )
+      }
+      else{
+        return(
+          <View style={styles.container}>
+            <Spinner
+              visible={this.state.spinner}
+              textContent={'Loading...'}
+              textStyle={styles.spinnerTextStyle}
+            />
+          </View>
+      
+        )
+      }
+    }
+    else{
+      console.log(this.state.isLoading)
       return (
         <View style={styles.container}>
-          <Text>
-            Risk: {this.state.risk}
-            {"\n"}
-            Place Type: {this.state.placeType}
-            {"\n"}
-            New Cases per Hundred Thousand: {this.state.casesData}
-            {"\n"} 
-          </Text>
+          <TextInput
+              style={styles.input}
+              value={this.state.location}
+              placeholder='Enter Location'
+              onChangeText={this.handleLocationChange}
+          />
+          <TextInput
+              style={styles.input}
+              value={this.state.day}
+              placeholder='Day of the Week'
+              onChangeText={this.handleDayChange}
+          />
+          <TextInput
+              style={styles.input}
+              value={this.state.time}
+              placeholder='Enter time you plan to be there'
+              onChangeText={this.handleTimeChange}
+          />
+          <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/> 
         </View>
       )
-    return (
-      <View style={styles.container}>
-        <TextInput
-            style={styles.input}
-            value={this.state.location}
-            placeholder='Enter Location'
-            onChangeText={this.handleLocationChange}
-        />
-        <TextInput
-            style={styles.input}
-            value={this.state.day}
-            placeholder='Day of the Week'
-            onChangeText={this.handleDayChange}
-        />
-        <TextInput
-            style={styles.input}
-            value={this.state.time}
-            placeholder='Enter time you plan to be there'
-            onChangeText={this.handleTimeChange}
-        />
-        <Button title="Submit" onPress = {this.handleSubmit} disabled = {!this.state.isFormValid}/>
-      </View>
-    )
+    }
   }
 }
 const styles = StyleSheet.create({
