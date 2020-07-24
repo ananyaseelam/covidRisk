@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Button, TextInput, Text } from 'react-native';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
 //import all the components we are going to use.
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Button } from 'react-native-elements';
 
 
 export default class FirstPage extends Component {

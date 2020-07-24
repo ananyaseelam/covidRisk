@@ -7,13 +7,13 @@ import MapView, {Marker} from 'react-native-maps';
 export default class ThirdPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'Third Page',
+    title: 'Map View',
   };
   
   render(){
     const { navigate } = this.props.navigation;
-    const latitude =  this.props.navigation.getParam('latitude', 0.0)
-    const longitude =  this.props.navigation.getParam('longitude', 0.0)
+    const latitude =  this.props.navigation.getParam('latitude', 35.783877)
+    const longitude =  this.props.navigation.getParam('longitude',  -78.602886)
     const risk = this.props.navigation.getParam('risk', 0.0)
     const location = this.props.navigation.getParam('location', '')
     const county = this.props.navigation.getParam('county', '')

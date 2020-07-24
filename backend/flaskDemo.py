@@ -18,11 +18,6 @@ def get_data():
         print("**********************************I am in the flask side")
         print(request.headers)
         print(request.data)
-        #byte_str=request.data
-        #new_str=byte_str.decode('utf-8')
-        #print(new_str)
-        #print(json.dumps(new_str))
-        #req_data = json.loads(new_str)
         req_data = request.json
         print(type(req_data))
         location = req_data['location']
@@ -43,7 +38,8 @@ def get_data():
         print(riskVal)
         riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':avgTimeRisk, 
-        'popular_times':busyness,'new_cases':newCases, 'population':population, 'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county}
+        'popular_times':busyness,'new_cases':newCases, 'population':population, 
+        'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county}
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson

@@ -8,7 +8,7 @@ import csv
 
 # the result is a Python dictionary:
 
-API_KEY = ''
+API_KEY = 
 
 
 def getPlaceID(address):
@@ -42,6 +42,14 @@ def returnPlaceType(address):
     oneplace = gmaps.place(str(oneplaceID))
     placeType = (oneplace['result'])['types']
     return placeType[0]
+
+def returnLL(address):
+    gmaps = googlemaps.Client(key=API_KEY)
+    oneplaceblob = gmaps.find_place(address, 'textquery')
+    oneplaceID = ((oneplaceblob['candidates'])[0])['place_id']
+    oneplace = gmaps.place(str(oneplaceID))
+    ltlng = ((oneplace['result'])['geometry'])['location']
+    return ltlng
 
 def countySearch(searchString):
     searchString = str(searchString)
@@ -105,3 +113,4 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[2])
     return avgTimeRisk
 
+#print(returnLL('RDU'))
