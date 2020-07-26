@@ -152,7 +152,37 @@ export default class SecondPage extends Component {
       console.log(this.state.isLoading)
       return (
         <KeyboardAvoidingView style={styles.container}>
-
+            <GooglePlacesAutocomplete
+              placeholder='Enter Location'
+              listViewDisplayed='auto'
+              onPress={(data, details = null) => {
+                // 'details' is provided when fetchDetails = true
+                {this.handleLocationChange}
+                console.log('here'+ this.state.location);
+              }}
+              query={{
+                key: '',
+                language: 'en',
+              }}
+              styles={{
+                textInputContainer: {
+                  backgroundColor: 'rgba(0,0,0,0)',
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  width: '100%',
+                },
+                textInput: {
+                  marginLeft: 0,
+                  marginRight: 0,
+                  height: 38,
+                  color: '#FF6347',
+                  fontSize: 16,
+                },
+                predefinedPlacesDescription: {
+                  color: '#1faadb',
+                },
+              }}
+            />
 
 
           <Input
