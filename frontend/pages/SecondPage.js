@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView} from 'react-native';
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
-
-
+import { Input } from 'react-native-elements';
+import GooglePlacesInput from '../Autocomplete'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+ 
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
@@ -76,7 +78,7 @@ export default class SecondPage extends Component {
 
 
   handleLocationChange = location => {
-    this.validateForm()
+    //this.validateForm()
     this.setState({location})
   }
   handleDayChange = day => {
@@ -97,7 +99,7 @@ export default class SecondPage extends Component {
     //onPress --> render progress bar 
   }
   validateForm = () => {
-    if(this.state.location.length > 0){
+    if(this.state.location.length >= 0){
       if(this.state.day.length > 0){
         if(this.state.time.length > 0){
           return this.setState({isFormValid:true})
@@ -149,27 +151,33 @@ export default class SecondPage extends Component {
     else{
       console.log(this.state.isLoading)
       return (
-        <View style={styles.container}>
-          <TextInput
+        <KeyboardAvoidingView style={styles.container}>
+
+
+
+          <Input
+              placeholder='BASIC INPUT'
               style={styles.input}
               value={this.state.location}
               placeholder='Enter Location'
               onChangeText={this.handleLocationChange}
           />
-          <TextInput
+          <Input
+              placeholder='BASIC INPUT'
               style={styles.input}
               value={this.state.day}
               placeholder='Day of the Week'
               onChangeText={this.handleDayChange}
           />
-          <TextInput
+          <Input
+              placeholder='BASIC INPUT'
               style={styles.input}
               value={this.state.time}
               placeholder='Enter time you plan to be there'
               onChangeText={this.handleTimeChange}
           />
           <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/> 
-        </View>
+        </KeyboardAvoidingView>
       )
     }
   }
@@ -177,7 +185,7 @@ export default class SecondPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    //backgroundColor: '#FF6347',
     margin: 50,
     alignItems: 'center',
     justifyContent: 'center',
