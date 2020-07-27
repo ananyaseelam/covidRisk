@@ -10,10 +10,10 @@ const GooglePlacesInput = () => {
       onPress={(data, details = null) => {
         // 'details' is provided when fetchDetails = true
         console.log(data, details);
-
+        
       }}
       query={{
-        key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
+        key: '',
         language: 'en',
       }}
       styles={{
