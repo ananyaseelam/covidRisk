@@ -152,6 +152,7 @@ export default class SecondPage extends Component {
       console.log(this.state.isLoading)
       return (
         <KeyboardAvoidingView style={styles.container}>
+
             <GooglePlacesAutocomplete
               placeholder='Enter Location'
               listViewDisplayed='auto'
@@ -184,6 +185,7 @@ export default class SecondPage extends Component {
               }}
             />
 
+          
 
 
           <Input
