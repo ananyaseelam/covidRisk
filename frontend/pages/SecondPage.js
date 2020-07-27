@@ -4,13 +4,13 @@ import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView}
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Input } from 'react-native-elements';
-import GooglePlacesInput from '../Autocomplete'
+
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
  
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'Second Page',
+    title: 'Input Page',
   };
   state = {
     risk: 0,
@@ -152,26 +152,50 @@ export default class SecondPage extends Component {
       console.log(this.state.isLoading)
       return (
         <KeyboardAvoidingView style={styles.container}>
-
-
-
-          <Input
-              placeholder='BASIC INPUT'
-              style={styles.input}
-              value={this.state.location}
+            <GooglePlacesAutocomplete
               placeholder='Enter Location'
-              onChangeText={this.handleLocationChange}
-          />
+              listViewDisplayed='auto'
+              onPress={(data, details = null) => {
+                // 'details' is provided when fetchDetails = true
+                {this.handleLocationChange(data.description)}
+                console.log(data.description);
+              }}
+              query={{
+                key: '',
+                language: 'en',
+              }}
+              styles={{
+                textInputContainer: {
+                  backgroundColor: 'rgba(0,0,0,0)',
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  width: '100%',
+                },
+                textInput: {
+                  marginLeft: 0,
+                  marginRight: 0,
+                  height: 38,
+                  color: '#FF6347',
+                  fontSize: 16,
+                },
+                predefinedPlacesDescription: {
+                  color: '#1faadb',
+                },
+              }}
+            />
+
+
+
           <Input
               placeholder='BASIC INPUT'
-              style={styles.input}
+              //style={styles.input}
               value={this.state.day}
               placeholder='Day of the Week'
               onChangeText={this.handleDayChange}
           />
           <Input
               placeholder='BASIC INPUT'
-              style={styles.input}
+              //style={styles.input}
               value={this.state.time}
               placeholder='Enter time you plan to be there'
               onChangeText={this.handleTimeChange}
@@ -188,7 +212,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#FF6347',
     margin: 50,
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
   },
   TextStyle: {
     fontSize: 23,
@@ -201,8 +225,8 @@ const styles = StyleSheet.create({
     minWidth: 100,
     marginTop: 20,
     marginHorizontal: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    //paddingHorizontal: 10,
+    //paddingVertical: 5,
     borderRadius: 3,
   },
 });
