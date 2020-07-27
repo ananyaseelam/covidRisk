@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Button, TextInput, Text } from 'react-native';
+import { StyleSheet, View, TextInput, Text, ScrollView, Image } from 'react-native';
 //import all the components we are going to use.
-import LocationForm from '../LocationForm';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
+
 
 export default class FirstPage extends Component {
   constructor(props) {
@@ -27,18 +29,44 @@ export default class FirstPage extends Component {
       const { navigate } = this.props.navigation;
       return (
         <View style={styles.container}>
-          <Text>
-            Welcome to the Covid Risk App! 
+          <Image 
+          source={require('./cvirusimage.png')} 
+          style={styles.logo}
+          />
+          <Text style={styles.baseText}>
+            <Text style={styles.titleText}>
+            {"\n"}
+            {"\n"}
+              Welcome to the Covid Risk App! 
+              {"\n"}
+            </Text>
           </Text>
+
           <Button
-          title="Calculate Your Risk Here"
+            title="Calculate Your Risk Here"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 30,
+              paddingVertical: 10,
+            }}
+
+              
+          
           //Button Title
           onPress={() =>
             navigate('SecondPage')
           }
+          //single page applications
           //On click of the button we will send
           //the data as a Json from here to the Second Screen using navigation prop
         />
+        <Text>
+        {"\n"}
+        </Text>
         </View>
   
       );
@@ -48,9 +76,9 @@ export default class FirstPage extends Component {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
-      padding: 16,
+      //justifyContent: 'center',
+      padding: 30,
     },
     input: {
       width: 200,
@@ -58,5 +86,16 @@ export default class FirstPage extends Component {
       padding: 10,
       marginBottom: 10,
       backgroundColor: '#DBDBD6',
+    },
+    baseText: {
+      fontFamily: 'System'
+    },
+    titleText: {
+      fontSize: 20,
+      //fontWeight: "bold"
+    },
+    logo: {
+      width: 100,
+      height: 100,
     },
   });
