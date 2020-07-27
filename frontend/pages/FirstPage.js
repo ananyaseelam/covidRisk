@@ -16,7 +16,7 @@ export default class FirstPage extends Component {
   }
   static navigationOptions = {
     //Setting the header of the screen
-    //title: 'Covid Risk App',
+    title: 'Covid Risk App',
   };
   showForm = () => {
     this.setState({showForm: true})
