@@ -4,7 +4,7 @@ import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView}
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Input } from 'react-native-elements';
-import GooglePlacesInput from '../Autocomplete'
+
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
  
 export default class SecondPage extends Component {
