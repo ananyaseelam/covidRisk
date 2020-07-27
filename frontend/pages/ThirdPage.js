@@ -21,9 +21,6 @@ export default class ThirdPage extends Component {
       <View style={styles.container}>
         <MapView
         style={styles.map}
-        zoomEnabled={true}
-        pitchEnabled={true}
-        showsCompass={true}
         initialRegion={{
           latitude: latitude,
           longitude: longitude,
@@ -32,12 +29,12 @@ export default class ThirdPage extends Component {
         }}
         onLayout={() => { this.mark.showCallout(); }}
         >
-          <MapView.Marker
+          <Marker
             ref={ref => { this.mark = ref; }}
             coordinate={{latitude: latitude,longitude: longitude}}
             title={'Risk: '+ risk.toString()}
             description={location + ', ' +county + ' County'}
-            
+            //calloutOffset = '(0, 0)'
           />
         </MapView>
       </View>

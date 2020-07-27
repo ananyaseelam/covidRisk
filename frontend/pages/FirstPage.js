@@ -45,7 +45,7 @@ export default class FirstPage extends Component {
           <Button
             title="Calculate Your Risk Here"
             type = "outline"
-            titleStyle={{ color: '#00000', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',
