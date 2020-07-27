@@ -16,7 +16,7 @@ export default class FirstPage extends Component {
   }
   static navigationOptions = {
     //Setting the header of the screen
-    //title: 'Covid Risk App',
+    title: 'Covid Risk App',
   };
   showForm = () => {
     this.setState({showForm: true})
@@ -45,7 +45,7 @@ export default class FirstPage extends Component {
           <Button
             title="Calculate Your Risk Here"
             type = "outline"
-            titleStyle={{ color: '#00000', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',

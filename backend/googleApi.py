@@ -8,7 +8,7 @@ import csv
 
 # the result is a Python dictionary:
 
-API_KEY = 
+API_KEY = ''
 
 
 def getPlaceID(address):
