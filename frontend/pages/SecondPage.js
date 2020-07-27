@@ -10,7 +10,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'Second Page',
+    title: 'Input Page',
   };
   state = {
     risk: 0,
@@ -157,8 +157,8 @@ export default class SecondPage extends Component {
               listViewDisplayed='auto'
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
-                {this.handleLocationChange}
-                console.log('here'+ this.state.location);
+                {this.handleLocationChange(data.description)}
+                console.log(data.description);
               }}
               query={{
                 key: '',
@@ -185,23 +185,17 @@ export default class SecondPage extends Component {
             />
 
 
+
           <Input
               placeholder='BASIC INPUT'
-              style={styles.input}
-              value={this.state.location}
-              placeholder='Enter Location'
-              onChangeText={this.handleLocationChange}
-          />
-          <Input
-              placeholder='BASIC INPUT'
-              style={styles.input}
+              //style={styles.input}
               value={this.state.day}
               placeholder='Day of the Week'
               onChangeText={this.handleDayChange}
           />
           <Input
               placeholder='BASIC INPUT'
-              style={styles.input}
+              //style={styles.input}
               value={this.state.time}
               placeholder='Enter time you plan to be there'
               onChangeText={this.handleTimeChange}
@@ -218,7 +212,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#FF6347',
     margin: 50,
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
   },
   TextStyle: {
     fontSize: 23,
@@ -231,8 +225,8 @@ const styles = StyleSheet.create({
     minWidth: 100,
     marginTop: 20,
     marginHorizontal: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    //paddingHorizontal: 10,
+    //paddingVertical: 5,
     borderRadius: 3,
   },
 });
