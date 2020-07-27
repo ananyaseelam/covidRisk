@@ -13,7 +13,7 @@ const GooglePlacesInput = () => {
 
       }}
       query={{
-        key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
+        key: '',
         language: 'en',
       }}
       styles={{
