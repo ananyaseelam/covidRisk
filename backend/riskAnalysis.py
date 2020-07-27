@@ -3,7 +3,7 @@ from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, re
 # import csv
 
 def calculateRisk(c, b, avgRisk):
-    if b == 0:
+    if b == 0: #if the location doesn't have a popular times function
         risk = 0.6*c + 0.4*avgRisk
     else:
         risk = 0.4*c + 0.3*b + 0.3*avgRisk
