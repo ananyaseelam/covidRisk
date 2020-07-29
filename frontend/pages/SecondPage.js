@@ -163,6 +163,7 @@ export default class SecondPage extends Component {
       if(this.state.location == ''){
       return (
         <KeyboardAvoidingView style={styles.container}>
+
             <GooglePlacesAutocomplete
               placeholder='Enter Location'
               listViewDisplayed='auto'
@@ -195,6 +196,7 @@ export default class SecondPage extends Component {
                 },
               }}
             />
+
           </KeyboardAvoidingView>
       )
       }
@@ -219,6 +221,7 @@ export default class SecondPage extends Component {
       if(this.state.location!='' && this.state.confirm == true){
         return(
           <KeyboardAvoidingView style = {styles.container}>
+
           <Input
             placeholder='BASIC INPUT'
             //style={styles.input}
