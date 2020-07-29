@@ -29,6 +29,7 @@ export default class SecondPage extends Component {
     spinner: true,
     latitude:0.0,
     longitude:0.0,
+    confirm: false, 
   }
 
   constructor(props) {
@@ -110,17 +111,26 @@ export default class SecondPage extends Component {
       return this.setState({isFormValid:false})
     }
   }
+  confirmLocation = () => {
+    this.setState({confirm:true})
+  }
+
+  eraseLocation = () => {
+    this.setState({location:''})
+  }
 
   render() { 
     const { navigate } = this.props.navigation;
-
     if (this.state.showForm===false){
       if(this.state.risk>0){
         return (
           <View style={styles.container}>
-            <Text>
+            <Text style = {styles.TextStyle}>
+              <Text style = {styles.riskText}>
               Risk: {this.state.risk}
               {"\n"}
+              {"\n"}
+              </Text>
               New Cases per Hundred Thousand: {this.state.casesData}
               {"\n"} 
               Place Type: {this.state.placeType}
@@ -150,6 +160,7 @@ export default class SecondPage extends Component {
     }
     else{
       console.log(this.state.isLoading)
+      if(this.state.location == ''){
       return (
         <KeyboardAvoidingView style={styles.container}>
             <GooglePlacesAutocomplete
@@ -158,7 +169,7 @@ export default class SecondPage extends Component {
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
                 {this.handleLocationChange(data.description)}
-                console.log(data.description);
+                console.log(data);
               }}
               query={{
                 key: '',
@@ -170,6 +181,7 @@ export default class SecondPage extends Component {
                   borderTopWidth: 0,
                   borderBottomWidth: 0,
                   width: '100%',
+                  //placeholder='BASIC INPUT'
                 },
                 textInput: {
                   marginLeft: 0,
@@ -183,26 +195,49 @@ export default class SecondPage extends Component {
                 },
               }}
             />
-
-
-
-          <Input
-              placeholder='BASIC INPUT'
-              //style={styles.input}
-              value={this.state.day}
-              placeholder='Day of the Week'
-              onChangeText={this.handleDayChange}
-          />
-          <Input
-              placeholder='BASIC INPUT'
-              //style={styles.input}
-              value={this.state.time}
-              placeholder='Enter time you plan to be there'
-              onChangeText={this.handleTimeChange}
-          />
-          <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/> 
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
       )
+      }
+      if(this.state.location!='' && this.state.confirm == false){
+        //const buttons = ['Hello', 'World', 'Buttons']
+        return (
+          <View style = {styles.container}>
+            <Text style = {styles.TextStyle}>
+              Is {this.state.location} your desired destination? 
+            </Text>
+            <Button
+              title = 'Yes'
+              onPress={this.confirmLocation}
+            />
+            <Button
+              title = 'No'
+              onPress={this.eraseLocation}
+            />
+          </View>
+        )
+      }
+      if(this.state.location!='' && this.state.confirm == true){
+        return(
+          <KeyboardAvoidingView style = {styles.container}>
+          <Input
+            placeholder='BASIC INPUT'
+            //style={styles.input}
+            value={this.state.day}
+            placeholder='Day of the Week'
+            onChangeText={this.handleDayChange}
+        />
+        <Input
+            placeholder='BASIC INPUT'
+            //style={styles.input}
+            value={this.state.time}
+            placeholder='Enter time you plan to be there'
+            onChangeText={this.handleTimeChange}
+        />
+        <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
+        </KeyboardAvoidingView>
+        )
+      }
+           
     }
   }
 }
@@ -216,8 +251,16 @@ const styles = StyleSheet.create({
   },
   TextStyle: {
     fontSize: 23,
+    textAlign: 'left',
+    color: 'black',
+    fontFamily: 'System',
+  },
+  riskText:{
+    fontSize: 23,
     textAlign: 'center',
-    color: '#f00',
+    color: 'black',
+    fontFamily: 'System',
+
   },
   input: {
     borderWidth: 5,
