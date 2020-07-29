@@ -79,22 +79,36 @@ def stateSearch(searchString):
     return state
 
 def returnPoptimes(day, hour, location):
-    periodPos = hour.find('M') -1
-    timePeriod = hour[periodPos:] 
-    semiPos = hour.find(':')
-    hour = int(hour[:semiPos])
-    if timePeriod == "PM": #converts to military time
-        hour+=12
-    if hour == 12: #changes 12 to 0
-        hour = 0
-    if hour == 24: #changes 24 to 12
-        hour = 12
-    dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
-    poptimes = populartimes.get_id(API_KEY, getPlaceID(location))
-    try:
-        dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
-    except KeyError:
-        dataPoint = 0
+    if (returnPlaceType(location) != 'locality' 
+    and returnPlaceType(location) != 'sublocality'
+    and returnPlaceType(location) != 'administrative_area_level_1'
+    and returnPlaceType(location) != 'administrative_area_level_2'
+    and returnPlaceType(location) != 'administrative_area_level_3'
+    and returnPlaceType(location) != 'administrative_area_level_4'
+    and returnPlaceType(location) != 'administrative_area_level_5'
+    and returnPlaceType(location) != 'sublocality_level_1'
+    and returnPlaceType(location) != 'sublocality_level_2'
+    and returnPlaceType(location) != 'sublocality_level_3'
+    and returnPlaceType(location) != 'sublocality_level_4'
+    and returnPlaceType(location) != 'intersection'):
+        periodPos = hour.find('M') -1
+        timePeriod = hour[periodPos:] 
+        semiPos = hour.find(':')
+        hour = int(hour[:semiPos])
+        if timePeriod == "PM": #converts to military time
+            hour+=12
+        if hour == 12: #changes 12 to 0
+            hour = 0
+        if hour == 24: #changes 24 to 12
+            hour = 12
+        dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
+        poptimes = populartimes.get_id(API_KEY, getPlaceID(location))
+        try:
+            dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
+        except KeyError:
+            dataPoint = 0
+    else:
+        dataPoint = 0 
     return dataPoint
 
 def avgTimeRisk(placeType):
