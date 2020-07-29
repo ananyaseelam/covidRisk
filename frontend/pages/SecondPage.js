@@ -113,7 +113,7 @@ export default class SecondPage extends Component {
   }
   confirmLocation = () => {
     this.setState({confirm:true})
-    this.setState({time:'10:00'})
+    
     if (this.state.placeType=='locality') {
       this.startLoading()
     }
