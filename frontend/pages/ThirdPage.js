@@ -34,7 +34,7 @@ export default class ThirdPage extends Component {
             coordinate={{latitude: latitude,longitude: longitude}}
             title={'Risk: '+ risk.toString()}
             description={location + ', ' +county + ' County'}
-            //calloutOffset = '(0, 0)'
+            centerOffset={{x: -5, y: 2}}
           />
         </MapView>
       </View>

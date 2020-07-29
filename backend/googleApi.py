@@ -113,4 +113,3 @@ def avgTimeSpent(placeType):
                 avgTimeRisk = float(row[2])
     return avgTimeRisk
 
-#print(returnLL('RDU'))
