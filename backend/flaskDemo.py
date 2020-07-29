@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 from covidApi import findPopulation, findCovidCasesPerHund, findRiskCases
-from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent, returnLL
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent, avgTimeRisk, returnLL
 from riskAnalysis import calculateRisk
 import json
 
@@ -29,15 +29,16 @@ def get_data():
         print(population)
         busyness = returnPoptimes(day, time, location)
         placeType = returnPlaceType(location)
-        avgTimeRisk = avgTimeSpent(placeType)
+        timespent = avgTimeSpent(placeType)
+        TimeRisk = avgTimeRisk(placeType)
         newCases = findCovidCasesPerHund(population, county, state)
         casesRisk = findRiskCases(newCases)
-        risk = calculateRisk(casesRisk, busyness, avgTimeRisk)
+        risk = calculateRisk(casesRisk, busyness, TimeRisk)
         latlng = returnLL(location)
         riskVal=risk
         print(riskVal)
         riskDict = riskDict = {'risk': risk, 'location':location, 
-        'placeType':placeType, 'average_time_spent':avgTimeRisk, 
+        'placeType':placeType, 'average_time_spent':timespent, 
         'popular_times':busyness,'new_cases':newCases, 'population':population, 
         'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county}
         riskJson = json.dumps(riskDict)

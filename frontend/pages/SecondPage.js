@@ -113,10 +113,51 @@ export default class SecondPage extends Component {
   }
   confirmLocation = () => {
     this.setState({confirm:true})
+    this.setState({time:'10:00'})
+    if (this.state.placeType=='locality') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_1') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_2') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_3') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_4') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_5') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_1') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_2') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_3') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_4') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='intersection') {
+      this.startLoading()
+    }
   }
 
   eraseLocation = () => {
     this.setState({location:''})
+  }
+  
+  addPlaceType = type => {
+    this.setState({placeType: type})
   }
 
   render() { 
@@ -170,7 +211,8 @@ export default class SecondPage extends Component {
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
                 {this.handleLocationChange(data.description)}
-                console.log(data);
+                {this.addPlaceType(data.types[0])}
+                console.log(data.types[0]);
               }}
               query={{
                 key: '',
@@ -210,10 +252,12 @@ export default class SecondPage extends Component {
             <Button
               title = 'Yes'
               onPress={this.confirmLocation}
+              color = 'red'
             />
             <Button
               title = 'No'
               onPress={this.eraseLocation}
+              color = 'red'
             />
           </View>
         )
@@ -239,8 +283,7 @@ export default class SecondPage extends Component {
         <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
-      }
-           
+      }    
     }
   }
 }
