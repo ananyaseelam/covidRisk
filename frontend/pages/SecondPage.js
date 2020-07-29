@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView} from 'react-native';
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Input } from 'react-native-elements';
+import { Input} from 'react-native-elements';
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
  
@@ -30,6 +30,7 @@ export default class SecondPage extends Component {
     latitude:0.0,
     longitude:0.0,
     confirm: false, 
+    eatType:'',
   }
 
   constructor(props) {
@@ -156,8 +157,15 @@ export default class SecondPage extends Component {
     this.setState({location:''})
   }
   
-  addPlaceType = type => {
+  setPlaceType = type => {
     this.setState({placeType: type})
+  }
+  
+  setTakeout = () => {
+    this.setState({eatType:'takeout'})
+  }
+  setDineIn = () => {
+    this.setState({eatType:'dine-in'})
   }
 
   render() { 
@@ -204,14 +212,13 @@ export default class SecondPage extends Component {
       if(this.state.location == ''){
       return (
         <KeyboardAvoidingView style={styles.container}>
-
             <GooglePlacesAutocomplete
               placeholder='Enter Location'
               listViewDisplayed='auto'
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
                 {this.handleLocationChange(data.description)}
-                {this.addPlaceType(data.types[0])}
+                {this.setPlaceType(data.types[0])}
                 console.log(data.types[0]);
               }}
               query={{
@@ -259,6 +266,26 @@ export default class SecondPage extends Component {
               onPress={this.eraseLocation}
               color = 'red'
             />
+          </View>
+        )
+      }
+      if (this.state.placeType=='cafe' || this.state.placeType=='bakery' || this.state.placeType=='restaurant'){
+        return(
+          <View style = {styles.container}>
+            <Text style = {styles.riskText}>
+              Please select one of the following
+              {"\n"}
+            </Text>
+            <Button
+              title = 'Pick-up/Takeout'
+              onPress={this.setTakeout}
+              color = 'green'
+              />
+            <Button
+              title = 'Dine In'
+              onPress={this.setDineIn}
+              color = 'red'
+              />
           </View>
         )
       }
