@@ -1,13 +1,13 @@
 
 from covidApi import findPercentChange, findPopulation, findCovidCasesPerHund, findRiskCases
-from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeRisk, avgTimeSpent
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeRisk, avgTimeSpent, returnPlaceGroup, returnRiskPlaceType
 # import csv
 
-def calculateRisk(c, b, avgRisk):
-    if b == 0:
-        risk = 0.6*c + 0.4*avgRisk
+def calculateRisk(c, b, avgTimeRisk, riskPlaceType): #c: covid cases risk, b: busyness, avgTimeRisk is from avgTimeSpent
+    if b == 0: #if busyness is 0, aka populartimes unavailable
+        risk = 0.4*c + 0.3*avgTimeRisk + 0.3*riskPlaceType
     else:
-        risk = 0.4*c + 0.3*b + 0.3*avgRisk
+        risk = 0.4*c + 0.3*b + 0.2*avgTimeRisk + 0.1*riskPlaceType
     return risk
     
     
