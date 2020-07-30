@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 from covidApi import findPopulation, findCovidCasesPerHund, findRiskCases
-from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent, avgTimeRisk, returnLL
+from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, returnPoptimes, avgTimeSpent, avgTimeRisk, returnLL, returnPlaceGroup, returnRiskPlaceType
 from riskAnalysis import calculateRisk
 import json
 
@@ -23,17 +23,23 @@ def get_data():
         location = req_data['location']
         day = (req_data['day']).capitalize()
         time = req_data['time']
+        eatType = req_date['eatType']
         county = returnCounty(getPlaceID(location))
         state = returnState(getPlaceID(location))
         population =  findPopulation(county, state)
         print(population)
         busyness = returnPoptimes(day, time, location)
         placeType = returnPlaceType(location)
+        transportType = False
+        if eatType == 'takeout':
+            transportType = True
         timespent = avgTimeSpent(placeType)
-        TimeRisk = avgTimeRisk(placeType)
+        TimeRisk = avgTimeRisk(placeType, transportType)
         newCases = findCovidCasesPerHund(population, county, state)
         casesRisk = findRiskCases(newCases)
-        risk = calculateRisk(casesRisk, busyness, TimeRisk)
+        placeGroup = returnPlaceGroup(placeType)
+        riskPlaceType = returnRiskPlaceType(placeGroup, transportType)
+        risk = calculateRisk(casesRisk, busyness, TimeRisk, riskPlaceType)
         latlng = returnLL(location)
         riskVal=risk
         print(riskVal)

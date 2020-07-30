@@ -39,7 +39,7 @@ export default class SecondPage extends Component {
  }
  
   getRemoteData = () => {
-    const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time};
+    const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time, 'eatType': this.state.eatType};
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
