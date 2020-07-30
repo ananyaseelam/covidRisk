@@ -151,6 +151,6 @@ def returnRiskPlaceType(placeGroup, transportType):
             for row in csv_reader:
                 if row[0] == placeGroup:
                     riskPlaceType = float(row[4])
-        return riskPlaceType
+        return riskPlaceType*10
 
 
