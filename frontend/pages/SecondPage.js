@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView} from 'react-native';
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Input } from 'react-native-elements';
+import { Input} from 'react-native-elements';
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
  
@@ -30,6 +30,7 @@ export default class SecondPage extends Component {
     latitude:0.0,
     longitude:0.0,
     confirm: false, 
+    eatType:'',
   }
 
   constructor(props) {
@@ -113,10 +114,58 @@ export default class SecondPage extends Component {
   }
   confirmLocation = () => {
     this.setState({confirm:true})
+    
+    if (this.state.placeType=='locality') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_1') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_2') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_3') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_4') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='administrative_area_level_5') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_1') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_2') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_3') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='sublocality_level_4') {
+      this.startLoading()
+    }
+    if (this.state.placeType=='intersection') {
+      this.startLoading()
+    }
   }
 
   eraseLocation = () => {
     this.setState({location:''})
+  }
+  
+  setPlaceType = type => {
+    this.setState({placeType: type})
+  }
+  
+  setTakeout = () => {
+    this.setState({eatType:'takeout'})
+  }
+  setDineIn = () => {
+    this.setState({eatType:'dine-in'})
   }
 
   render() { 
@@ -163,14 +212,14 @@ export default class SecondPage extends Component {
       if(this.state.location == ''){
       return (
         <KeyboardAvoidingView style={styles.container}>
-
             <GooglePlacesAutocomplete
               placeholder='Enter Location'
               listViewDisplayed='auto'
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
                 {this.handleLocationChange(data.description)}
-                console.log(data);
+                {this.setPlaceType(data.types[0])}
+                console.log(data.types[0]);
               }}
               query={{
                 key: '',
@@ -210,11 +259,33 @@ export default class SecondPage extends Component {
             <Button
               title = 'Yes'
               onPress={this.confirmLocation}
+              color = 'red'
             />
             <Button
               title = 'No'
               onPress={this.eraseLocation}
+              color = 'red'
             />
+          </View>
+        )
+      }
+      if (this.state.placeType=='cafe' || this.state.placeType=='bakery' || this.state.placeType=='restaurant'){
+        return(
+          <View style = {styles.container}>
+            <Text style = {styles.riskText}>
+              Please select one of the following
+              {"\n"}
+            </Text>
+            <Button
+              title = 'Pick-up/Takeout'
+              onPress={this.setTakeout}
+              color = 'green'
+              />
+            <Button
+              title = 'Dine In'
+              onPress={this.setDineIn}
+              color = 'red'
+              />
           </View>
         )
       }
@@ -239,8 +310,7 @@ export default class SecondPage extends Component {
         <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
-      }
-           
+      }    
     }
   }
 }
