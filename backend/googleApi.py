@@ -10,7 +10,6 @@ import csv
 
 API_KEY = ''
 
-
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
     oneplaceblob = gmaps.find_place(address, 'textquery')
