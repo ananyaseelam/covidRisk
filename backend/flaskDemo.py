@@ -23,6 +23,7 @@ def get_data():
         location = req_data['location']
         day = (req_data['day']).capitalize()
         time = req_data['time']
+        eatType = req_data['eatType'] 
         county = returnCounty(getPlaceID(location))
         state = returnState(getPlaceID(location))
         population =  findPopulation(county, state)
