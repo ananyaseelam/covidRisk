@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView, AppRegistry} from 'react-native';
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Input} from 'react-native-elements';
-
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
- 
+import DropDownPicker from 'react-native-dropdown-picker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import TimePicker from 'react-native-simple-time-picker';
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
@@ -31,6 +32,10 @@ export default class SecondPage extends Component {
     longitude:0.0,
     confirm: false, 
     eatType:'',
+    isTimePickerVisible: false,
+    setTimePickerVisibility: false,
+    selectedHours: 0,
+    selectedMinutes: 0,
   }
 
   constructor(props) {
@@ -38,8 +43,10 @@ export default class SecondPage extends Component {
     //this.state = {risk: 0, location: '', day: '', time: '', isFormValid: false, isLoading: true};
  }
  
+
   getRemoteData = () => {
-    const obj = {'location': this.state.location, 'day': this.state.day, 'time': this.state.time, 'eatType': this.state.eatType};
+    const obj = {'location': this.state.location, 'day': this.state.day, 
+              'time': this.state.time, 'eatType': this.state.eatType};
     const blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
     let postData = {
         method: 'POST',
@@ -84,33 +91,40 @@ export default class SecondPage extends Component {
     this.setState({location})
   }
   handleDayChange = day => {
-    this.validateForm()
     this.setState({day})
+    this.validateForm()
+    
   }
   handleTimeChange = time => {
-    this.validateForm()
     this.setState({time})
+    this.validateForm()
+    
   }
   
   handleSubmit = () => {
     //this.props.onSubmit(this.statee
     this.setState({showForm:false})
     this.getRemoteData()
+    
     //Alert.alert('Location is ' + this.state.location + '\nDay of the Week is ' + this.state.day + '\nTime is ' 
     //+ this.state.time+ '\nRisk is ' + this.state.risk)
     //onPress --> render progress bar 
   }
   validateForm = () => {
+    
     if(this.state.location.length >= 0){
       if(this.state.day.length > 0){
-        if(this.state.time.length > 0){
+        if(this.state.time.length > 5){
+          console.warn('here1')
           return this.setState({isFormValid:true})
+          
         }
       }
     }
     else{
       return this.setState({isFormValid:false})
     }
+    
   }
   confirmLocation = () => {
     this.setState({confirm:true})
@@ -168,6 +182,28 @@ export default class SecondPage extends Component {
     this.setState({eatType:'dine-in'})
   }
 
+  
+  showTimePicker = () => {
+    this.setState({
+      isTimePickerVisible:true
+    })
+      
+  };
+
+  hideTimePicker = () => {
+    this.setState({
+      isTimePickerVisible:false
+    })
+  };
+
+  handleConfirm = (time) => {
+    console.warn("A time has been picked: ", time);
+    this.handleTimeChange(time);
+    console.warn('here')
+    this.hideTimePicker();
+  };
+
+
   render() { 
     const { navigate } = this.props.navigation;
     if (this.state.showForm===false){
@@ -176,6 +212,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
+                //add location info here 
               Risk: {this.state.risk}
               {"\n"}
               {"\n"}
@@ -251,7 +288,7 @@ export default class SecondPage extends Component {
       }
       if(this.state.location!='' && this.state.confirm == false){
         //const buttons = ['Hello', 'World', 'Buttons']
-        return (
+        return ( //delete this
           <View style = {styles.container}>
             <Text style = {styles.TextStyle}>
               Is {this.state.location} your desired destination? 
@@ -269,11 +306,11 @@ export default class SecondPage extends Component {
           </View>
         )
       }
-      if (this.state.placeType=='cafe' || this.state.placeType=='bakery' || this.state.placeType=='restaurant'){
+      if ((this.state.placeType=='cafe' || this.state.placeType=='bakery' || this.state.placeType=='restaurant')&&(this.state.eatType == '')){
         return(
           <View style = {styles.container}>
             <Text style = {styles.riskText}>
-              Please select one of the following
+              You have selected an Please select one of the following
               {"\n"}
             </Text>
             <Button
@@ -291,22 +328,43 @@ export default class SecondPage extends Component {
       }
       if(this.state.location!='' && this.state.confirm == true){
         return(
+          //show place type and name of location
           <KeyboardAvoidingView style = {styles.container}>
-
+            <DropDownPicker
+                placeholder="Select a Day of the Week"
+                items={[
+                  {label: 'Today', value: ' '},
+                    {label: 'Monday', value: 'Monday'},
+                    {label: 'Tuesday ', value: 'Tuesday'},
+                    {label: 'Wednesday', value: 'Wednesday'},
+                    {label: 'Thursday', value: 'Thursday'},
+                    {label: 'Friday', value: 'Friday'},
+                    {label: 'Saturday', value: 'Saturday'},
+                    {label: 'Sunday', value: 'Sunday'},
+                ]}
+                defaultValue={this.state.day}
+                containerStyle={{width: 300,height: 50}}
+                style={{backgroundColor: '#fafafa'}}
+                itemStyle={{
+                    justifyContent: 'center'
+                }}
+                dropDownStyle={{backgroundColor: '#fafafa'}}
+                onChangeItem={(item)=>this.handleDayChange(item.value)}
+            />
+            <Text>
+            {"\n"}
+            </Text>
+            
           <Input
-            placeholder='BASIC INPUT'
-            //style={styles.input}
-            value={this.state.day}
-            placeholder='Day of the Week'
-            onChangeText={this.handleDayChange}
-        />
-        <Input
-            placeholder='BASIC INPUT'
-            //style={styles.input}
-            value={this.state.time}
-            placeholder='Enter time you plan to be there'
-            onChangeText={this.handleTimeChange}
-        />
+              placeholder='BASIC INPUT'
+              style={styles.input}
+              value={this.state.time}
+              placeholder='Enter Time (Ex. 7:00 PM)'
+              onChangeText={this.handleTimeChange}
+          />
+              
+
+
         <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
