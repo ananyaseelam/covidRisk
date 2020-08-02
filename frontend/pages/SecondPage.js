@@ -129,7 +129,7 @@ export default class SecondPage extends Component {
   }
   confirmLocation = () => {
     this.setState({confirm:true})
-    
+    console.log('here'+ this.state.location);
     if (this.state.placeType=='locality') {
       this.startLoading()
     }
@@ -214,7 +214,6 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-                //add location info here 
               Risk: {this.state.risk}
               {"\n"}
               {"\n"}
@@ -248,17 +247,20 @@ export default class SecondPage extends Component {
     }
     else{
       console.log(this.state.isLoading)
-      if(this.state.location == ''){
+      if(this.state.confirm == false){
       return (
         <KeyboardAvoidingView style={styles.container}>
+        <Text style ={styles.HeaderText}>
+          Where would you like to go? 
+          {"\n"}
+        </Text>
             <GooglePlacesAutocomplete
               placeholder='Enter Location'
               listViewDisplayed='auto'
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
-                {this.handleLocationChange(data.description)}
                 {this.setPlaceType(data.types[0])}
-                console.log(data.types[0]);
+                {this.handleLocationChange(data.description)}
               }}
               query={{
                 key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
@@ -284,30 +286,25 @@ export default class SecondPage extends Component {
                 },
               }}
             />
+            
+            <Button
+            title="Next"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 30,
+              paddingVertical: 10,
+            }}
+          onPress={this.confirmLocation}
+          />
 
-          </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
       )
       }
-      if(this.state.location!='' && this.state.confirm == false){
-        //const buttons = ['Hello', 'World', 'Buttons']
-        return ( //delete this
-          <View style = {styles.container}>
-            <Text style = {styles.TextStyle}>
-              Is {this.state.location} your desired destination? 
-            </Text>
-            <Button
-              title = 'Yes'
-              onPress={this.confirmLocation}
-              color = 'red'
-            />
-            <Button
-              title = 'No'
-              onPress={this.eraseLocation}
-              color = 'red'
-            />
-          </View>
-        )
-      }
+
       if ((this.state.placeType=='cafe' || this.state.placeType=='bakery' || this.state.placeType=='restaurant')&&(this.state.eatType == '')){
         return(
           <View style = {styles.container}>
@@ -385,6 +382,12 @@ const styles = StyleSheet.create({
   TextStyle: {
     fontSize: 23,
     textAlign: 'left',
+    color: 'black',
+    fontFamily: 'System',
+  },
+  HeaderText:{
+    fontSize: 22,
+    textAlign: 'center',
     color: 'black',
     fontFamily: 'System',
   },
