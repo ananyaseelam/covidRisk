@@ -44,17 +44,18 @@ def get_data():
         print (risk)
         riskName = ''
         if (risk <= 25):
-            riskName = " Low Risk "
+            riskName = "Low Risk"
         elif(risk<=50):
-            riskName = " Medium Low Risk "
+            riskName = "Medium Low Risk"
         elif(risk<=75):
-            riskName = " Medium High Risk "
+            riskName = "Medium High Risk"
         elif(risk>75):
-            riskName = " High Risk "
+            riskName = "High Risk"
         riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':timespent, 
         'popular_times':busyness,'new_cases':newCases, 'population':population, 
         'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county, 'riskName':riskName}
+        print("risk place type: ", riskPlaceType)
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson

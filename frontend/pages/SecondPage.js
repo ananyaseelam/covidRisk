@@ -9,7 +9,6 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
 import TimePicker from 'react-native-simple-time-picker';
-import ColorOutput from './OutputBar.js'
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -213,12 +212,25 @@ export default class SecondPage extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.showForm===false){
       if(this.state.risk>0){
+        var color = "#000000"
+        if(this.state.riskName == "Low Risk"){
+          color = "#008000"
+        }
+        else if(this.state.riskName == "Medium Low Risk"){
+          color = "#FFFF00"
+        }
+        else if(this.state.riskName == "Medium High Risk"){
+          color = "#FFA500"
+        }
+        else{
+          color = "#FF0000"
+        }
         return (
           <View style={styles.container}>
             <Slider
               disabled
               style={{width: 200, height: 29}}
-              minimumTrackTintColor="#8B0000"
+              minimumTrackTintColor = {color}
               maximumTrackTintColor="#000000"
               minimumValue={0}
               maximumValue={100}

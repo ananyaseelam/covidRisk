@@ -4,7 +4,9 @@ from googleApi import returnCounty, returnState, returnPlaceType, getPlaceID, re
 # import csv
 
 def calculateRisk(c, b, avgTimeRisk, riskPlaceType): #c: covid cases risk, b: busyness, avgTimeRisk is from avgTimeSpent
-    if b == 0: #if busyness is 0, aka populartimes unavailable
+    if riskPlaceType == 0:
+        risk = 0.6*c + 0.4*avgTimeRisk
+    elif b == 0: #if busyness is 0, aka populartimes unavailable
         risk = 0.4*c + 0.3*avgTimeRisk + 0.3*riskPlaceType
     else:
         risk = 0.4*c + 0.3*b + 0.2*avgTimeRisk + 0.1*riskPlaceType
