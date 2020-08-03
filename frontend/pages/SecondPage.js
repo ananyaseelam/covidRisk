@@ -7,8 +7,9 @@ import { Input} from 'react-native-elements';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Slider from '@react-native-community/slider'
 import TimePicker from 'react-native-simple-time-picker';
-import ColorOutput from './OutputBar.js'
+
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
@@ -37,6 +38,7 @@ export default class SecondPage extends Component {
     setTimePickerVisibility: false,
     selectedHours: 0,
     selectedMinutes: 0,
+    riskName: ''
   }
 
   constructor(props) {
@@ -70,6 +72,7 @@ export default class SecondPage extends Component {
       this.setState({latitude: json.latitude})
       this.setState({longitude: json.longitude})
       this.setState({county: json.county})
+      this.setState({riskName: json.riskName})
       //this.setState({state: json.state})
       //console.log('Risk AGAIN ', this.state.risk)
     })
@@ -207,14 +210,36 @@ export default class SecondPage extends Component {
 
   render() { 
     const { navigate } = this.props.navigation;
-    <ColorOutput/>
     if (this.state.showForm===false){
       if(this.state.risk>0){
+        var color = "#000000"
+        if(this.state.riskName == "Low Risk"){
+          color = "#008000"
+        }
+        else if(this.state.riskName == "Medium Low Risk"){
+          color = "#FFFF00"
+        }
+        else if(this.state.riskName == "Medium High Risk"){
+          color = "#FFA500"
+        }
+        else{
+          color = "#FF0000"
+        }
         return (
           <View style={styles.container}>
+            <Slider
+              disabled
+              style={{width: 200, height: 29}}
+              minimumTrackTintColor = {color}
+              maximumTrackTintColor="#000000"
+              minimumValue={0}
+              maximumValue={100}
+              value={this.state.risk}
+              />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-              Risk: {this.state.risk}
+              Risk: {this.state.riskName}
+              Risk Percentage: {this.state.risk}%
               {"\n"}
               {"\n"}
               </Text>
@@ -263,7 +288,7 @@ export default class SecondPage extends Component {
                 {this.handleLocationChange(data.description)}
               }}
               query={{
-                key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
+                key: '',
                 language: 'en',
               }}
               styles={{
