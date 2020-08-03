@@ -8,6 +8,8 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
+import TimePicker from 'react-native-simple-time-picker';
+import ColorOutput from './OutputBar.js'
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -274,7 +276,7 @@ export default class SecondPage extends Component {
                 {this.handleLocationChange(data.description)}
               }}
               query={{
-                key: '',
+                key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
                 language: 'en',
               }}
               styles={{

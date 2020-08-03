@@ -1,44 +1,34 @@
 import React, { Component } from 'react';
-import Slider from '@react-native-community/slider'
-import { StyleSheet, View, TextInput, Text, ScrollView, Image } from 'react-native';
- 
 
+import ColorBar from 'react-color-bar';
 
 export default class ColorOutput extends Component {
-    constructor(props) {
-          //constructor to set default state
-      super(props);
-      this.state = {
-        value: 50,
-      };
+    render() {
+        const data = [
+              {
+                  value: 100,
+                  color: '#21bbce',
+                  legendLabel: 'Low Risk',
+                  legendValue: 300,
+                  tooltip: 'interest is $300',
+              }, {
+                  value: 100,
+                  color: '#4bc97d',
+                  legendLabel: 'Medium Risk',
+                  legendValue: 200,
+                  tooltip: 'tax is $200',
+              }, {
+                  value: 100,
+                  color: '#eb5be1',
+                  legendLabel: 'High Risk',
+                  legendValue: 100,
+                  tooltip: 'insurance is $100',
+              },
+          ];
+          return (
+            <div>
+                <ColorBar data={data} />
+            </div>
+        );
     }
-
- 
-  render() {
-    return (
-      <View>
-        <Slider
-          disabled
-          style={{width: 200, height: 40}}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          minimumValue={0}
-          maximumValue={100}
-          value={this.state.value}
-          onValueChange={(value) => this.setState({value})} />
-        <Text>Value: {this.state.value}</Text>
-      </View>
-    );
-  }
-};
- 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-});
- 
+}
