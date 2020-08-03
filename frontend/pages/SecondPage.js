@@ -7,6 +7,7 @@ import { Input} from 'react-native-elements';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Slider from '@react-native-community/slider'
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -36,6 +37,7 @@ export default class SecondPage extends Component {
     setTimePickerVisibility: false,
     selectedHours: 0,
     selectedMinutes: 0,
+    riskName: ''
   }
 
   constructor(props) {
@@ -69,6 +71,7 @@ export default class SecondPage extends Component {
       this.setState({latitude: json.latitude})
       this.setState({longitude: json.longitude})
       this.setState({county: json.county})
+      this.setState({riskName: json.riskName})
       //this.setState({state: json.state})
       //console.log('Risk AGAIN ', this.state.risk)
     })
@@ -210,9 +213,19 @@ export default class SecondPage extends Component {
       if(this.state.risk>0){
         return (
           <View style={styles.container}>
+            <Slider
+              disabled
+              style={{width: 200, height: 29}}
+              minimumTrackTintColor="#8B0000"
+              maximumTrackTintColor="#000000"
+              minimumValue={0}
+              maximumValue={100}
+              value={this.state.risk}
+              />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-              Risk: {this.state.risk}
+              Risk: {this.state.riskName}
+              Risk Percentage: {this.state.risk}%
               {"\n"}
               {"\n"}
               </Text>
