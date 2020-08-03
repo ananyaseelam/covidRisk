@@ -1,6 +1,3 @@
-import React, { Component } from 'react';
-import Slider from '@react-native-community/slider'
-
 'use strict';
  
 var React = require('react');
