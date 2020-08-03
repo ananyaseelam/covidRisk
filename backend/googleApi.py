@@ -137,9 +137,10 @@ def returnPlaceGroup(placeType):
         for row in csv_reader:
             if row[0] == placeType:
                 placeGroup = row[1]
-        return placeGroup
+    return placeGroup
 
 def returnRiskPlaceType(placeGroup, transportType):
+    print("entered risk place type")
     with open('Risk_by_PlaceType_Prereq.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         if transportType == True:
@@ -147,9 +148,12 @@ def returnRiskPlaceType(placeGroup, transportType):
                 if row[0] == 'Delivery/Takeout':
                     riskPlaceType = float(row[4])
         else:
+            print('entered else')
             for row in csv_reader:
                 if row[0] == placeGroup:
+                    print('placeGroup: ', placeGroup)
                     riskPlaceType = float(row[4])
-        return riskPlaceType*10
+    print(riskPlaceType)
+    return riskPlaceType*10
 
 
