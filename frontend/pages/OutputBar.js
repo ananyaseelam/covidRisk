@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import ColorBar from 'react-color-bar';
 
 export default class ColorOutput extends Component {
@@ -31,5 +32,3 @@ export default class ColorOutput extends Component {
         );
     }
 }
-  
-
