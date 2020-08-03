@@ -288,7 +288,7 @@ export default class SecondPage extends Component {
                 {this.handleLocationChange(data.description)}
               }}
               query={{
-                key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
+                key: '',
                 language: 'en',
               }}
               styles={{
