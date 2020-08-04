@@ -229,8 +229,9 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Slider
               disabled
-              style={{width: 200, height: 29}}
-              minimumTrackTintColor = {color}
+              style={{width: 300, height: 40, backgroundColor: color, borderColor: 'black', borderWidth: 2}}
+              //trackImage = {require('./cvirusimage.png')}
+              minimumTrackTintColor = {"#000000"}
               maximumTrackTintColor="#000000"
               minimumValue={0}
               maximumValue={100}
@@ -238,7 +239,11 @@ export default class SecondPage extends Component {
               />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-              Risk: {this.state.riskName}
+                {"\n"}
+                <Text style = {{color: color}}>
+                  {this.state.riskName}
+                  {"\n"}
+                </Text>
               Risk Percentage: {this.state.risk}%
               {"\n"}
               {"\n"}
@@ -247,7 +252,7 @@ export default class SecondPage extends Component {
               {"\n"} 
               Place Type: {this.state.placeType}
               {"\n"}
-              Average Time Spent at this Location: {this.state.timeSpent} minutes
+              {/* Average Time Spent at this Location: {this.state.timeSpent} minutes */}
             </Text>
             <Button 
             title="Map View"
@@ -288,7 +293,7 @@ export default class SecondPage extends Component {
                 {this.handleLocationChange(data.description)}
               }}
               query={{
-                key: '',
+                key: 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs',
                 language: 'en',
               }}
               styles={{
@@ -399,7 +404,7 @@ export default class SecondPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: '#FF6347',
+    //backgroundColor: 'grey',
     margin: 50,
     alignItems: 'center',
     //justifyContent: 'center',
@@ -432,5 +437,8 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 10,
     //paddingVertical: 5,
     borderRadius: 3,
+  },
+  slider: {
+    backgroundColor: 'black',
   },
 });
