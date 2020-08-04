@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, TextInput, Text, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, ScrollView, Image, Linking} from 'react-native';
 //import all the components we are going to use.
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
@@ -36,14 +36,13 @@ export default class FirstPage extends Component {
           <Text style={styles.baseText}>
             <Text style={styles.titleText}>
             {"\n"}
-            {"\n"}
-              Welcome to the Covid Risk App! 
+            {"CovidRisk"}
               {"\n"}
             </Text>
           </Text>
 
           <Button
-            title="Calculate Your Risk Here"
+            title="Calculate Risk At Any Location"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={{
@@ -53,17 +52,27 @@ export default class FirstPage extends Component {
               borderRadius: 30,
               paddingVertical: 10,
             }}
-
-              
-          
-          //Button Title
           onPress={() =>
             navigate('SecondPage')
           }
-          //single page applications
-          //On click of the button we will send
-          //the data as a Json from here to the Second Screen using navigation prop
-        />
+          />
+          <Text>
+        {"\n"}
+        </Text>
+          <Button
+            title="Learn More About Covid-19 Prevention"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 30,
+              paddingVertical: 10,
+            }}
+            onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
+          />
+        
         <Text>
         {"\n"}
         </Text>
@@ -91,11 +100,13 @@ export default class FirstPage extends Component {
       fontFamily: 'System'
     },
     titleText: {
-      fontSize: 20,
-      //fontWeight: "bold"
+      fontSize: 50,
+      fontFamily:"System",
+      color: "black",
+      fontWeight: "bold"
     },
     logo: {
-      width: 100,
-      height: 100,
+      width: 150,
+      height: 150,
     },
   });
