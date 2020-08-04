@@ -239,6 +239,7 @@ export default class SecondPage extends Component {
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
               Risk: {this.state.riskName}
+              {"\n"} 
               Risk Percentage: {this.state.risk}%
               {"\n"}
               {"\n"}
@@ -370,7 +371,8 @@ export default class SecondPage extends Component {
                 containerStyle={{width: 300,height: 50}}
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    fontFamily: 'System',
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
                 onChangeItem={(item)=>this.handleDayChange(item.value)}
