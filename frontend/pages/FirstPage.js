@@ -46,13 +46,7 @@ export default class FirstPage extends Component {
             title="Calculate Risk At Any Location"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
-            buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 30,
-              paddingVertical: 10,
-            }}
+            buttonStyle={styles.button}
           onPress={() =>
             navigate('SecondPage')
           }
@@ -64,13 +58,7 @@ export default class FirstPage extends Component {
             title="Learn More About Covid-19 Prevention"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
-            buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 30,
-              paddingVertical: 10,
-            }}
+            buttonStyle={styles.button}
             onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
           />
           <Text>
@@ -80,13 +68,7 @@ export default class FirstPage extends Component {
             title="How We Calculate Risk"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
-            buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 30,
-              paddingVertical: 10,
-            }}
+            buttonStyle={styles.button}
             onPress={() => navigate('Fourth Page')}
           />
         
@@ -121,6 +103,14 @@ export default class FirstPage extends Component {
       fontFamily:"System",
       color: "black",
       fontWeight: "bold"
+    },
+    button:{
+      backgroundColor: 'white',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal:20,
     },
     logo: {
       width: 150,
