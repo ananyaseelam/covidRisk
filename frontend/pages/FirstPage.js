@@ -34,11 +34,12 @@ export default class FirstPage extends Component {
           style={styles.logo}
           />
           <Text style={styles.baseText}>
+          {"\n"}
             <Text style={styles.titleText}>
-            {"\n"}
             {"CovidRisk"}
-              {"\n"}
             </Text>
+            {"\n"}
+            {"\n"}
           </Text>
 
           <Button
@@ -71,6 +72,22 @@ export default class FirstPage extends Component {
               paddingVertical: 10,
             }}
             onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
+          />
+          <Text>
+        {"\n"}
+        </Text>
+          <Button
+            title="How We Calculate Risk"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'transparent',
+              borderWidth: 0,
+              borderRadius: 30,
+              paddingVertical: 10,
+            }}
+            onPress={() => navigate('Fourth Page')}
           />
         
         <Text>
