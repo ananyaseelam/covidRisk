@@ -43,7 +43,7 @@ export default class FirstPage extends Component {
           </Text>
 
           <Button
-            title="Calculate Risk At Any Location"
+            title="Calculate Risk For Any Location"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={styles.button}
