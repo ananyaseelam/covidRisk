@@ -69,7 +69,7 @@ export default class FirstPage extends Component {
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={styles.button}
-            onPress={() => navigate('Fourth Page')}
+            onPress={() => navigate('FourthPage')}
           />
         
         <Text>
