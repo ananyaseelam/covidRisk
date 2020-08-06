@@ -364,7 +364,6 @@ export default class SecondPage extends Component {
             <DropDownPicker
                 placeholder="Select a Day of the Week"
                 items={[
-                  {label: 'Today', value: ' '},
                     {label: 'Monday', value: 'Monday'},
                     {label: 'Tuesday ', value: 'Tuesday'},
                     {label: 'Wednesday', value: 'Wednesday'},
