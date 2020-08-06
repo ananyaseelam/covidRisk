@@ -9,6 +9,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
 import TimePicker from 'react-native-simple-time-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default class SecondPage extends Component {
   static navigationOptions = {
