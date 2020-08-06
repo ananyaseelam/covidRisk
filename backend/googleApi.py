@@ -90,7 +90,6 @@ def returnPoptimes(day, hour, location):
     and returnPlaceType(location) != 'sublocality_level_3'
     and returnPlaceType(location) != 'sublocality_level_4'
     and returnPlaceType(location) != 'intersection'):
-        timePeriod = hour[periodPos:] 
         # periodPos = hour.find('M') -1
         # timePeriod = hour[periodPos:] 
         # semiPos = hour.find(':')
