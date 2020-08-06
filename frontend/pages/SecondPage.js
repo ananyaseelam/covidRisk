@@ -75,6 +75,7 @@ export default class SecondPage extends Component {
       this.setState({longitude: json.longitude})
       this.setState({county: json.county})
       this.setState({riskName: json.riskName})
+      this.setState({time: json.time})
       //this.setState({state: json.state})
       //console.log('Risk AGAIN ', this.state.risk)
     })
