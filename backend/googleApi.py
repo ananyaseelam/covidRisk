@@ -111,6 +111,7 @@ def returnPoptimes(day, hour, location):
     return dataPoint
 
 def avgTimeSpent(placeType):
+    avgTimeRisk = 0
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -119,6 +120,7 @@ def avgTimeSpent(placeType):
     return avgTimeRisk
 
 def avgTimeRisk(placeType, transportType):
+    avgTimeRisk = 0
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         if transportType == True:
@@ -132,6 +134,7 @@ def avgTimeRisk(placeType, transportType):
     return avgTimeRisk
 
 def returnPlaceGroup(placeType):
+    placeGroup = ''
     with open('Risk_by_PlaceType.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -140,6 +143,8 @@ def returnPlaceGroup(placeType):
     return placeGroup
 
 def returnRiskPlaceType(placeGroup, transportType):
+    riskPlaceType = 0
+    print("place group is: ", placeGroup)
     print("entered risk place type")
     with open('Risk_by_PlaceType_Prereq.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
