@@ -103,6 +103,7 @@ export default class SecondPage extends Component {
   }
   handleTimeChange = time => {
     this.setState({time})
+    console.log(time.length)
     this.validateForm()
     
   }
@@ -120,11 +121,10 @@ export default class SecondPage extends Component {
     
     if(this.state.location.length >= 0){
       if(this.state.day.length > 0){
-        if(this.state.time.length > 5){
           console.warn('here1')
           return this.setState({isFormValid:true})
           
-        }
+        
       }
     }
     else{
