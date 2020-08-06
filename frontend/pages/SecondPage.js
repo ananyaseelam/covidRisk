@@ -8,6 +8,8 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
+import TimePicker from 'react-native-simple-time-picker';
+
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -211,28 +213,12 @@ export default class SecondPage extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.showForm===false){
       if(this.state.risk>0){
-        var color = "#000000"
-        var textshadowcolor = "#FFFFFF"
-        if(this.state.riskName == "Low Risk"){
-          color = "#008000"
-        }
-        else if(this.state.riskName == "Medium Low Risk"){
-          color = "#FFFF00"
-          textshadowcolor = "#000000"
-        }
-        else if(this.state.riskName == "Medium High Risk"){
-          color = "#FFA500"
-        }
-        else{
-          color = "#FF0000"
-        }
         return (
           <View style={styles.container}>
             <Slider
               disabled
-              style={{width: 300, height: 40, backgroundColor: color, borderColor: 'black', borderWidth: 2}}
-              //trackImage = {require('./cvirusimage.png')}
-              minimumTrackTintColor = {"#000000"}
+              style={{width: 200, height: 29}}
+              minimumTrackTintColor="#8B0000"
               maximumTrackTintColor="#000000"
               minimumValue={0}
               maximumValue={100}
@@ -240,22 +226,16 @@ export default class SecondPage extends Component {
               />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-                {"\n"}
-                <Text style = {{color: color, fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
-                  {this.state.riskName}
-                  {"\n"}
-                </Text>
-                <Text style = {{fontFamily: 'Avenir'}}>
-                  Risk Percentage: {this.state.risk}%
-                  {"\n"}
-                </Text>
-                {"\n"}
+              Risk: {this.state.riskName}
+              Risk Percentage: {this.state.risk}%
+              {"\n"}
+              {"\n"}
               </Text>
-              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
+              New Cases per Hundred Thousand: {this.state.casesData}
               {"\n"} 
               Place Type: {this.state.placeType}
               {"\n"}
-              {/* Average Time Spent at this Location: {this.state.timeSpent} minutes */}
+              Average Time Spent at this Location: {this.state.timeSpent} minutes
             </Text>
             <Button 
             title="Map View"
@@ -323,14 +303,13 @@ export default class SecondPage extends Component {
             <Button
             title="Next"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: "Avenir"}}
+            titleStyle={{ color: 'black', fontFamily: 'System'}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',
               borderWidth: 0,
               borderRadius: 30,
               paddingVertical: 10,
-              
             }}
           onPress={this.confirmLocation}
           />
@@ -350,13 +329,11 @@ export default class SecondPage extends Component {
               title = 'Pick-up/Takeout'
               onPress={this.setTakeout}
               color = 'green'
-              fontFamily = "Avenir"
               />
             <Button
               title = 'Dine In'
               onPress={this.setDineIn}
               color = 'red'
-              fontFamily = "Avenir"
               />
           </View>
         )
@@ -381,8 +358,7 @@ export default class SecondPage extends Component {
                 containerStyle={{width: 300,height: 50}}
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
-                    justifyContent: 'center',
-                    fontFamily: "Avenir"
+                    justifyContent: 'center'
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
                 onChangeItem={(item)=>this.handleDayChange(item.value)}
@@ -390,19 +366,19 @@ export default class SecondPage extends Component {
             <Text>
             {"\n"}
             </Text>
-            
-          <Input
-              placeholder='BASIC INPUT'
-              style={styles.input}
-              value={this.state.time}
-              placeholder='Enter Time (Ex. 7:00 PM)'
-              onChangeText={this.handleTimeChange}
-              fontFamily = "Avenir"
-          />
-              
+            <Button title="Click to select a time of day" onPress={this.showTimePicker} />
+            <DateTimePickerModal
+              isVisible={this.state.isTimePickerVisible}
+              mode="time"
+              onConfirm={this.handleConfirm}
+              onCancel={this.hideTimePicker}
+              headerTextIOS = "Pick a Time"
+            />
 
 
-        <Button title="Submit" onPress = {this.startLoading} fontFamily = "Avenir" disabled = {!this.state.isFormValid}/>
+
+
+        <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
       }    
@@ -412,28 +388,28 @@ export default class SecondPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //backgroundColor: 'grey',
+    //backgroundColor: '#FF6347',
     margin: 50,
     alignItems: 'center',
     //justifyContent: 'center',
   },
   TextStyle: {
-    fontSize: 21,
-    textAlign: 'center',
+    fontSize: 23,
+    textAlign: 'left',
     color: 'black',
-    fontFamily: 'Avenir',
+    fontFamily: 'System',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'Avenir',
+    fontFamily: 'System',
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'Avenir',
+    fontFamily: 'System',
 
   },
   input: {
@@ -445,8 +421,5 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 10,
     //paddingVertical: 5,
     borderRadius: 3,
-  },
-  slider: {
-    backgroundColor: 'black',
   },
 });
