@@ -8,7 +8,6 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
-import TimePicker from 'react-native-simple-time-picker';
 
 export default class SecondPage extends Component {
   static navigationOptions = {
@@ -324,13 +323,14 @@ export default class SecondPage extends Component {
             <Button
             title="Next"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: "Avenir"}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',
               borderWidth: 0,
               borderRadius: 30,
               paddingVertical: 10,
+              
             }}
           onPress={this.confirmLocation}
           />
@@ -350,11 +350,13 @@ export default class SecondPage extends Component {
               title = 'Pick-up/Takeout'
               onPress={this.setTakeout}
               color = 'green'
+              fontFamily = "Avenir"
               />
             <Button
               title = 'Dine In'
               onPress={this.setDineIn}
               color = 'red'
+              fontFamily = "Avenir"
               />
           </View>
         )
@@ -380,7 +382,7 @@ export default class SecondPage extends Component {
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
                     justifyContent: 'center',
-                    fontFamily: 'System',
+                    fontFamily: "Avenir"
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
                 onChangeItem={(item)=>this.handleDayChange(item.value)}
@@ -395,11 +397,12 @@ export default class SecondPage extends Component {
               value={this.state.time}
               placeholder='Enter Time (Ex. 7:00 PM)'
               onChangeText={this.handleTimeChange}
+              fontFamily = "Avenir"
           />
               
 
 
-        <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
+        <Button title="Submit" onPress = {this.startLoading} fontFamily = "Avenir" disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
       }    
