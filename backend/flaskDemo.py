@@ -30,7 +30,6 @@ def get_data():
         print(population)
         busyness = returnPoptimes(day, time, location)
         placeType = returnPlaceType(location)
-        placeType = placeType.title()
         transportType = False
         if eatType == 'takeout':
             transportType = True
@@ -39,8 +38,10 @@ def get_data():
         newCases = findCovidCasesPerHund(population, county, state)
         casesRisk = findRiskCases(newCases)
         placeGroup = returnPlaceGroup(placeType)
+        print("place group in flask is: ", placeGroup)
         riskPlaceType = returnRiskPlaceType(placeGroup, transportType)
         risk = calculateRisk(casesRisk, busyness, TimeRisk, riskPlaceType)
+        placeType = placeType.title()
         latlng = returnLL(location)
         print (risk)
         risk = round(risk, 1)
