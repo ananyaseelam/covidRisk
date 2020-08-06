@@ -215,12 +215,24 @@ export default class SecondPage extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.showForm===false){
       if(this.state.risk>0){
+        var color = "#000000"
+        var textshadowcolor = "#FFFFFF"
+        if(this.state.riskName == "Low Risk"){
+          color = "#008000"
+        }
+        else if(this.state.riskName == "Medium Low Risk"){
+          color = "#FFFF00"
+          textshadowcolor = "#000000"
+        }
+        else if(this.state.riskName == "Medium High Risk"){
+          color = "#FFA500"
+        }
         return (
           <View style={styles.container}>
             <Slider
               disabled
-              style={{width: 200, height: 29}}
-              minimumTrackTintColor="#8B0000"
+              style={{width: 300, height: 40, backgroundColor: color, borderColor: 'black', borderWidth: 2}}
+              minimumTrackTintColor="#000000"
               maximumTrackTintColor="#000000"
               minimumValue={0}
               maximumValue={100}
@@ -228,16 +240,21 @@ export default class SecondPage extends Component {
               />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-              Risk: {this.state.riskName}
-              Risk Percentage: {this.state.risk}%
-              {"\n"}
-              {"\n"}
+                {"\n"}
+                <Text style = {{color: color, fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+                  {this.state.riskName}
+                  {"\n"}
+                </Text>
+                <Text style = {{fontFamily: 'Avenir'}}>
+                  Risk Percentage: {this.state.risk}%
+                  {"\n"}
+                </Text>
+                {"\n"}
               </Text>
-              New Cases per Hundred Thousand: {this.state.casesData}
+              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
               {"\n"} 
               Place Type: {this.state.placeType}
               {"\n"}
-              Average Time Spent at this Location: {this.state.timeSpent} minutes
             </Text>
             <Button 
             title="Map View"
@@ -407,21 +424,25 @@ const styles = StyleSheet.create({
   TextStyle: {
     fontSize: 23,
     textAlign: 'left',
+    fontSize: 21,
+    textAlign: 'center',
     color: 'black',
     fontFamily: 'System',
+    fontFamily: 'Avenir',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
     fontFamily: 'System',
+    fontFamily: 'Avenir',
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
     fontFamily: 'System',
-
+    fontFamily: 'Avenir',
   },
   input: {
     borderWidth: 5,
