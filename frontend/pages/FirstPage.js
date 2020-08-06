@@ -30,7 +30,7 @@ export default class FirstPage extends Component {
       return (
         <View style={styles.container}>
           <Image 
-          source={require('./cvirusimage.png')} 
+          source={require('./transparent.png')} 
           style={styles.logo}
           />
           <Text style={styles.baseText}>
