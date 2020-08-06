@@ -194,7 +194,6 @@ export default class SecondPage extends Component {
     this.setState({
       isTimePickerVisible:true
     })
-      
   };
 
   hideTimePicker = () => {
@@ -249,6 +248,8 @@ export default class SecondPage extends Component {
                   Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
+                {"\n"}
+                At {this.state.location}
                 {"\n"}
               </Text>
               New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
