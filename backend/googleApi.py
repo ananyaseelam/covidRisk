@@ -8,7 +8,7 @@ import csv
 
 # the result is a Python dictionary:
 
-API_KEY = 'AIzaSyBveSLDqpF_INNFNwuaKwj2btremDjHtTs'
+API_KEY = ''
 
 def getPlaceID(address):
     gmaps = googlemaps.Client(key=API_KEY)
@@ -111,6 +111,7 @@ def returnPoptimes(day, hour, location):
     return dataPoint
 
 def avgTimeSpent(placeType):
+    avgTimeRisk = 0
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -119,6 +120,7 @@ def avgTimeSpent(placeType):
     return avgTimeRisk
 
 def avgTimeRisk(placeType, transportType):
+    avgTimeRisk = 0
     with open('Average_Time_Spent_Risk.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         if transportType == True:
@@ -132,14 +134,18 @@ def avgTimeRisk(placeType, transportType):
     return avgTimeRisk
 
 def returnPlaceGroup(placeType):
+    placeGroup = ''
     with open('Risk_by_PlaceType.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             if row[0] == placeType:
                 placeGroup = row[1]
-        return placeGroup
+    return placeGroup
 
 def returnRiskPlaceType(placeGroup, transportType):
+    riskPlaceType = 0
+    print("place group is: ", placeGroup)
+    print("entered risk place type")
     with open('Risk_by_PlaceType_Prereq.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         if transportType == True:
@@ -147,9 +153,12 @@ def returnRiskPlaceType(placeGroup, transportType):
                 if row[0] == 'Delivery/Takeout':
                     riskPlaceType = float(row[4])
         else:
+            print('entered else')
             for row in csv_reader:
                 if row[0] == placeGroup:
+                    print('placeGroup: ', placeGroup)
                     riskPlaceType = float(row[4])
-        return riskPlaceType*10
+    print(riskPlaceType)
+    return riskPlaceType*10
 
 

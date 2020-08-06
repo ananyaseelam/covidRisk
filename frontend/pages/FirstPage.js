@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, TextInput, Text, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, ScrollView, Image, Linking} from 'react-native';
 //import all the components we are going to use.
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
@@ -30,40 +30,48 @@ export default class FirstPage extends Component {
       return (
         <View style={styles.container}>
           <Image 
-          source={require('./cvirusimage.png')} 
+          source={require('./transparent.png')} 
           style={styles.logo}
           />
           <Text style={styles.baseText}>
+          {"\n"}
             <Text style={styles.titleText}>
-            {"\n"}
-            {"\n"}
-              Welcome to the Covid Risk App! 
-              {"\n"}
+            {"CovidRisk"}
             </Text>
+            {"\n"}
+            {"\n"}
           </Text>
 
           <Button
-            title="Calculate Your Risk Here"
+            title="Calculate Risk For Any Location"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
-            buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: 'transparent',
-              borderWidth: 0,
-              borderRadius: 30,
-              paddingVertical: 10,
-            }}
-
-              
-          
-          //Button Title
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={styles.button}
           onPress={() =>
             navigate('SecondPage')
           }
-          //single page applications
-          //On click of the button we will send
-          //the data as a Json from here to the Second Screen using navigation prop
-        />
+          />
+          <Text>
+        {"\n"}
+        </Text>
+          <Button
+            title="Learn More About Covid-19 Prevention"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={styles.button}
+            onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
+          />
+          <Text>
+        {"\n"}
+        </Text>
+          <Button
+            title="How We Calculate Risk"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={styles.button}
+            onPress={() => navigate('FourthPage')}
+          />
+        
         <Text>
         {"\n"}
         </Text>
@@ -88,14 +96,24 @@ export default class FirstPage extends Component {
       backgroundColor: '#DBDBD6',
     },
     baseText: {
-      fontFamily: 'System'
+      fontFamily: 'Avenir'
     },
     titleText: {
-      fontSize: 20,
-      //fontWeight: "bold"
+      fontSize: 50,
+      fontFamily:"Avenir-Heavy",
+      color: "black",
+      fontWeight: "bold"
+    },
+    button:{
+      backgroundColor: 'white',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal:20,
     },
     logo: {
-      width: 100,
-      height: 100,
+      width: 150,
+      height: 150,
     },
   });

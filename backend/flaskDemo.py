@@ -38,23 +38,27 @@ def get_data():
         newCases = findCovidCasesPerHund(population, county, state)
         casesRisk = findRiskCases(newCases)
         placeGroup = returnPlaceGroup(placeType)
+        print("place group in flask is: ", placeGroup)
         riskPlaceType = returnRiskPlaceType(placeGroup, transportType)
         risk = calculateRisk(casesRisk, busyness, TimeRisk, riskPlaceType)
+        placeType = placeType.title()
         latlng = returnLL(location)
         print (risk)
+        risk = round(risk, 1)
         riskName = ''
         if (risk <= 25):
-            riskName = " Low Risk "
+            riskName = "Low Risk"
         elif(risk<=50):
-            riskName = " Medium Low Risk "
+            riskName = "Medium Low Risk"
         elif(risk<=75):
-            riskName = " Medium High Risk "
+            riskName = "Medium High Risk"
         elif(risk>75):
-            riskName = " High Risk "
+            riskName = "High Risk"
         riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':timespent, 
         'popular_times':busyness,'new_cases':newCases, 'population':population, 
         'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county, 'riskName':riskName}
+        print("risk place type: ", riskPlaceType)
         riskJson = json.dumps(riskDict)
         print(riskJson)
         return riskJson
