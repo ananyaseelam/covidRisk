@@ -23,12 +23,7 @@ def get_data():
         location = req_data['location']
         day = (req_data['day']).capitalize()
         time = req_data['time']
-        location = time.find("T") + 1 
-        time = time[location:location+1]
-        time = float(time)
-        time = time - 4
-        if time < 0:
-            time + 24
+        time = str(time)
         eatType = req_data['eatType'] 
         county = returnCounty(getPlaceID(location))
         state = returnState(getPlaceID(location))
