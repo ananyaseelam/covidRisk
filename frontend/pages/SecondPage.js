@@ -376,6 +376,15 @@ export default class SecondPage extends Component {
               headerTextIOS = "Pick a Time"
             />
 
+            {/* 
+            string = "2020-08-06T02:26:51.980Z"
+            location = string.find("T") + 1 
+            time = string[location:location+1]
+            time = float(time)
+            time = time - 4
+            if time < 0:
+              time + 24
+             */}
 
 
 
