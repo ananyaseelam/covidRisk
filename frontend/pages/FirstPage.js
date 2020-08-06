@@ -45,7 +45,7 @@ export default class FirstPage extends Component {
           <Button
             title="Calculate Risk For Any Location"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={styles.button}
           onPress={() =>
             navigate('SecondPage')
@@ -57,7 +57,7 @@ export default class FirstPage extends Component {
           <Button
             title="Learn More About Covid-19 Prevention"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={styles.button}
             onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
           />
@@ -67,7 +67,7 @@ export default class FirstPage extends Component {
           <Button
             title="How We Calculate Risk"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={styles.button}
             onPress={() => navigate('FourthPage')}
           />
@@ -96,11 +96,11 @@ export default class FirstPage extends Component {
       backgroundColor: '#DBDBD6',
     },
     baseText: {
-      fontFamily: 'System'
+      fontFamily: 'Avenir'
     },
     titleText: {
       fontSize: 50,
-      fontFamily:"System",
+      fontFamily:"Avenir-Heavy",
       color: "black",
       fontWeight: "bold"
     },
