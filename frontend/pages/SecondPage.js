@@ -203,7 +203,25 @@ export default class SecondPage extends Component {
   };
 
   handleConfirm = (time) => {
-    console.warn("A time has been picked: ", time);
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    time = time.toLocaleTimeString();
+    // var location = time.search('T') + 1;
+    // var newTime = time.substring(location, 1);
+    // newTime = Number(newTime);
+    // newTime = newTime - 4;
+    // if (newTime < 0) {
+    //   newTime + 24;
+    // }
+    // newTime = String(newTime);
+    // if (newTime.length == 1){
+    //   newTime = "0" + newTime;
+    // }
+    // time = time.substring(0, location) + newTime + time.substring(location+2);
+    //time = time.substring(17,5);
+    time = hours + ":" + minutes;
+    console.warn("A time has been picked:", time);
+    time = String(hours);
     this.handleTimeChange(time);
     console.warn('here')
     this.hideTimePicker();
@@ -394,7 +412,9 @@ export default class SecondPage extends Component {
               onCancel={this.hideTimePicker}
               headerTextIOS = "Pick a Time"
             />
-
+            <Text>
+              Time selected is: {this.time}
+            </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
             location = string.find("T") + 1 
