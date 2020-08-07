@@ -262,7 +262,7 @@ export default class SecondPage extends Component {
                 {"\n"}
                 {"\n"}
               </Text>
-              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
+              Daily New Cases Per 100k People: {this.state.casesData}
               {"\n"} 
               {"\n"}
               Place Type: {this.state.placeType}
