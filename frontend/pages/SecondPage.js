@@ -122,7 +122,7 @@ export default class SecondPage extends Component {
     
     if(this.state.location.length >= 0){
       if(this.state.day.length > 0){
-          console.warn('here1')
+          //console.warn('here1')
           return this.setState({isFormValid:true})
           
         
@@ -207,10 +207,10 @@ export default class SecondPage extends Component {
     var minutes = time.getMinutes();
     time = time.toLocaleTimeString();
     time = hours + ":" + minutes;
-    console.warn("A time has been picked:", time);
+    //console.warn("A time has been picked:", time);
     time = String(time);
     this.handleTimeChange(time);
-    console.warn('here')
+    //console.warn('here')
     this.hideTimePicker();
   };
 
@@ -252,16 +252,19 @@ export default class SecondPage extends Component {
                   {this.state.riskName}
                   {"\n"}
                 </Text>
+
                 <Text style = {{fontFamily: 'Avenir'}}>
                   Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
                 {"\n"}
-                At {this.state.location}
+                Location: {this.state.location}
+                {"\n"}
                 {"\n"}
               </Text>
               New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
               {"\n"} 
+              {"\n"}
               Place Type: {this.state.placeType}
               {"\n"}
             </Text>
