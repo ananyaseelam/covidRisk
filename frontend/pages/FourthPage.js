@@ -24,20 +24,20 @@ export default class FourthPage extends Component {
             main factors are used to calculate the risk at any location: 
             {"\n"}
             {"\n"}
-            {"\t"}1) The number of new COVID-19 cases per hundred thousand per day in the county of the intended destination.
+            {"\t"}1) The <Text style= {{fontWeight:"bold"}}> number of daily new COVID-19 cases </Text> per 100k people in the county of the intended destination.
             {"\n"}
             {"\t"}- This information is accessed through the New York Times COVID-19 Database.
             {"\n"}
             {"\n"}
-            {"\t"}2) The busyness of the location at the day and time the user selects.
+            {"\t"}2) The <Text style= {{fontWeight:"bold"}}>busyness</Text> of the location at the day and time the user selects.
             {"\n"}
             {"\t"}- This information is determined by the Google Maps "Popular Times" data.
             {"\n"}
             {"\n"}
-            {"\t"}3) The average time spent at the location based on the place type property from Google Places.
+            {"\t"}3) The <Text style= {{fontWeight:"bold"}}>average time spent</Text> at the location based on the place type property from Google Places.
             {"\n"}
             {"\n"}
-            {"\t"}4) The average risk based on the location type calculated using risk scales from Texas Medical Association, Yahoo Finance, and Nebraska Medicine shown below.
+            {"\t"}4) The <Text style= {{fontWeight:"bold"}}>average risk based on the location type</Text> calculated using risk scales from Texas Medical Association, Yahoo Finance, and Nebraska Medicine shown below.
             {"\n"}
         </Text>
         <Image 
