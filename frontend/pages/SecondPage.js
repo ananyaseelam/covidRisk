@@ -262,6 +262,7 @@ export default class SecondPage extends Component {
             onPress={() =>
               this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
             }/>
+            
           </View>
         )
       }
