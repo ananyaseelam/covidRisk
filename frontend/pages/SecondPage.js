@@ -207,22 +207,9 @@ export default class SecondPage extends Component {
     var hours = time.getHours();
     var minutes = time.getMinutes();
     time = time.toLocaleTimeString();
-    // var location = time.search('T') + 1;
-    // var newTime = time.substring(location, 1);
-    // newTime = Number(newTime);
-    // newTime = newTime - 4;
-    // if (newTime < 0) {
-    //   newTime + 24;
-    // }
-    // newTime = String(newTime);
-    // if (newTime.length == 1){
-    //   newTime = "0" + newTime;
-    // }
-    // time = time.substring(0, location) + newTime + time.substring(location+2);
-    //time = time.substring(17,5);
     time = hours + ":" + minutes;
     console.warn("A time has been picked:", time);
-    time = String(hours);
+    time = String(time);
     this.handleTimeChange(time);
     console.warn('here')
     this.hideTimePicker();
@@ -244,6 +231,9 @@ export default class SecondPage extends Component {
         }
         else if(this.state.riskName == "Medium High Risk"){
           color = "#FFA500"
+        }
+        else {
+          color = "#FF0000"
         }
         return (
           <View style={styles.container}>
@@ -287,7 +277,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Spinner
               visible={this.state.spinner}
-              textContent={'Loading...'}
+              textContent={'Gathering information from Google Places and the NYT COVID-19 Database...'}
               textStyle={styles.spinnerTextStyle}
             />
           </View>
@@ -411,8 +401,8 @@ export default class SecondPage extends Component {
               onCancel={this.hideTimePicker}
               headerTextIOS = "Pick a Time"
             />
-            <Text>
-              Time selected is: {this.time}
+            <Text style={styles.TextStyle}>
+              Time selected (in 24H Time) is: {this.state.time}
             </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
@@ -447,21 +437,18 @@ const styles = StyleSheet.create({
     fontSize: 21,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   input: {
@@ -473,5 +460,13 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 10,
     //paddingVertical: 5,
     borderRadius: 3,
+  },
+  spinnerTextStyle: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: 'black',
+    fontFamily: 'System',
+    fontFamily: 'Avenir',
+    margin: 50,
   },
 });
