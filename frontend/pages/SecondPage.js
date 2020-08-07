@@ -260,7 +260,7 @@ export default class SecondPage extends Component {
                 At {this.state.location}
                 {"\n"}
               </Text>
-              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
+              Daily New Cases Per 100k People: {this.state.casesData}
               {"\n"} 
               Place Type: {this.state.placeType}
               {"\n"}
