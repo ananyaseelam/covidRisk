@@ -194,7 +194,6 @@ export default class SecondPage extends Component {
     this.setState({
       isTimePickerVisible:true
     })
-      
   };
 
   hideTimePicker = () => {
@@ -267,6 +266,8 @@ export default class SecondPage extends Component {
                   Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
+                {"\n"}
+                At {this.state.location}
                 {"\n"}
               </Text>
               New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
@@ -382,7 +383,6 @@ export default class SecondPage extends Component {
             <DropDownPicker
                 placeholder="Select a Day of the Week"
                 items={[
-                  {label: 'Today', value: ' '},
                     {label: 'Monday', value: 'Monday'},
                     {label: 'Tuesday ', value: 'Tuesday'},
                     {label: 'Wednesday', value: 'Wednesday'},
