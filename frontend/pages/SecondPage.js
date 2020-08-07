@@ -9,6 +9,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
 import TimePicker from 'react-native-simple-time-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default class SecondPage extends Component {
@@ -74,6 +75,7 @@ export default class SecondPage extends Component {
       this.setState({longitude: json.longitude})
       this.setState({county: json.county})
       this.setState({riskName: json.riskName})
+      this.setState({time: json.time})
       //this.setState({state: json.state})
       //console.log('Risk AGAIN ', this.state.risk)
     })
@@ -192,7 +194,6 @@ export default class SecondPage extends Component {
     this.setState({
       isTimePickerVisible:true
     })
-      
   };
 
   hideTimePicker = () => {
@@ -202,7 +203,12 @@ export default class SecondPage extends Component {
   };
 
   handleConfirm = (time) => {
-    console.warn("A time has been picked: ", time);
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    time = time.toLocaleTimeString();
+    time = hours + ":" + minutes;
+    console.warn("A time has been picked:", time);
+    time = String(time);
     this.handleTimeChange(time);
     console.warn('here')
     this.hideTimePicker();
@@ -213,12 +219,27 @@ export default class SecondPage extends Component {
     const { navigate } = this.props.navigation;
     if (this.state.showForm===false){
       if(this.state.risk>0){
+        var color = "#000000"
+        var textshadowcolor = "#FFFFFF"
+        if(this.state.riskName == "Low Risk"){
+          color = "#008000"
+        }
+        else if(this.state.riskName == "Medium Low Risk"){
+          color = "#FFFF00"
+          textshadowcolor = "#000000"
+        }
+        else if(this.state.riskName == "Medium High Risk"){
+          color = "#FFA500"
+        }
+        else {
+          color = "#FF0000"
+        }
         return (
           <View style={styles.container}>
             <Slider
               disabled
-              style={{width: 200, height: 29}}
-              minimumTrackTintColor="#8B0000"
+              style={{width: 300, height: 40, backgroundColor: color, borderColor: 'black', borderWidth: 2}}
+              minimumTrackTintColor="#000000"
               maximumTrackTintColor="#000000"
               minimumValue={0}
               maximumValue={100}
@@ -226,22 +247,30 @@ export default class SecondPage extends Component {
               />
             <Text style = {styles.TextStyle}>
               <Text style = {styles.riskText}>
-              Risk: {this.state.riskName}
-              Risk Percentage: {this.state.risk}%
-              {"\n"}
-              {"\n"}
+                {"\n"}
+                <Text style = {{color: color, fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+                  {this.state.riskName}
+                  {"\n"}
+                </Text>
+                <Text style = {{fontFamily: 'Avenir'}}>
+                  Risk Percentage: {this.state.risk}%
+                  {"\n"}
+                </Text>
+                {"\n"}
+                At {this.state.location}
+                {"\n"}
               </Text>
-              New Cases per Hundred Thousand: {this.state.casesData}
+              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
               {"\n"} 
               Place Type: {this.state.placeType}
               {"\n"}
-              Average Time Spent at this Location: {this.state.timeSpent} minutes
             </Text>
             <Button 
             title="Map View"
             onPress={() =>
               this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
             }/>
+            
           </View>
         )
       }
@@ -250,7 +279,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Spinner
               visible={this.state.spinner}
-              textContent={'Loading...'}
+              textContent={'Gathering information from Google Places and the NYT COVID-19 Database...'}
               textStyle={styles.spinnerTextStyle}
             />
           </View>
@@ -345,7 +374,6 @@ export default class SecondPage extends Component {
             <DropDownPicker
                 placeholder="Select a Day of the Week"
                 items={[
-                  {label: 'Today', value: ' '},
                     {label: 'Monday', value: 'Monday'},
                     {label: 'Tuesday ', value: 'Tuesday'},
                     {label: 'Wednesday', value: 'Wednesday'},
@@ -374,7 +402,18 @@ export default class SecondPage extends Component {
               onCancel={this.hideTimePicker}
               headerTextIOS = "Pick a Time"
             />
-
+            <Text style={styles.TextStyle}>
+              Time selected (in 24H Time) is: {this.state.time}
+            </Text>
+            {/* 
+            string = "2020-08-06T02:26:51.980Z"
+            location = string.find("T") + 1 
+            time = string[location:location+1]
+            time = float(time)
+            time = time - 4
+            if time < 0:
+              time + 24
+             */}
 
 
 
@@ -396,21 +435,22 @@ const styles = StyleSheet.create({
   TextStyle: {
     fontSize: 23,
     textAlign: 'left',
+    fontSize: 21,
+    textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
+    fontFamily: 'Avenir',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
+    fontFamily: 'Avenir',
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
-
+    fontFamily: 'Avenir',
   },
   input: {
     borderWidth: 5,
@@ -421,5 +461,13 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 10,
     //paddingVertical: 5,
     borderRadius: 3,
+  },
+  spinnerTextStyle: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: 'black',
+    fontFamily: 'System',
+    fontFamily: 'Avenir',
+    margin: 50,
   },
 });

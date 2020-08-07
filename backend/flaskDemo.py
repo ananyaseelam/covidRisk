@@ -23,6 +23,7 @@ def get_data():
         location = req_data['location']
         day = (req_data['day']).capitalize()
         time = req_data['time']
+        time = str(time)
         eatType = req_data['eatType'] 
         county = returnCounty(getPlaceID(location))
         state = returnState(getPlaceID(location))
@@ -57,7 +58,7 @@ def get_data():
         riskDict = riskDict = {'risk': risk, 'location':location, 
         'placeType':placeType, 'average_time_spent':timespent, 
         'popular_times':busyness,'new_cases':newCases, 'population':population, 
-        'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county, 'riskName':riskName}
+        'latitude':latlng['lat'],'longitude': latlng['lng'], 'county':county, 'riskName':riskName, 'time':time}
         print("risk place type: ", riskPlaceType)
         riskJson = json.dumps(riskDict)
         print(riskJson)
