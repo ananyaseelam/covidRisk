@@ -40,7 +40,7 @@ export default class SecondPage extends Component {
     setTimePickerVisibility: false,
     selectedHours: 0,
     selectedMinutes: 0,
-    riskName: ''
+    riskName: '',
   }
 
   constructor(props) {
@@ -189,7 +189,6 @@ export default class SecondPage extends Component {
     this.setState({eatType:'dine-in'})
   }
 
-  
   showTimePicker = () => {
     this.setState({
       isTimePickerVisible:true
@@ -257,27 +256,53 @@ export default class SecondPage extends Component {
                   {this.state.riskName}
                   {"\n"}
                 </Text>
-
-                <Text style = {{fontFamily: 'Avenir'}}>
+                <Text style = {{fontFamily: 'Avenir', fontSize: 20}}>
                   Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
+                <Text style = {{fontFamily: 'Avenir', fontSize: 18}}>
+                  Location: {this.state.location}
+                  {"\n"}
+                  On {this.state.day} at {this.state.time}
+                  {"\n"}
+                </Text>
+              </Text>
+              <Text style = {{fontSize: 15}}>
                 {"\n"}
-                Location: {this.state.location}
-                {"\n"}
+                Daily New Cases Per 100k People: {this.state.casesData}
+                {"\n"} 
+                Place Type: {this.state.placeType}
                 {"\n"}
               </Text>
-              Daily New Cases Per 100k People: {this.state.casesData}
-              {"\n"} 
-              {"\n"}
-              Place Type: {this.state.placeType}
-              {"\n"}
             </Text>
             <Button 
             title="Map View"
             onPress={() =>
               this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
             }/>
+            <Text style ={{fontFamily: 'Avenir'}}>
+              Key:
+              {"\n"} 
+              <Text style = {{color: '#008000', fontWeight: 'bold'}}>
+              Green: 
+              </Text>
+              It is safe to leave your house. Wear a face covering and keep physical distance.
+              {"\n"} 
+              <Text style = {{color: '#FFFF00', fontWeight: 'bold', textShadowColor: '#000000', textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+              Yellow: 
+              </Text>
+              It is safe to leave your house. Wear a face covering and keep strict physical distance.
+              {"\n"} 
+              <Text style = {{color: '#FFA500', fontWeight: 'bold'}}>
+              Orange: 
+              </Text>
+              Use discretion when leaving the house, depending on urgency. Wear a face covering and keep strict physical distance.
+              {"\n"} 
+              <Text style = {{color: '#FF0000', fontWeight: 'bold'}}>
+              Red: 
+              </Text>
+              If possible, it is highly recommended you stay home.
+            </Text>
             
           </View>
         )
