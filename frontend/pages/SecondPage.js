@@ -365,7 +365,7 @@ export default class SecondPage extends Component {
             <Button
             title="Next"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',
@@ -404,8 +404,13 @@ export default class SecondPage extends Component {
         return(
           //show place type and name of location
           <KeyboardAvoidingView style = {styles.container}>
+            <Text style = {styles.HeaderText}> 
+              When are you going to {this.state.location} ?
+              {"\n"}
+
+            </Text>
             <DropDownPicker
-                placeholder="Select a Day of the Week"
+                placeholder="Choose Day of Week"
                 items={[
                     {label: 'Monday', value: 'Monday'},
                     {label: 'Tuesday ', value: 'Tuesday'},
@@ -419,6 +424,7 @@ export default class SecondPage extends Component {
                 containerStyle={{width: 300,height: 50}}
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
+                    fontFamily: 'Avenir',
                     justifyContent: 'center'
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
@@ -427,7 +433,7 @@ export default class SecondPage extends Component {
             <Text>
             {"\n"}
             </Text>
-            <Button title="Click to select a time of day" onPress={this.showTimePicker} />
+            <Button title="Click to Choose Time" onPress={this.showTimePicker} />
             <DateTimePickerModal
               isVisible={this.state.isTimePickerVisible}
               mode="time"
@@ -436,7 +442,7 @@ export default class SecondPage extends Component {
               headerTextIOS = "Pick a Time"
             />
             <Text style={styles.TextStyle}>
-              Time selected (in 24H Time) is: {this.state.time}
+              Time selected (in 24H Time) : {this.state.time}
             </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
