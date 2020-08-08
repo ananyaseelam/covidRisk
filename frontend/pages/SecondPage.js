@@ -12,7 +12,6 @@ import TimePicker from 'react-native-simple-time-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
@@ -123,7 +122,7 @@ export default class SecondPage extends Component {
     
     if(this.state.location.length >= 0){
       if(this.state.day.length > 0){
-          console.warn('here1')
+          //console.warn('here1')
           return this.setState({isFormValid:true})
           
         
@@ -195,7 +194,6 @@ export default class SecondPage extends Component {
     this.setState({
       isTimePickerVisible:true
     })
-      
   };
 
   hideTimePicker = () => {
@@ -205,9 +203,14 @@ export default class SecondPage extends Component {
   };
 
   handleConfirm = (time) => {
-    console.warn("A time has been picked: ", time);
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    time = time.toLocaleTimeString();
+    time = hours + ":" + minutes;
+    //console.warn("A time has been picked:", time);
+    time = String(time);
     this.handleTimeChange(time);
-    console.warn('here')
+    //console.warn('here')
     this.hideTimePicker();
   };
 
@@ -228,6 +231,9 @@ export default class SecondPage extends Component {
         else if(this.state.riskName == "Medium High Risk"){
           color = "#FFA500"
         }
+        else {
+          color = "#FF0000"
+        }
         return (
           <View style={styles.container}>
             <Slider
@@ -246,14 +252,19 @@ export default class SecondPage extends Component {
                   {this.state.riskName}
                   {"\n"}
                 </Text>
+
                 <Text style = {{fontFamily: 'Avenir'}}>
                   Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
                 {"\n"}
+                Location: {this.state.location}
+                {"\n"}
+                {"\n"}
               </Text>
-              New Cases Per Day Per Hundred Thousand People: {this.state.casesData}
+              Daily New Cases Per 100k People: {this.state.casesData}
               {"\n"} 
+              {"\n"}
               Place Type: {this.state.placeType}
               {"\n"}
             </Text>
@@ -262,6 +273,7 @@ export default class SecondPage extends Component {
             onPress={() =>
               this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
             }/>
+            
           </View>
         )
       }
@@ -270,7 +282,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Spinner
               visible={this.state.spinner}
-              textContent={'Loading...'}
+              textContent={'Gathering information from Google Places and the NYT COVID-19 Database...'}
               textStyle={styles.spinnerTextStyle}
             />
           </View>
@@ -323,7 +335,7 @@ export default class SecondPage extends Component {
             <Button
             title="Next"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'System'}}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={{
               backgroundColor: 'white',
               borderColor: 'transparent',
@@ -362,8 +374,13 @@ export default class SecondPage extends Component {
         return(
           //show place type and name of location
           <KeyboardAvoidingView style = {styles.container}>
+            <Text style = {styles.HeaderText}> 
+              When are you going to {this.state.location} ?
+              {"\n"}
+
+            </Text>
             <DropDownPicker
-                placeholder="Select a Day of the Week"
+                placeholder="Choose Day of Week"
                 items={[
                     {label: 'Monday', value: 'Monday'},
                     {label: 'Tuesday ', value: 'Tuesday'},
@@ -377,6 +394,7 @@ export default class SecondPage extends Component {
                 containerStyle={{width: 300,height: 50}}
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
+                    fontFamily: 'Avenir',
                     justifyContent: 'center'
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
@@ -385,7 +403,7 @@ export default class SecondPage extends Component {
             <Text>
             {"\n"}
             </Text>
-            <Button title="Click to select a time of day" onPress={this.showTimePicker} />
+            <Button title="Click to Choose Time" onPress={this.showTimePicker} />
             <DateTimePickerModal
               isVisible={this.state.isTimePickerVisible}
               mode="time"
@@ -393,7 +411,9 @@ export default class SecondPage extends Component {
               onCancel={this.hideTimePicker}
               headerTextIOS = "Pick a Time"
             />
-
+            <Text style={styles.TextStyle}>
+              Time selected (in 24H Time) : {this.state.time}
+            </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
             location = string.find("T") + 1 
@@ -427,21 +447,18 @@ const styles = StyleSheet.create({
     fontSize: 21,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
     fontFamily: 'Avenir',
   },
   input: {
@@ -453,5 +470,13 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 10,
     //paddingVertical: 5,
     borderRadius: 3,
+  },
+  spinnerTextStyle: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: 'black',
+    fontFamily: 'System',
+    fontFamily: 'Avenir',
+    margin: 50,
   },
 });

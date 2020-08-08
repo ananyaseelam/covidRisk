@@ -100,10 +100,13 @@ def returnPoptimes(day, hour, location):
         #     hour = 0
         # if hour == 24: #changes 24 to 12
         #     hour = 12
+        loc = hour.find(':')
+        hour = hour[0:loc]
+        print("time is: ", hour)
         dayNum = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4, 'Saturday':5, 'Sunday':6}
         poptimes = populartimes.get_id(API_KEY, getPlaceID(location))
         try:
-            dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(time)-1]
+            dataPoint = (((poptimes['populartimes'])[dayNum[str(day)]])['data'])[int(hour)-1]
         except KeyError:
             dataPoint = 0
     else:

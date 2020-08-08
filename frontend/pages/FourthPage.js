@@ -18,16 +18,26 @@ export default class FourthPage extends Component {
             {"\n"}
           </Text>
         <Text style ={styles.baseText}>
-            Up to three main factors are used to calculate risk at any location: 
+            <Text style={{fontSize:25, textAlign: "center"}}>
+              FOUR{" "}
+            </Text>
+            main factors are used to calculate the risk at any location: 
             {"\n"}
             {"\n"}
-            {"\t"}- Number of covid-19 cases per hundred thousand in the county of the location.
+            {"\t"}1) The <Text style= {{fontWeight:"bold"}}> number of daily new COVID-19 cases </Text> per 100k people in the county of the intended destination.
+            {"\n"}
+            {"\t"}- This information is accessed through the New York Times COVID-19 Database.
             {"\n"}
             {"\n"}
-            {"\t"}- How busy the location is at the time and day selected.
+            {"\t"}2) The <Text style= {{fontWeight:"bold"}}>busyness</Text> of the location at the day and time the user selects.
+            {"\n"}
+            {"\t"}- This information is determined by the Google Maps "Popular Times" data.
             {"\n"}
             {"\n"}
-            {"\t"}- The average risk based on the location type calculated using risk scales from Texas Medical Association, Yahoo Finance, Nebraska Medicine shown below.
+            {"\t"}3) The <Text style= {{fontWeight:"bold"}}>average time spent</Text> at the location based on the place type property from Google Places.
+            {"\n"}
+            {"\n"}
+            {"\t"}4) The <Text style= {{fontWeight:"bold"}}>average risk based on the location type</Text> calculated using risk scales from Texas Medical Association, Yahoo Finance, and Nebraska Medicine shown below.
             {"\n"}
         </Text>
         <Image 
@@ -78,27 +88,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBDBD6',
   },
   baseText: {
-    fontFamily: 'System', 
+    fontFamily: 'Avenir', 
     fontSize: 18,
   },
   TextStyle: {
     fontSize: 23,
     textAlign: 'left',
     color: 'black',
-    fontFamily: 'System',
+    fontFamily: 'Avenir',
   },
   HeaderText:{
     fontSize: 22,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
+    fontFamily: 'Avenir',
     fontWeight: "bold"
   },
   riskText:{
     fontSize: 23,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'System',
+    fontFamily: 'Avenir',
 
   },
   textBlock: {

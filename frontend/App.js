@@ -19,7 +19,6 @@ const App = createStackNavigator({
     ThirdPage: { screen: ThirdPage },
 
     FourthPage: {screen: FourthPage},
-
   },
   
   {
