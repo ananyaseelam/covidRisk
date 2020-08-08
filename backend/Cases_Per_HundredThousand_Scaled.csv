@@ -1,12 +1,26 @@
-high,risk values
-1,33
-10,53.79310345
-15,65.34482759
-25,88.44827586
-50,146.2068966
-75,203.9655172
-100,261.7241379
-min ,
-1,
-max,
-30,
+high (upper bound for new covid cases per day per hundred thousand),risk values (scaled),,,
+1,1,,,
+5,17.5,,,
+10,38.125,,,
+15,58.75,,,
+20,79.375,,,
+25,100,,,
+30,120.625,,,
+35,141.25,,,
+40,161.875,,,
+45,182.5,,,
+50,203.125,,,source: https://globalepidemics.org/key-metrics-for-covid-suppression/
+55,223.75,,,
+60,244.375,,,
+65,265,,,
+70,285.625,,,reasoning for max at 25 is based on above source
+75,306.25,,,
+80,326.875,,,
+85,347.5,,,
+90,368.125,,,
+95,388.75,,,
+100,409.375,,,
+min ,,,,
+1,,,,
+max,,,,
+25,,,,

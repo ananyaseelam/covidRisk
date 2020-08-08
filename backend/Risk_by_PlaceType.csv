@@ -1,0 +1,145 @@
+Type of Location,Group from 
+_default_,4
+accounting,Office Building
+airport,Airport
+amusement_park,Amusement Park
+aquarium,Museum
+art_gallery,Museum
+atm,2
+bakery,Restaurant
+bank,Office Building
+bar,Bar
+beauty_salon,Hair Salon
+bicycle_store,Mall
+book_store,Library
+bowling_alley,Bowling Alley
+bus_station,Public Transport
+cafe,Restaurant
+campground,Campsite
+car_dealer,Office Building
+car_rental,Office Building
+car_repair,Office Building
+car_wash,2
+casino,Casino
+cemetery,Wedding/Funeral
+church,Religious Service
+city_hall,Office Building
+clothing_store,Mall
+convenience_store,Grocery Store
+courthouse,Office Building
+dentist,Dentist's Office
+department_store,Mall
+doctor,Doctor's Office
+drugstore,Grocery Store
+electrician,Office Building
+electronics_store,Mall
+embassy,Office Building
+fire_station,Office Building
+florist,Grocery Store
+funeral_home,Wedding/Funeral
+furniture_store,Mall
+gas_station,Gas Station
+grocery_or_supermarket,Grocery Store
+gym,Gym
+hair_care,Hair Salon
+hardware_store,Mall
+health,Doctor's Office
+hindu_temple,Religious Service
+home_goods_store,Mall
+hospital,Doctor's Office
+insurance_agency,Office Building
+jewelry_store,Mall
+laundry,Office Building
+lawyer,Office Building
+library,Library
+light_rail_station,Public Transport
+liquor_store,Grocery Store
+local_government_office,Office Building
+locksmith,Office Building
+lodging,Hotel
+meal_delivery,Delivery/Takeout
+meal_takeaway,Delivery/Takeout
+mosque,Religious Service
+movie_rental,2
+movie_theater,Movie Theater
+moving_company,Office Building
+museum,Museum
+night_club,Bar
+painter,Office Building
+park,Park
+parking,1
+pet_store,Mall
+pharmacy,Grocery Store
+physiotherapist,Doctor's Office
+plumber,Office Building
+police,Office Building
+post_office,Office Building
+primary_school,School
+real_estate_agency,Office Building
+restaurant,Restaurant
+roofing_contractor,Office Building
+rv_park,Park
+school,School
+secondary_school,School
+shoe_store,Mall
+shopping_mall,Mall
+spa,Hair Salon
+stadium,Sport Stadium
+storage,Library
+store,Mall
+subway_station,Public Transport
+supermarket,Grocery Store
+synagogue,Religious Service
+taxi_stand,T
+tourist_attraction,Beach
+train_station,Public Transport
+transit_station,Public Transport
+travel_agency,Office Building
+university,School
+veterinary_care,Doctor's Office
+zoo,Zoo
+administrative_area_level_1,0
+administrative_area_level_2,0
+administrative_area_level_3,0
+administrative_area_level_4,0
+administrative_area_level_5,0
+archipelago,Beach
+colloquial_area,0
+continent,0
+country,0
+establishment,Office Building
+finance,Office Building
+floor,Office Building
+food,Restaurant
+general_contractor,Public Pool
+geocode,0
+health,Doctor's Office
+intersection,0
+locality,0
+natural_feature,Lake
+neighborhood,Household
+place_of_worship,Religious Service
+plus_code,0
+point_of_interest,5
+political,Office Building
+post_box,Office Building
+postal_code,0
+postal_code_prefix,0
+postal_code_suffix,0
+postal_town,0
+premise,Household
+room,Office Building
+route,0
+street_address,Household
+street_number,Household
+sublocality,0
+sublocality_level_1,0
+sublocality_level_2,0
+sublocality_level_3,0
+sublocality_level_4,0
+sublocality_level_5,0
+subpremise,0
+town_square,0
+address,Household
+regions,0
+cities,0
