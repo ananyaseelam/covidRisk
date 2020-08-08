@@ -206,9 +206,14 @@ export default class SecondPage extends Component {
     var hours = time.getHours();
     var minutes = time.getMinutes();
     time = time.toLocaleTimeString();
+    minutes = String(minutes);
+    hours = String(hours);
+    if (minutes.length == 1){
+      minutes = "0" + minutes;
+    }
     time = hours + ":" + minutes;
-    //console.warn("A time has been picked:", time);
-    time = String(time);
+    console.warn("A time has been picked:", time);
+    // time = String(time);
     this.handleTimeChange(time);
     //console.warn('here')
     this.hideTimePicker();
