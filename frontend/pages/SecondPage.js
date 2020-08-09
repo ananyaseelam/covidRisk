@@ -8,14 +8,13 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
-import TimePicker from 'react-native-simple-time-picker';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import Picker from 'react-native-wheel-picker'
+var PickerItem = Picker.Item;
 
 export default class SecondPage extends Component {
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'Input Page',
+    title: 'Risk Analysis',
   };
   state = {
     risk: 0,
@@ -41,6 +40,7 @@ export default class SecondPage extends Component {
     selectedHours: 0,
     selectedMinutes: 0,
     riskName: '',
+    printTime: '',
   }
 
   constructor(props) {
@@ -207,11 +207,23 @@ export default class SecondPage extends Component {
     time = time.toLocaleTimeString();
     minutes = String(minutes);
     hours = String(hours);
+    var ampm = ' AM'
     if (minutes.length == 1){
       minutes = "0" + minutes;
     }
     time = hours + ":" + minutes;
-    console.warn("A time has been picked:", time);
+    if (hours>12){
+      hours= hours%12
+      if(hours == 0){
+        hours = 12
+      }
+      ampm = ' PM'
+    }
+    this.setState({
+      printTime: hours + ":" + minutes + ampm
+    })
+
+    //console.warn("A time has been picked:", time);
     // time = String(time);
     this.handleTimeChange(time);
     //console.warn('here')
@@ -263,8 +275,10 @@ export default class SecondPage extends Component {
                 <Text style = {{fontFamily: 'Avenir', fontSize: 18}}>
                   Location: {this.state.location}
                   {"\n"}
-                  On {this.state.day} at {this.state.time}
                   {"\n"}
+                  {this.state.day} {this.state.printTime}
+                  {"\n"}
+                  
                 </Text>
               </Text>
               <Text style = {{fontSize: 15}}>
@@ -353,7 +367,7 @@ export default class SecondPage extends Component {
                   marginLeft: 0,
                   marginRight: 0,
                   height: 38,
-                  color: '#FF6347',
+                  color: 'black',
                   fontSize: 16,
                 },
                 predefinedPlacesDescription: {
@@ -409,6 +423,7 @@ export default class SecondPage extends Component {
               {"\n"}
 
             </Text>
+            
             <DropDownPicker
                 placeholder="Choose Day of Week"
                 items={[
@@ -425,7 +440,8 @@ export default class SecondPage extends Component {
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{
                     fontFamily: 'Avenir',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    fontSize: 23,
                 }}
                 dropDownStyle={{backgroundColor: '#fafafa'}}
                 onChangeItem={(item)=>this.handleDayChange(item.value)}
@@ -442,7 +458,7 @@ export default class SecondPage extends Component {
               headerTextIOS = "Pick a Time"
             />
             <Text style={styles.TextStyle}>
-              Time selected (in 24H Time) : {this.state.time}
+              Time selected : {this.state.printTime}
             </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
