@@ -297,8 +297,6 @@ export default class SecondPage extends Component {
                 
               </Text>
                 {"\n"}
-                {"\n"}
-                {"\n"}
                 Daily New Cases Per 100k People: {this.state.casesData}
                 {"\n"} 
                 Place Type: {this.state.placeType}
@@ -353,7 +351,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Spinner
               visible={this.state.spinner}
-              textContent={'Gathering information from COVID-19 Database...'}
+              textContent={'Gathering information from Google Places and the NYT COVID-19 Database...'}
               textStyle={styles.spinnerTextStyle}
             />
           </View>
@@ -428,7 +426,10 @@ export default class SecondPage extends Component {
         return(
           <View style = {styles.container}>
             <Text style = {styles.riskText}>
-              You have selected a restaurant, Please select one of the following
+              You have selected a {this.state.placeType}
+              {"\n"}
+              {"\n"}
+              Please select one of the following
               {"\n"}
             </Text>
             <Button
