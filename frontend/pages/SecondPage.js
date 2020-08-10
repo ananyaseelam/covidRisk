@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, TextInput, Text, Button, Alert, KeyboardAvoidingView, AppRegistry} from 'react-native';
+import { StyleSheet, View, TextInput, Text, Alert, KeyboardAvoidingView, AppRegistry} from 'react-native';
 //import all the components we are going to use.
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Input} from 'react-native-elements';
@@ -10,12 +10,26 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Slider from '@react-native-community/slider'
 import TimePicker from 'react-native-simple-time-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
-
+import ActionBarImage from './ActionBarImage'
+import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
 export default class SecondPage extends Component {
   static navigationOptions = {
-    //Setting the header of the screen
-    title: 'Input Page',
+    title: 'Input',
+    headerStyle: {
+      backgroundColor: '#E6F0FF',
+      height:75,
+      borderBottomWidth: 0,
+      
+      
+    },
+    headerLeft: <ActionBarImage />,
+    headerTintColor: 'black',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontFamily: 'Avenir',
+      fontSize:25
+    },
+   
   };
   state = {
     risk: 0,
@@ -282,7 +296,7 @@ export default class SecondPage extends Component {
           <View style={styles.container}>
             <Spinner
               visible={this.state.spinner}
-              textContent={'Gathering information from Google Places and the NYT COVID-19 Database...'}
+              textContent={'Gathering information from COVID-19 Database...'}
               textStyle={styles.spinnerTextStyle}
             />
           </View>
@@ -335,13 +349,16 @@ export default class SecondPage extends Component {
             <Button
             title="Next"
             type = "outline"
+            raised
             titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
             buttonStyle={{
               backgroundColor: 'white',
-              borderColor: 'transparent',
-              borderWidth: 0,
+              borderColor: '#46b4ff',
+              borderWidth: 3,
               borderRadius: 30,
               paddingVertical: 10,
+              paddingHorizontal:100,
+              
             }}
           onPress={this.confirmLocation}
           />
@@ -403,7 +420,19 @@ export default class SecondPage extends Component {
             <Text>
             {"\n"}
             </Text>
-            <Button title="Click to Choose Time" onPress={this.showTimePicker} />
+            <Button 
+            title="Click to Choose Time"
+            type = "outline"
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'grey',
+              borderWidth: .3,
+              paddingVertical: 8,
+              paddingHorizontal:60,
+              
+            }} 
+            onPress={this.showTimePicker} />
             <DateTimePickerModal
               isVisible={this.state.isTimePickerVisible}
               mode="time"
@@ -412,7 +441,16 @@ export default class SecondPage extends Component {
               headerTextIOS = "Pick a Time"
             />
             <Text style={styles.TextStyle}>
-              Time selected (in 24H Time) : {this.state.time}
+              {"\n"}
+              {"\n"}
+              Date and Time selected (in 24H Time) : 
+            </Text>
+            <Text style={styles.inputText}>
+              {this.state.day}
+              {"\n"}
+              {this.state.time}
+              {"\n"}
+              
             </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
@@ -426,7 +464,20 @@ export default class SecondPage extends Component {
 
 
 
-        <Button title="Submit" onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
+        <Button 
+            title="Submit"
+            type="outline"
+            raised
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: '#46b4ff',
+              borderWidth: 3,
+              borderRadius: 30,
+              paddingVertical: 10,
+              paddingHorizontal:100,
+              
+            }}onPress = {this.startLoading} disabled = {!this.state.isFormValid}/>
         </KeyboardAvoidingView>
         )
       }    
@@ -437,23 +488,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: '#FF6347',
-    margin: 50,
+    margin: 40,
     alignItems: 'center',
     //justifyContent: 'center',
   },
   TextStyle: {
-    fontSize: 23,
-    textAlign: 'left',
     fontSize: 21,
+    textAlign: 'center',
+    color: 'black',
+    fontFamily: 'Avenir',
+    fontWeight:'bold'
+  },
+  inputText:{
+    fontSize: 20,
     textAlign: 'center',
     color: 'black',
     fontFamily: 'Avenir',
   },
   HeaderText:{
-    fontSize: 22,
+    fontSize: 23,
     textAlign: 'center',
     color: 'black',
     fontFamily: 'Avenir',
+    fontWeight:'bold'
   },
   riskText:{
     fontSize: 23,

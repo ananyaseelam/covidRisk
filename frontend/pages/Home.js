@@ -6,7 +6,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
 
 
-export default class FirstPage extends Component {
+export default class Home extends Component {
   constructor(props) {
         //constructor to set default state
     super(props);
@@ -16,7 +16,7 @@ export default class FirstPage extends Component {
   }
   static navigationOptions = {
     //Setting the header of the screen
-    header:null
+    headerShown:false
   };
   showForm = () => {
     this.setState({showForm: true})
@@ -44,7 +44,7 @@ export default class FirstPage extends Component {
           </Text>
 
           <Button
-            title="Enter A Location"
+            title="Calculate Risk For A Location"
             type = "outline"
             titleStyle={{ color: 'black', fontFamily: 'Avenir', fontWeight: 'bold'}}
             buttonStyle={styles.button1}
@@ -114,7 +114,7 @@ export default class FirstPage extends Component {
       borderColor: '#46b4ff',
       borderWidth: 3,
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 0,
       paddingHorizontal:75,
      
     },
@@ -123,7 +123,7 @@ export default class FirstPage extends Component {
       borderColor: '#46b4ff',
       borderWidth: 3,
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 15,
       paddingHorizontal:20,
     },
     button3:{
@@ -131,7 +131,7 @@ export default class FirstPage extends Component {
       borderColor: '#46b4ff',
       borderWidth: 3,
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 15,
       paddingHorizontal:45,
 
     },
