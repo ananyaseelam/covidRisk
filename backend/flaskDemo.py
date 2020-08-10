@@ -18,6 +18,11 @@ def get_data():
         print("**********************************I am in the flask side")
         print(request.headers)
         print(request.data)
+        #byte_str=request.data
+        #new_str=byte_str.decode('utf-8')
+        #print(new_str)
+        #print(json.dumps(new_str))
+        #req_data = json.loads(new_str)
         req_data = request.json
         print(type(req_data))
         location = req_data['location']

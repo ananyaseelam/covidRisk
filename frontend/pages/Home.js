@@ -6,7 +6,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
 
 
-export default class FirstPage extends Component {
+export default class Home extends Component {
   constructor(props) {
         //constructor to set default state
     super(props);
@@ -16,7 +16,7 @@ export default class FirstPage extends Component {
   }
   static navigationOptions = {
     //Setting the header of the screen
-    title: 'Covid Risk App',
+    headerShown:false
   };
   showForm = () => {
     this.setState({showForm: true})
@@ -40,13 +40,15 @@ export default class FirstPage extends Component {
             </Text>
             {"\n"}
             {"\n"}
+            {"\n"}
           </Text>
 
           <Button
-            title="Calculate Risk For Any Location"
+            title="Calculate Risk For A Location"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
-            buttonStyle={styles.button}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir', fontWeight: 'bold'}}
+            buttonStyle={styles.button1}
+            raised
           onPress={() =>
             navigate('SecondPage')
           }
@@ -55,10 +57,11 @@ export default class FirstPage extends Component {
         {"\n"}
         </Text>
           <Button
-            title="Learn More About Covid-19 Prevention"
+            title="More about Covid Prevention"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
-            buttonStyle={styles.button}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir', fontWeight: 'bold'}}
+            buttonStyle={styles.button2}
+            raised
             onPress={() => Linking.openURL('https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/index.html')}
           />
           <Text>
@@ -67,8 +70,9 @@ export default class FirstPage extends Component {
           <Button
             title="How We Calculate Risk"
             type = "outline"
-            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
-            buttonStyle={styles.button}
+            titleStyle={{ color: 'black', fontFamily: 'Avenir', fontWeight: 'bold'}}
+            buttonStyle={styles.button3}
+            raised
             onPress={() => navigate('FourthPage')}
           />
         
@@ -76,10 +80,9 @@ export default class FirstPage extends Component {
         {"\n"}
         </Text>
         </View>
-  
       );
-    }
-  }
+     }
+}
   
   const styles = StyleSheet.create({
     container: {
@@ -87,6 +90,8 @@ export default class FirstPage extends Component {
       alignItems: 'center',
       //justifyContent: 'center',
       padding: 30,
+      backgroundColor:'#E6F0FF'
+      
     },
     input: {
       width: 200,
@@ -102,17 +107,36 @@ export default class FirstPage extends Component {
       fontSize: 50,
       fontFamily:"Avenir-Heavy",
       color: "black",
-      fontWeight: "bold"
+      fontWeight: "bold",
     },
-    button:{
+    button1:{
       backgroundColor: 'white',
-      borderColor: 'transparent',
-      borderWidth: 0,
+      borderColor: '#46b4ff',
+      borderWidth: 3,
       borderRadius: 30,
-      paddingVertical: 10,
+      paddingVertical: 0,
+      paddingHorizontal:75,
+     
+    },
+    button2:{
+      backgroundColor: 'white',
+      borderColor: '#46b4ff',
+      borderWidth: 3,
+      borderRadius: 30,
+      paddingVertical: 15,
       paddingHorizontal:20,
     },
+    button3:{
+      backgroundColor: 'white',
+      borderColor: '#46b4ff',
+      borderWidth: 3,
+      borderRadius: 30,
+      paddingVertical: 15,
+      paddingHorizontal:45,
+
+    },
     logo: {
+    
       width: 150,
       height: 150,
     },
