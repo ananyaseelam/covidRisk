@@ -14,7 +14,7 @@ import ActionBarImage from './ActionBarImage'
 import { Button, LinearGradient, linearGradientProps, Header, Icon } from 'react-native-elements';
 export default class SecondPage extends Component {
   static navigationOptions = {
-    title: 'Input',
+    title: 'Risk Analysis',
     headerStyle: {
       backgroundColor: '#E6F0FF',
       height:75,
@@ -22,7 +22,7 @@ export default class SecondPage extends Component {
       
       
     },
-    headerLeft: <ActionBarImage />,
+    headerRight:()=> <ActionBarImage />,
     headerTintColor: 'black',
     headerTitleStyle: {
       fontWeight: 'bold',
@@ -250,40 +250,57 @@ export default class SecondPage extends Component {
         }
         return (
           <View style={styles.container}>
+            <Text style={styles.HeaderText}>
+                {this.state.location}
+                {"\n"}
+
+            </Text>
+            <Text style = {{fontFamily: 'Avenir',fontSize:50, color:'#46b4ff', fontWeight:'bold'}}>
+                  {this.state.risk}%
+            </Text>
+
+
             <Slider
               disabled
-              style={{width: 300, height: 40, backgroundColor: color, borderColor: 'black', borderWidth: 2}}
-              minimumTrackTintColor="#000000"
-              maximumTrackTintColor="#000000"
+              style={{width: 300, height: 40, backgroundColor: color, borderColor: '#46b4ff', borderWidth: 3, borderRadius:15}}
+              minimumTrackTintColor="#46b4ff"
+              maximumTrackTintColor="#46b4ff"
               minimumValue={0}
               maximumValue={100}
               value={this.state.risk}
               />
-            <Text style = {styles.TextStyle}>
+            <Text style = {{fontFamily: 'Avenir',fontSize:18, color:'black', fontWeight:'bold'}}>
               <Text style = {styles.riskText}>
-                {"\n"}
                 <Text style = {{color: color, fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
                   {this.state.riskName}
                   {"\n"}
-                </Text>
-
-                <Text style = {{fontFamily: 'Avenir'}}>
-                  Risk Percentage: {this.state.risk}%
                   {"\n"}
                 </Text>
-                {"\n"}
-                Location: {this.state.location}
-                {"\n"}
-                {"\n"}
+
+                
               </Text>
-              Daily New Cases Per 100k People: {this.state.casesData}
-              {"\n"} 
-              {"\n"}
-              Place Type: {this.state.placeType}
-              {"\n"}
+                {"\n"}
+                {"\n"}
+                {"\n"}
+                Daily New Cases Per 100k People: {this.state.casesData}
+                {"\n"} 
+                Place Type: {this.state.placeType}
+                {"\n"}
             </Text>
             <Button 
             title="Map View"
+            type = "outline"
+            raised
+            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: '#46b4ff',
+              borderWidth: 3,
+              borderRadius: 30,
+              paddingVertical: 10,
+              paddingHorizontal:100,
+              
+            }}
             onPress={() =>
               this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
             }/>
@@ -337,7 +354,7 @@ export default class SecondPage extends Component {
                   marginLeft: 0,
                   marginRight: 0,
                   height: 38,
-                  color: '#FF6347',
+                  color: '#000000',
                   fontSize: 16,
                 },
                 predefinedPlacesDescription: {
@@ -371,18 +388,45 @@ export default class SecondPage extends Component {
         return(
           <View style = {styles.container}>
             <Text style = {styles.riskText}>
-              You have selected an Please select one of the following
+              You have selected a restaurant, Please select one of the following
               {"\n"}
             </Text>
             <Button
               title = 'Pick-up/Takeout'
+              type = "outline"
+              raised
+              titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+              buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: '#46b4ff',
+              borderWidth: 3,
+              borderRadius: 30,
+              paddingVertical: 10,
+              paddingHorizontal:75,
+              
+            }}
               onPress={this.setTakeout}
-              color = 'green'
+              
               />
+            <Text >
+              {"\n"}
+            </Text>
             <Button
               title = 'Dine In'
+              type = "outline"
+              raised
+              titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
+              buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: '#46b4ff',
+              borderWidth: 3,
+              borderRadius: 30,
+              paddingVertical: 10,
+              paddingHorizontal: 110,
+              
+            }}
               onPress={this.setDineIn}
-              color = 'red'
+              
               />
           </View>
         )
@@ -450,7 +494,7 @@ export default class SecondPage extends Component {
               {"\n"}
               {this.state.time}
               {"\n"}
-              
+              {"\n"}
             </Text>
             {/* 
             string = "2020-08-06T02:26:51.980Z"
@@ -488,7 +532,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: '#FF6347',
-    margin: 40,
+    margin: 30,
     alignItems: 'center',
     //justifyContent: 'center',
   },
