@@ -286,42 +286,18 @@ export default class SecondPage extends Component {
               maximumValue={100}
               value={this.state.risk}
               />
-            <Text style = {{fontFamily: 'Avenir',fontSize:18, color:'black', fontWeight:'bold'}}>
-              <Text style = {styles.riskText}>
-                <Text style = {{color: color, fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+            <Text style = {{color: color, fontSize:22 ,fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
                   {this.state.riskName}
                   {"\n"}
-                  {"\n"}
-                </Text>
-
-                
-              </Text>
-                {"\n"}
+            </Text>
+            <View style={styles.container1}>
+            <Text style = {{fontFamily: 'Avenir',fontSize:16, color:'black', fontWeight:'bold'}}>
                 Daily New Cases Per 100k People: {this.state.casesData}
                 {"\n"} 
                 Place Type: {this.state.placeType}
-                {"\n"}
             </Text>
-            <Button 
-            title="Map View"
-            type = "outline"
-            raised
-            titleStyle={{ color: 'black', fontFamily: 'Avenir'}}
-            buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: '#46b4ff',
-              borderWidth: 3,
-              borderRadius: 30,
-              paddingVertical: 10,
-              paddingHorizontal:100,
-              
-            }}
-            onPress={() =>
-              this.props.navigation.navigate('ThirdPage', {latitude: this.state.latitude, longitude: this.state.longitude, risk: this.state.risk, location: this.state.location, county:this.state.county})
-            }/>
+           
             <Text style ={{fontFamily: 'Avenir'}}>
-              Key:
-              {"\n"} 
               <Text style = {{color: '#008000', fontWeight: 'bold'}}>
               Green: 
               </Text>
@@ -342,6 +318,9 @@ export default class SecondPage extends Component {
               </Text>
               If possible, it is highly recommended you stay home.
             </Text>
+
+            </View>
+    
             
           </View>
         )
@@ -527,18 +506,23 @@ export default class SecondPage extends Component {
               onCancel={this.hideTimePicker}
               headerTextIOS = "Pick a Time"
             />
+            <Text>
+              {"\n"}
+            </Text>
+            <View style={styles.container2}>
             <Text style={styles.TextStyle}>
-              {"\n"}
-              {"\n"}
               Date and Time selected: 
             </Text>
             <Text style={styles.inputText}>
               {this.state.day}
               {"\n"}
               {this.state.printTime}
-              {"\n"}
+            </Text>
+            </View>
+            <Text>
               {"\n"}
             </Text>
+            
             {/* 
             string = "2020-08-06T02:26:51.980Z"
             location = string.find("T") + 1 
@@ -578,6 +562,28 @@ const styles = StyleSheet.create({
     margin: 30,
     alignItems: 'center',
     //justifyContent: 'center',
+  },
+  container1:{
+    flex: 1,
+    //backgroundColor: '#FF6347',
+    borderRadius: 20,
+    borderColor: '#46b4ff',
+    borderWidth:5,
+    alignItems: 'center',
+    backgroundColor:'#E6F0FF',
+    
+  },
+  container2:{
+    flex: 1,
+    //backgroundColor: '#FF6347',
+    borderRadius: 15,
+    paddingHorizontal:70,
+    paddingTop:15,
+    borderColor: '#46b4ff',
+    borderWidth:5,
+    alignItems: 'center',
+    backgroundColor:'#E6F0FF',
+    
   },
   TextStyle: {
     fontSize: 21,

@@ -12,7 +12,8 @@ export default class ActionBarImage extends Component {
             width: 40,
             height: 40,
             borderRadius: 40 / 2,
-            marginLeft: 15,
+            marginLeft: 20,
+            paddingHorizontal:25
           }}
         />
       </View>
