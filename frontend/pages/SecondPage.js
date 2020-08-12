@@ -56,6 +56,7 @@ export default class SecondPage extends Component {
     selectedMinutes: 0,
     riskName: '',
     printTime: '',
+    comma:', '
   }
 
   constructor(props) {
@@ -152,39 +153,51 @@ export default class SecondPage extends Component {
     this.setState({confirm:true})
     console.log('here'+ this.state.location);
     if (this.state.placeType=='locality') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='sublocality') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='administrative_area_level_1') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='administrative_area_level_2') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='administrative_area_level_3') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='administrative_area_level_4') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='administrative_area_level_5') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='sublocality_level_1') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='sublocality_level_2') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='sublocality_level_3') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='sublocality_level_4') {
+      this.setState({comma:''})
       this.startLoading()
     }
     if (this.state.placeType=='intersection') {
+      this.setState({comma:''})
       this.startLoading()
     }
   }
@@ -270,13 +283,15 @@ export default class SecondPage extends Component {
             <Text style={styles.HeaderText}>
                 {this.state.location}
                 {"\n"}
+                {this.state.day}{this.state.comma} {this.state.printTime}
+
+
 
             </Text>
-            <Text style = {{fontFamily: 'Avenir',fontSize:50, color:'#46b4ff', fontWeight:'bold'}}>
-                  {this.state.risk}%
+            <Text style = {{color: color, fontSize:35 ,fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+                  {this.state.riskName}
+
             </Text>
-
-
             <Slider
               disabled
               style={{width: 300, height: 40, backgroundColor: color, borderColor: '#46b4ff', borderWidth: 3, borderRadius:15}}
@@ -286,17 +301,20 @@ export default class SecondPage extends Component {
               maximumValue={100}
               value={this.state.risk}
               />
-            <Text style = {{color: color, fontSize:22 ,fontFamily: 'Avenir-Heavy', textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
-                  {this.state.riskName}
-                  {"\n"}
+            <Text style = {{fontFamily: 'Avenir',fontSize:30, color:color, fontWeight:'bold',textShadowColor: textshadowcolor, textShadowOffset: {width: -1, height: 1}, textShadowRadius: 10}}>
+                  {this.state.risk}%
+                  {"\n"} 
             </Text>
+            
             <View style={styles.container1}>
-            <Text style = {{fontFamily: 'Avenir',fontSize:16, color:'black', fontWeight:'bold'}}>
-                Daily New Cases Per 100k People: {this.state.casesData}
+            <Text style = {{fontFamily: 'Avenir',fontSize:19, color:'black', fontWeight:'bold', alignItems:'center'}}>
+                Daily New Cases Per 100K: {this.state.casesData}
                 {"\n"} 
                 Place Type: {this.state.placeType}
-            </Text>
-           
+                {"\n"}
+                Key:
+                </Text>
+
             <Text style ={{fontFamily: 'Avenir'}}>
               <Text style = {{color: '#008000', fontWeight: 'bold'}}>
               Green: 
