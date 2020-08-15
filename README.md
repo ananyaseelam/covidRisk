@@ -13,3 +13,6 @@ These four factors are factored into a percentage risk value. We classify risk p
 75%+: High Risk
 
 Our app also prompts the user with additional questions based on place type. For example, if the location is a cafe, bakery, or restaurant, the user is prompted with a question about whether they plan to take out or dine in, which is factored into the risk value. In addition, if the place is a city or other type of locality, the user is not prompted with any additional questions and risk is calculated based solely on the number of new COVID-19 cases per 100 thousand residents. 
+
+Application Demo:
+https://youtu.be/H9MzpT8g-XY
